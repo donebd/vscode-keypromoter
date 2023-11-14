@@ -4,12 +4,12 @@ import * as vscode from 'vscode';
 import { uIOhook } from 'uiohook-napi';
 import * as keybindings from './main/keybindings/keybindings';
 import { SubscriptionService } from './services/subscriptionService';
-import { CommandCounter } from './main/commandCounter';
+import { CommandCounter } from './main/counter/commandCounter';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	const commandCounter = new CommandCounter(0);
+	const commandCounter = new CommandCounter(1);
 	uIOhook.on('keydown', (e) => {
 		commandCounter.handleKeyPress(e.keycode);
 	});

@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
-import { CommandCounter } from '../main/commandCounter';
+import { CommandCounter } from '../main/counter/commandCounter';
 
 export class SubscriptionService {
 
