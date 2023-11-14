@@ -20,9 +20,12 @@ export class KeyLogBuffer {
     }
 
     hasKeystroke(keystroke: string[]): Boolean {
+        let doubleBuffer = this.buffer.concat(this.buffer);
+        let firstKeyIndex = this.nextIndex;
+        let lastKeyIndex = firstKeyIndex + this.size;
         let len = keystroke.length;
-        for (let i = 0; i <= this.size - len; i++) {
-            let window = this.buffer.slice(i, i + len);
+        for (let i = firstKeyIndex; i <= lastKeyIndex - len; i++) {
+            let window = doubleBuffer.slice(i, i + len);
             if (window.toString() === keystroke.toString()) {
                 return true;
             }
