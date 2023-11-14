@@ -1,7 +1,9 @@
 export class KeyLogBuffer {
 
     readonly size: number;
+
     private buffer: Array<string>;
+    private nextIndex = 0;
 
     constructor(size: number) {
         this.size = size;
@@ -9,7 +11,8 @@ export class KeyLogBuffer {
     }
 
     keyPressed(key: string) {
-        this.buffer.push(key);
+        this.buffer[this.nextIndex] = key;
+        this.nextIndex = (this.nextIndex + 1) % this.size;
     }
 
     wasPressed(key: string): Boolean {
