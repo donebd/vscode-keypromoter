@@ -1,14 +1,16 @@
+import path from 'path';
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
 import { CommandCounter } from '../main/counter/commandCounter';
+import { CommandGroup } from '../models/commandGroup';
 
 export class SubscriptionService {
 
     private readonly pipe = new Subject<[string, ...any]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
-    private readonly commandCounter : CommandCounter;
+    private readonly commandCounter: CommandCounter;
 
-    constructor(commandCounter : CommandCounter) {
+    constructor(commandCounter: CommandCounter) {
         this.commandCounter = commandCounter;
     }
 
@@ -32,7 +34,7 @@ export class SubscriptionService {
                     overloadedHandler
                 );
             } catch (e) {
-                console.log(`${commandId} can't be overloaded`)
+                console.log(`${commandId} can't be overloaded`);
             }
         });
 
@@ -55,59 +57,53 @@ export class SubscriptionService {
         });
     }
 
-    // Пока убирать не стал, потенциально здесь может что то хендлиться, что не хендлиться коммандами
     private listenPublicVscodeApi() {
-        vscode.workspace.onDidCreateFiles((event) => {
-            // Potential keybindigs:
-            // welcome.showNewFileEntries
-            // workbench.action.files.newUntitledFile
-            // vscode.window.showInformationMessage('File created!');
+        let activeTextEditor: string | undefined;
+        let previousStateTabs: string[] = [];
+
+
+        const equalsCheck = (a: string[], b: string[]) => {
+            return JSON.stringify(a) === JSON.stringify(b);
+        };
+
+        // Here complex logic cause vscode handle this in many ways
+        // Handled on text editor closed/opened
+        // And not only text editor is text editor (LOL)
+        // Output view defined as text editor too
+        vscode.window.onDidChangeActiveTextEditor((textEditor) => {
+            if (!textEditor) {
+                activeTextEditor = textEditor;
+                return;
+            }
+
+            if (!activeTextEditor) {
+                if (!textEditor.document.fileName.includes(path.sep)) {
+                    // It's some of output view. Don't need handle explicity (handled by commands)
+                    return;
+                }
+
+                const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
+                const actualStateTabs = openEditors.map(tab => tab.label);
+                if (openEditors.length === 1 || !equalsCheck(previousStateTabs, actualStateTabs)) {
+                    this.commandCounter.handleCommand("workbench.action.quickOpen");
+                    activeTextEditor = textEditor.document.fileName;
+                    previousStateTabs = actualStateTabs;
+                    return;
+                }
+
+                // Here navigate between tabs
+                this.commandCounter.handleCommandGroup(CommandGroup.NavigateBetweenTabsGroup);
+            }
+
+            previousStateTabs = vscode.window.tabGroups.activeTabGroup.tabs.map(tab => tab.label);
+            activeTextEditor = textEditor.document.fileName;
         });
 
-        vscode.workspace.onDidRenameFiles((event) => {
-            // Potential keybindigs:
-            // renameFile
-            // vscode.window.showInformationMessage('File renamed!');
-        });
+        // This handler explicity ignore, cause it doesn't suit our purposes
+        vscode.workspace.onDidCloseTextDocument(() => { });
 
-        vscode.window.onDidChangeActiveTextEditor((event) => {
-            // Potential keybindigs:
-            // many way to open from shortcuts:
-            // workbench.action.openEditorAtIndex1, workbench.action.openEditorAtIndex2...
-            // workbench.action.nextEditor, workbench.action.previousEditor,
-            // workbench.action.quickOpen
-
-            // workbench.action.closeActiveEditor
-
-            // Детектить что ничего из этого не было нажато, и сказать юзеру что вот смотри сколько у нас способов
-            // Кнопка посмотреть все шорткаты где будет перечисленны все перечисленные
-
-
-            // Нужно быть аккруатным т.к. эта лямбда дергается и при onDidCreateFiles и при onDidRenameFiles и когда мы просто закрываем едитор
-            // vscode.window.showInformationMessage('onDidChangeActiveTextEditor');
-        });
-
-        vscode.workspace.onDidSaveTextDocument((event) => {
-            // Potential keybindigs:
-            // workbench.action.files.save, workbench.action.files.saveAs, workbench.action.files.saveWithoutFormatting
-            // vscode.window.showInformationMessage('Text document save!');
-        });
-
-        vscode.window.onDidChangeWindowState((event) => {
-            // vscode.window.showInformationMessage('onDidChangeWindowState');
-        });
-
-        vscode.window.onDidOpenTerminal((event) => {
-            //Potential keybindigs:
-            // workbench.action.terminal.openNativeConsole, workbench.action.terminal.new
-            // and other workbench.action.terminal.* group
-            // vscode.window.showInformationMessage('onDidOpenTerminal');
-        });
-
-        vscode.window.onDidCloseTerminal((event) => {
-            //Potential keybindigs:
-            // workbench.action.terminal.kill
-            // vscode.window.showInformationMessage('onDidCloseTerminal');
+        vscode.window.onDidCloseTerminal(() => {
+            this.commandCounter.handleCommand("workbench.action.terminal.kill");
         });
     }
 
