@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import * as keybindings from './keybindings';
 
-describe("Keybindings Test", () => {
+describe("Default Keybindings Test", () => {
 
     it("get linux default keybindings", () => {
         let bindings = keybindings.loadDefault("linux");
@@ -30,3 +30,29 @@ function countBindings(bindings: Map<string, string[]>) {
     });
     return count;
 }
+
+describe("Patched Keybindings Test", () => {
+
+    it("patch default keybindings", () => {
+        const JsonPatch =
+        `
+        [
+            {
+                "key": "numpad_add",
+                "command": "editor.action.insertCursorAbove",
+                "when": "editorTextFocus"
+            },
+            {
+                "key": "shift+alt+up",
+                "command": "-editor.action.insertCursorAbove",
+                "when": "editorTextFocus"
+            }
+        ]
+        `;
+        let bindings = keybindings.loadDefault("linux");
+        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
+        keybindings.patch(bindings, JsonPatch);
+        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "numpad_add"]);
+    });
+
+});

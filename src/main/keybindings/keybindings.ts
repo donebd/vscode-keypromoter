@@ -16,3 +16,21 @@ export function loadDefault(platform: string): Map<string, string[]> {
     }
     return keybindings;
 }
+
+export function patch(keybindings: Map<string, string[]>, JsonPatch: string) {
+    let patch = json.parse<Keybinding[]>(JsonPatch);
+    for (let i in patch) {
+        let key = patch[i].key;
+        let command = patch[i].command;
+        let keystrokes: Array<string>;
+        if (command.startsWith("-")) {
+            command = command.slice(1);
+            keystrokes = keybindings.get(command) ?? new Array<string>();
+            keystrokes = keystrokes.filter(other => other !== key);
+        } else {
+            keystrokes = keybindings.get(command) ?? new Array<string>();
+            keystrokes.push(key);
+        }
+        keybindings.set(command, keystrokes);
+    }
+}
