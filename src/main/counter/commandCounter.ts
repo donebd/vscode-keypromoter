@@ -1,6 +1,7 @@
 import { loadDefault } from "../keybindings/keybindings";
 import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
 import { keyFromKeycode } from "../keylogging/transform";
+import * as platform from '../platform';
 import * as vscode from 'vscode';
 
 export class CommandCounter {
@@ -14,12 +15,12 @@ export class CommandCounter {
     }
 
     handleCommand(commandId : string) {
-        const keybindings = loadDefault("windows").get(commandId);
+        const keybindings = loadDefault(platform.get()).get(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             let keybindingUsed = false;
             for (let keybinding of keybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/+| /)).valueOf();
+                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
             }
             if (!keybindingUsed) {
                 currCounter++;

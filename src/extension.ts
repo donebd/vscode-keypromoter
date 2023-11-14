@@ -10,7 +10,7 @@ import * as platform from './main/platform';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	const commandCounter = new CommandCounter(1);
+	const commandCounter = new CommandCounter(0);
 	uIOhook.on('keydown', (e) => {
 		commandCounter.handleKeyPress(e.keycode);
 	});
