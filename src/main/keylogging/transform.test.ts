@@ -9,6 +9,7 @@ describe("Key Transform Test", () => {
         assert.equal(transform.keyFromKeycode(iohook.UiohookKey.W), "w");
         assert.equal(transform.keyFromKeycode(iohook.UiohookKey.Alt), "alt");
         assert.equal(transform.keyFromKeycode(iohook.UiohookKey.Escape), "escape");
+        assert.equal(transform.keyFromKeycode(0), transform.UNSUPPORTED_KEY);
     });
 
 });
