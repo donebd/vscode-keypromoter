@@ -6,7 +6,7 @@ class Keybinding {
     command!: string;
 }
 
-export function load(platform: string): Map<string, string[]> {
+export function loadDefault(platform: string): Map<string, string[]> {
     let document = json.parse<Keybinding[]>(readFileSync(`./default-keybindings/${platform}.keybindings.json`).toString());
     let keybindings = new Map<string, string[]>();
     for (let i in document) {
