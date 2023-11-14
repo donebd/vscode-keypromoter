@@ -1,7 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { uIOhook } from 'uiohook-napi'
+import { uIOhook } from 'uiohook-napi';
+import * as keybindings from './main/keybindings/keybindings';
 import { SubscriptionService } from './services/subscriptionService';
 
 // This method is called when your extension is activated
@@ -11,9 +12,9 @@ export function activate(context: vscode.ExtensionContext) {
 		console.log(e.keycode);
 	});
 	uIOhook.start();
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-keypromoter" is now active!');
+
+	console.log('Reading keybindings...');
+	console.log(keybindings.loadWithUser(process.platform));
 
 	const subscriptionService = new SubscriptionService();
 	subscriptionService.listenForPossibleShortcutActions();
