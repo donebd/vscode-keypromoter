@@ -1,10 +1,16 @@
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
+import { CommandCounter } from '../main/commandCounter';
 
 export class SubscriptionService {
 
     private readonly pipe = new Subject<[string, ...any]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
+    private readonly commandCounter : CommandCounter;
+
+    constructor(commandCounter : CommandCounter) {
+        this.commandCounter = commandCounter;
+    }
 
     public async listenForPossibleShortcutActions() {
         const commandIds = await vscode.commands.getCommands(true);
@@ -33,13 +39,14 @@ export class SubscriptionService {
         this.pipe.subscribe(async (next) => {
             const commandId = next[0];
             console.log(commandId + " executed!");
-            vscode.window.showInformationMessage(next[0] + " executed!");
+            //vscode.window.showInformationMessage(next[0] + " executed!");
             if (next[1]) {
                 await vscode.commands.executeCommand(commandId, ...next[1]);
             } else {
                 await vscode.commands.executeCommand(commandId);
             }
-            // here need calculate command count
+
+            this.commandCounter.handleCommand(commandId);
 
             this.commandIdToOverloadHandlerMap.set(
                 commandId,
