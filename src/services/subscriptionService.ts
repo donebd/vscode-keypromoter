@@ -38,10 +38,10 @@ export class SubscriptionService {
 
         this.pipe.subscribe(async (next) => {
             const commandId = next[0];
+            const pipeArgs = next[1];
             console.log(commandId + " executed!");
-            //vscode.window.showInformationMessage(next[0] + " executed!");
             if (next[1]) {
-                await vscode.commands.executeCommand(commandId, ...next[1]);
+                await vscode.commands.executeCommand(commandId, pipeArgs);
             } else {
                 await vscode.commands.executeCommand(commandId);
             }
