@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import * as json from 'json5';
+import * as path from 'path';
 
 class Keybinding {
     key!: string;
@@ -9,7 +10,8 @@ class Keybinding {
 export function loadDefault(platform: string): Map<string, string[]> {
     let keybindings = new Map<string, string[]>();
     try {
-        let file = readFileSync(`./default-keybindings/${platform}.keybindings.json`);
+        let p = path.resolve(__dirname, `../../.././default-keybindings/${platform}.keybindings.json`);
+        let file = readFileSync(p);
         let document = json.parse<Keybinding[]>(file.toString());
         for (let i in document) {
             let keystrokes = keybindings.get(document[i].command) ?? new Array<string>();
