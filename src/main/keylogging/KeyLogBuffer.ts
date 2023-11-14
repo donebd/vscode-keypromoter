@@ -18,4 +18,15 @@ export class KeyLogBuffer {
     wasPressed(key: string): Boolean {
         return this.buffer.includes(key);
     }
+
+    hasKeystroke(keystroke: string[]): Boolean {
+        let len = keystroke.length;
+        for (let i = 0; i <= this.size - len; i++) {
+            let window = this.buffer.slice(i, i + len);
+            if (window.toString() === keystroke.toString()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

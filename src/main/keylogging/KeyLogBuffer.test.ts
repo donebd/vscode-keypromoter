@@ -29,4 +29,15 @@ describe("Key Log Buffer Test", () => {
         assert.equal(buf.wasPressed("B"), true);
         assert.equal(buf.wasPressed("C"), true);
     });
+
+    it("keystrokes", () => {
+        var buf = new KeyLogBuffer(3);
+        buf.keyPressed("A");
+        buf.keyPressed("B");
+        buf.keyPressed("C");
+        assert.equal(buf.hasKeystroke(["A", "C"]), false);
+        assert.equal(buf.hasKeystroke(["A", "B"]), true);
+        assert.equal(buf.hasKeystroke(["B", "C"]), true);
+        assert.equal(buf.hasKeystroke(["A", "B", "C"]), true);        
+    });
 });
