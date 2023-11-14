@@ -26,7 +26,7 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "test-unit": "tsc && mocha out/main/**/*.test.js"
+    "test-unit": "mocha --require ts-node/register src/main/**/*.test.ts"
   },
   "devDependencies": {
     "@types/vscode": "^1.84.0",
@@ -38,6 +38,7 @@
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
     "typescript": "^5.2.2",
-    "@vscode/test-electron": "^2.3.6"
+    "@vscode/test-electron": "^2.3.6",
+    "ts-node": "^10.9.1"
   }
 }
