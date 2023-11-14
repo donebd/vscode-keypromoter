@@ -5,7 +5,7 @@ describe("Keybindings Test", () => {
 
     it("get default keybindings", () => {
         let bindings = keybindings.load("linux");
-        assert.equal(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
+        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
         let total = 0;
         bindings.forEach((keystrokes: string[], _: string) => {
             total += keystrokes.length;

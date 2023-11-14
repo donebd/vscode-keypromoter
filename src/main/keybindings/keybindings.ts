@@ -8,11 +8,11 @@ class Keybinding {
 
 export function load(platform: string): Map<string, string[]> {
     let document = json.parse<Keybinding[]>(readFileSync("./default-keybindings/linux.keybindings.json").toString());
-    let keybindings = new Map<string, string>();
+    let keybindings = new Map<string, string[]>();
     for (let i in document) {
-        let keybind = document[i];
-        keybindings.set(keybind.key, keybind.command);
+        let keystrokes = keybindings.get(document[i].command) ?? new Array<string>();
+        keystrokes.push(document[i].key);
+        keybindings.set(document[i].command, keystrokes);
     }
-    console.log(keybindings);
-    return new Map();
+    return keybindings;
 }
