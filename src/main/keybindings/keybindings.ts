@@ -1,13 +1,14 @@
 import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
+import { Platform } from '../platform';
 
 class Keybinding {
     key!: string;
     command!: string;
 }
 
-export function loadDefault(platform: string): Map<string, string[]> {
+export function loadDefault(platform: Platform): Map<string, string[]> {
     let keybindings = new Map<string, string[]>();
     try {
         let p = path.resolve(__dirname, `../../.././default-keybindings/${platform}.keybindings.json`);
@@ -44,23 +45,23 @@ export function patch(keybindings: Map<string, string[]>, JsonPatch: string) {
     }
 }
 
-export function loadWithUser(platform: string): Map<string, string[]> {
+export function loadWithUser(platform: Platform): Map<string, string[]> {
     let keybindings = loadDefault(platform);
     let pathToUser = "";
     switch (platform) {
-        case "linux":
+        case Platform.LINUX:
             pathToUser = process.env.HOME + "/.config/Code";
             break;
-        case "windows":
+        case Platform.WINDOWS:
             pathToUser = process.env.APPDATA + "/Code";
             break;
-        case "macos":
+        case Platform.MACOS:
             pathToUser = process.env.HOME + "/Library/Application Support/Code";
             break;
     }
     try {
         pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
-            .replace(/\//g, process.platform === "win32" ? "\\" : "/");
+            .replace(/\//g, platform === Platform.WINDOWS ? "\\" : "/");
         let userJson = readFileSync(pathToUser).toString();
         patch(keybindings, userJson); 
     } catch(e) {

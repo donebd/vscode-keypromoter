@@ -5,6 +5,7 @@ import { uIOhook } from 'uiohook-napi';
 import * as keybindings from './main/keybindings/keybindings';
 import { SubscriptionService } from './services/subscriptionService';
 import { CommandCounter } from './main/counter/commandCounter';
+import * as platform from './main/platform';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -16,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 	uIOhook.start();
 
 	console.log('Reading keybindings...');
-	console.log(keybindings.loadWithUser(process.platform));
+	console.log(keybindings.loadWithUser(platform.get()));
 
 	const subscriptionService = new SubscriptionService(commandCounter);
 	subscriptionService.listenForPossibleShortcutActions();
