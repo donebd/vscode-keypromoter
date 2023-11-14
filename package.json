@@ -40,5 +40,8 @@
     "typescript": "^5.2.2",
     "@vscode/test-electron": "^2.3.6",
     "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.2"
   }
 }
