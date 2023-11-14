@@ -7,12 +7,19 @@ class Keybinding {
 }
 
 export function loadDefault(platform: string): Map<string, string[]> {
-    let document = json.parse<Keybinding[]>(readFileSync(`./default-keybindings/${platform}.keybindings.json`).toString());
     let keybindings = new Map<string, string[]>();
-    for (let i in document) {
-        let keystrokes = keybindings.get(document[i].command) ?? new Array<string>();
-        keystrokes.push(document[i].key);
-        keybindings.set(document[i].command, keystrokes);
+    try {
+        let file = readFileSync(`./default-keybindings/${platform}.keybindings.json`);
+        let document = json.parse<Keybinding[]>(file.toString());
+        for (let i in document) {
+            let keystrokes = keybindings.get(document[i].command) ?? new Array<string>();
+            keystrokes.push(document[i].key);
+            keybindings.set(document[i].command, keystrokes);
+        }
+    } catch (e) {
+        if (e instanceof Error) {
+            console.log("Error when loading default keybindings: %s", e.message);
+        }
     }
     return keybindings;
 }

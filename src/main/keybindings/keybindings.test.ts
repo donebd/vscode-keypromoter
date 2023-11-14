@@ -21,6 +21,10 @@ describe("Default Keybindings Test", () => {
         assert.equal(countBindings(bindings), 866);
     });
 
+    it("get unsupported OS default keybindings", () => {
+        let bindings = keybindings.loadDefault("");
+        assert.equal(bindings.size, 0);
+    });
 });
 
 function countBindings(bindings: Map<string, string[]>) {
