@@ -2,7 +2,7 @@ export enum Platform {
     WINDOWS = "windows",
     LINUX = "linux",
     MACOS = "macos",
-    UNSUPPORTED = "",
+    UNSUPPORTED = "unsupported",
 }
 
 export function get(): Platform {
