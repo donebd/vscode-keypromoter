@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import * as json from "json5";
+import * as json from 'json5';
 
 class Keybinding {
     key!: string;
