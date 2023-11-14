@@ -1,21 +1,22 @@
-import { loadDefault } from "../keybindings/keybindings";
+import * as vscode from 'vscode';
+import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
 import { keyFromKeycode } from "../keylogging/transform";
-import * as platform from '../platform';
-import * as vscode from 'vscode';
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private keyBuf = new KeyLogBuffer(5);
 
-    readonly maxErrors : number;
+    private readonly maxErrors: number;
+    private readonly keybindingStorage: KeybindingStorage;
 
-    constructor(maxErrors : number) {
+    constructor(maxErrors: number, keybindingStorage: KeybindingStorage) {
         this.maxErrors = maxErrors;
+        this.keybindingStorage = keybindingStorage;
     }
 
-    handleCommand(commandId : string) {
-        const keybindings = loadDefault(platform.get()).get(commandId);
+    public handleCommand(commandId: string) {
+        const keybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             let keybindingUsed = false;
@@ -33,7 +34,7 @@ export class CommandCounter {
         }
     }
 
-    handleKeyPress(keycode : number) {
+    public handleKeyPress(keycode: number) {
         this.keyBuf.keyPressed(keyFromKeycode(keycode));
     }
 }
