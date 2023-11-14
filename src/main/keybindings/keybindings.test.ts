@@ -1,28 +1,29 @@
 import * as assert from 'assert';
 import * as keybindings from './keybindings';
+import { Platform } from '../platform';
 
 describe("Default Keybindings Test", () => {
 
     it("get linux default keybindings", () => {
-        let bindings = keybindings.loadDefault("linux");
+        let bindings = keybindings.loadDefault(Platform.LINUX);
         assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
         assert.equal(countBindings(bindings), 858);
     });
 
     it("get macos default keybindings", () => {
-        let bindings = keybindings.loadDefault("macos");
+        let bindings = keybindings.loadDefault(Platform.MACOS);
         assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
         assert.equal(countBindings(bindings), 925);
     });
 
     it("get windows default keybindings", () => {
-        let bindings = keybindings.loadDefault("windows");
+        let bindings = keybindings.loadDefault(Platform.WINDOWS);
         assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
         assert.equal(countBindings(bindings), 866);
     });
 
     it("get unsupported OS default keybindings", () => {
-        let bindings = keybindings.loadDefault("");
+        let bindings = keybindings.loadDefault(Platform.UNSUPPORTED);
         assert.equal(bindings.size, 0);
     });
 });
@@ -53,7 +54,7 @@ describe("Patched Keybindings Test", () => {
             }
         ]
         `;
-        let bindings = keybindings.loadDefault("linux");
+        let bindings = keybindings.loadDefault(Platform.LINUX);
         assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
         keybindings.patch(bindings, JsonPatch);
         assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "numpad_add"]);
