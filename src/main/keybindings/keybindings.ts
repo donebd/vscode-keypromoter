@@ -61,7 +61,7 @@ export function loadWithUser(platform: Platform): Map<string, string[]> {
     }
     try {
         pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
-            .replace(/\//g, process.platform === "win32" ? "\\" : "/");
+            .replace(/\//g, platform === Platform.WINDOWS ? "\\" : "/");
         let userJson = readFileSync(pathToUser).toString();
         patch(keybindings, userJson); 
     } catch(e) {
