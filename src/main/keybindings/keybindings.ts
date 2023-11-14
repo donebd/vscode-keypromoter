@@ -34,3 +34,30 @@ export function patch(keybindings: Map<string, string[]>, JsonPatch: string) {
         keybindings.set(command, keystrokes);
     }
 }
+
+export function loadWithUser(platform: string): Map<string, string[]> {
+    let keybindings = loadDefault(platform);
+    let pathToUser = "";
+    switch (platform) {
+        case "linux":
+            pathToUser = process.env.HOME + "/.config/Code";
+            break;
+        case "windows":
+            pathToUser = process.env.APPDATA + "/Code";
+            break;
+        case "macos":
+            pathToUser = process.env.HOME + "/Library/Application Support/Code";
+            break;
+    }
+    try {
+        pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
+            .replace(/\//g, process.platform === "win32" ? "\\" : "/");
+        let userJson = readFileSync(pathToUser).toString();
+        patch(keybindings, userJson); 
+    } catch(e) {
+        if (e instanceof Error) {
+            console.log("Error when loading user keybindings: %s", e.message);
+        }
+    }
+    return keybindings;
+} 
