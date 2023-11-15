@@ -66,7 +66,7 @@ const keyMap = new Map<number, string>([
     [UiohookKey.F22, "f22"],
     [UiohookKey.F23, "f23"],
     [UiohookKey.F24, "f24"],
-    [UiohookKey.Semicolon, "],"],
+    [UiohookKey.Semicolon, ";"],
     [UiohookKey.Comma, ","],
     [UiohookKey.Minus, "-"],
     [UiohookKey.Period, "."],
