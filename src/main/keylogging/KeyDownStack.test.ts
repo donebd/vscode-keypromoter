@@ -53,4 +53,17 @@ describe("Key Down Stack Test", () => {
         assert.equal(stack.hasKeystroke([]), true);
     });
 
+    it("reset", () => {
+        let stack = new KeyDownStack();
+        stack.keyDown("A");
+        stack.keyDown("B");
+        stack.keyDown("C");
+        assert.equal(stack.hasKeystroke(["A", "B", "C"]), true);
+        stack.reset();
+        assert.equal(stack.hasKeystroke(["A", "B", "C"]), false);
+        assert.equal(stack.hasKeystroke(["A", "B"]), false);
+        assert.equal(stack.hasKeystroke(["A"]), false);
+        assert.equal(stack.hasKeystroke([]), true);
+    });
+
 });

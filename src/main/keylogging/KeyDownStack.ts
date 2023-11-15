@@ -19,7 +19,7 @@ export class KeyDownStack {
     }
 
     public reset() {
-
+        this.stack = new Array();
     }
 
 }
