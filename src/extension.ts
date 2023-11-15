@@ -13,6 +13,9 @@ export function activate(context: vscode.ExtensionContext) {
 	uIOhook.on('keydown', (e) => {
 		commandCounter.handleKeyDown(e.keycode);
 	});
+	uIOhook.on('keyup', (e) => {
+		commandCounter.handleKeyUp(e.keycode);
+	});
 	uIOhook.on('mousedown', (_) => {
 		commandCounter.handleMousePress();
 	});
