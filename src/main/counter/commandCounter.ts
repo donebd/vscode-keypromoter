@@ -1,31 +1,27 @@
 import * as vscode from 'vscode';
 import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
 import { KeybindingStorage } from "../keybindings/keybindings";
-import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
-import { keyFromKeycode } from "../keylogging/transform";
+import { KeyLogger } from '../keylogging/KeyLogger';
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
-    private keyBuf = new KeyLogBuffer(5);
 
     private readonly maxErrors: number;
     private readonly keybindingStorage: KeybindingStorage;
+    private readonly keyLogger: KeyLogger;
 
-    constructor(maxErrors: number, keybindingStorage: KeybindingStorage) {
+    constructor(maxErrors: number, keybindingStorage: KeybindingStorage, keyLogger: KeyLogger) {
         this.maxErrors = maxErrors;
         this.keybindingStorage = keybindingStorage;
+        this.keyLogger = keyLogger;
     }
 
     public handleCommand(commandId: string) {
         const keybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
-            let keybindingUsed = false;
-            for (let keybinding of keybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
-            }
-            if (!keybindingUsed) {
+            if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter++;
             }
             if (currCounter > this.maxErrors) {
@@ -49,11 +45,7 @@ export class CommandCounter {
 
         if (groupKeybindings.length !== 0) {
             let currCounter = this.commandGroupToCounter.get(groupId) ?? 0;
-            let keybindingUsed = false;
-            for (let keybinding of groupKeybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
-            }
-            if (!keybindingUsed) {
+            if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
             }
             if (currCounter > this.maxErrors) {
@@ -89,12 +81,4 @@ export class CommandCounter {
         }
     }
 
-
-    public handleKeyPress(keycode: number) {
-        this.keyBuf.keyPressed(keyFromKeycode(keycode));
-    }
-
-    public handleMousePress() {
-        this.keyBuf.reset();
-    }
 }
