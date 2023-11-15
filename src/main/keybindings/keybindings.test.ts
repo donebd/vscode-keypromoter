@@ -11,19 +11,19 @@ describe("Default Keybindings Test", () => {
     });
 
     it("get macos default keybindings", () => {
-        const macStorage = new KeybindingStorage(Platform.MACOS);
+        const macStorage = new KeybindingStorage(Platform.MACOS, true);
         assert.deepEqual(macStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
         assert.equal(countBindings(macStorage.allKeybindings()), 925);
     });
 
     it("get windows default keybindings", () => {
-        const windowsStorage = new KeybindingStorage(Platform.WINDOWS);
+        const windowsStorage = new KeybindingStorage(Platform.WINDOWS, true);
         assert.deepEqual(windowsStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
         assert.equal(countBindings(windowsStorage.allKeybindings()), 866);
     });
 
     it("get unsupported OS default keybindings", () => {
-        const unsupportedStorage = new KeybindingStorage(Platform.UNSUPPORTED);
+        const unsupportedStorage = new KeybindingStorage(Platform.UNSUPPORTED, true);
         assert.equal(unsupportedStorage.allKeybindings().size, 0);
     });
 
