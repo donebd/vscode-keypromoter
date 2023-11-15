@@ -27,5 +27,6 @@ export function activate(context: vscode.ExtensionContext) {
 	subscriptionService.listenForPossibleShortcutActions();
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+	uIOhook.stop();
+}
