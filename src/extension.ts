@@ -8,7 +8,7 @@ import { KeyLogger } from './main/keylogging/KeyLogger';
 import { logger, initLogger } from './main/logging';
 
 export function activate(context: vscode.ExtensionContext) {
-	initLogger(vscode.window.createOutputChannel("Key Promoter"));
+	initLogger(vscode.window.createOutputChannel("Key Promoter", "log"));
 
 	logger.info("activating extension...");
 
