@@ -35,14 +35,14 @@ export class SubscriptionService {
                     overloadedHandler
                 );
             } catch (e) {
-                logger.log('debug', `command ${commandId} can't be overloaded`);
+                logger.debug(`command ${commandId} can't be overloaded`);
             }
         });
 
         this.pipe.subscribe(async (next) => {
             const commandId = next[0];
             const pipeArgs = next[1];
-            logger.log('debug', `command ${commandId} was executed!`);
+            logger.debug(`command ${commandId} was executed!`);
             if (next[1]) {
                 await vscode.commands.executeCommand(commandId, pipeArgs);
             } else {

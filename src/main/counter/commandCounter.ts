@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
 import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogger } from '../keylogging/KeyLogger';
+import { logger } from '../logging';
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
@@ -21,8 +22,10 @@ export class CommandCounter {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter++;
+                logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
             if (currCounter > this.getLoyaltyLevel()) {
+                logger.info(`show info message for command ${commandId}`);
                 vscode.window.showInformationMessage("You could use " + "'" + keybindings.join("' or '") + "'" + " to perform command " + commandId + "!");
                 currCounter = 0;
             }
@@ -45,8 +48,10 @@ export class CommandCounter {
             let currCounter = this.commandGroupToCounter.get(groupId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
+                logger.debug(`user did not use keybindings for group ${groupId}, counter = ${currCounter}`);
             }
             if (currCounter > this.getLoyaltyLevel()) {
+                logger.info(`show info message for group ${groupId}`);
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
             }

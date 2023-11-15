@@ -32,19 +32,19 @@ export class KeyLogger {
 
     public handleKeyDown(keycode: number) {
         let key = keyFromKeycode(keycode);
-        logger.log('debug', `key down: ${key}`);
+        logger.debug(`key down: ${key}`);
         this.keyBuf.keyPressed(key);
         this.keyStack.keyDown(key);
     }
 
     public handleKeyUp(keycode: number) {
         let key = keyFromKeycode(keycode);
-        logger.log('debug', `key up: ${key}`);
+        logger.debug(`key up: ${key}`);
         this.keyStack.keyUp(key);
     }
 
     public handleMousePress() {
-        logger.log('debug', `pressed mouse`);
+        logger.debug(`pressed mouse`);
         this.keyBuf.reset();
         this.keyStack.reset();
     }
