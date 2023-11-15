@@ -9,7 +9,8 @@ export class KeyLogger {
 
     public hasAnyKeybinding(keybindings: string[]): boolean {
         for (let keybinding of keybindings) {
-            if (this.keyBuf.hasKeystroke(keybinding.split(/\+| /))) {
+            let keySequence = keybinding.split(/\+| /);
+            if (this.keyStack.hasKeystroke(keySequence)) {
                 return true;
             }
         }
