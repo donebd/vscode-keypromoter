@@ -42,4 +42,14 @@ describe("Key Logger Test", () => {
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w+shift", "w+shift+ctrl", "shift+w+ctrl"]), false);
     });
 
+    it("key reuse", () => {
+        let keyLogger = new KeyLogger();
+        keyLogger.handleKeyDown(UiohookKey.Alt);
+        keyLogger.handleKeyDown(UiohookKey.ArrowDown);
+        assert.equal(keyLogger.hasAnyKeybinding(["alt+down"]), true);
+        keyLogger.handleKeyUp(UiohookKey.ArrowDown);
+        keyLogger.handleKeyDown(UiohookKey.ArrowUp);
+        assert.equal(keyLogger.hasAnyKeybinding(["alt+down"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["alt+up"]), true);
+    });
 });
