@@ -5,8 +5,11 @@ import { CommandCounter } from './main/counter/commandCounter';
 import * as platform from './main/platform';
 import { KeybindingStorage } from './main/keybindings/keybindings';
 import { KeyLogger } from './main/keylogging/KeyLogger';
+import { logger } from './main/logging';
 
 export function activate(context: vscode.ExtensionContext) {
+	logger.log('info', "hello");
+
 	let keyLogger = new KeyLogger();
 	uIOhook.on('keydown', (e) => {
 		keyLogger.handleKeyDown(e.keycode);
