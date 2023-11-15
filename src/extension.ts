@@ -5,9 +5,11 @@ import { CommandCounter } from './main/counter/commandCounter';
 import * as platform from './main/platform';
 import { KeybindingStorage } from './main/keybindings/keybindings';
 import { KeyLogger } from './main/keylogging/KeyLogger';
-import { logger } from './main/logging';
+import { logger, initLogger } from './main/logging';
 
 export function activate(context: vscode.ExtensionContext) {
+	initLogger(vscode.window.createOutputChannel("Key Promoter"));
+
 	logger.info("activating extension...");
 
 	let keyLogger = new KeyLogger();
