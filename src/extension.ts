@@ -5,8 +5,11 @@ import { CommandCounter } from './main/counter/commandCounter';
 import * as platform from './main/platform';
 import { KeybindingStorage } from './main/keybindings/keybindings';
 import { KeyLogger } from './main/keylogging/KeyLogger';
+import { logger } from './main/logging';
 
 export function activate(context: vscode.ExtensionContext) {
+	logger.log('info', "activating extension...");
+
 	let keyLogger = new KeyLogger();
 	uIOhook.on('keydown', (e) => {
 		keyLogger.handleKeyDown(e.keycode);
@@ -19,14 +22,15 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	uIOhook.start();
 
-	console.log('Reading keybindings...');
 	const keybindingStorage = new KeybindingStorage(platform.get());
-	console.log(keybindingStorage.getKeybindingMap());
 	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
 	const subscriptionService = new SubscriptionService(commandCounter);
 	subscriptionService.listenForPossibleShortcutActions();
+	logger.log('info', "extension activated!");
 }
 
 export function deactivate() {
+	logger.log('info', "deactivating extension...");
 	uIOhook.stop();
+	logger.log('info', "extension deactivated!");
 }

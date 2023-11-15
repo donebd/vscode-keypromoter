@@ -2,6 +2,7 @@ import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
 import { Platform } from '../platform';
+import { logger } from '../logging';
 
 class Keybinding {
     key!: string;
@@ -35,7 +36,7 @@ export class KeybindingStorage {
             this.patch(keybindings, userJson);
         } catch (e) {
             if (e instanceof Error) {
-                console.log("Error when loading user keybindings: %s", e.message);
+                logger.log('error', `error when loading user keybindings: ${e.message}`);
             }
         }
         return keybindings;
@@ -55,7 +56,7 @@ export class KeybindingStorage {
             }
         } catch (e) {
             if (e instanceof Error) {
-                console.log("Error when loading default keybindings: %s", e.message);
+                logger.log('error', `error when loading default keybindings: ${e.message}`);
             }
         }
         return keybindings;

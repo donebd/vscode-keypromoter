@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
 import { CommandCounter } from '../main/counter/commandCounter';
 import { CommandGroup } from '../models/commandGroup';
+import { logger } from '../main/logging';
 
 export class SubscriptionService {
 
@@ -34,14 +35,14 @@ export class SubscriptionService {
                     overloadedHandler
                 );
             } catch (e) {
-                console.log(`${commandId} can't be overloaded`);
+                logger.log('debug', `command ${commandId} can't be overloaded`);
             }
         });
 
         this.pipe.subscribe(async (next) => {
             const commandId = next[0];
             const pipeArgs = next[1];
-            console.log(commandId + " executed!");
+            logger.log('debug', `command ${commandId} was executed!`);
             if (next[1]) {
                 await vscode.commands.executeCommand(commandId, pipeArgs);
             } else {
