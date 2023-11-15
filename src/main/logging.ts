@@ -7,10 +7,11 @@ const outputChannel = vscode.window.createOutputChannel("Key Promoter");
 const outputStream = new Writable({
     write(chunk: any, encoding, callback) {
         outputChannel.append(chunk.toString());
+        callback();
     }
 });
 
-const level = 'info';
+const level = 'debug';
 
 export const logger = winston.createLogger({
     level: level,

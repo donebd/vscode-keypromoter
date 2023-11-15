@@ -1,6 +1,7 @@
 import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
 import { KeyDownStack } from "../keylogging/KeyDownStack";
 import { keyFromKeycode } from "../keylogging/transform";
+import { logger } from "../logging";
 
 export class KeyLogger {
 
@@ -31,15 +32,19 @@ export class KeyLogger {
 
     public handleKeyDown(keycode: number) {
         let key = keyFromKeycode(keycode);
+        logger.log('debug', `key down: ${key}`);
         this.keyBuf.keyPressed(key);
         this.keyStack.keyDown(key);
     }
 
     public handleKeyUp(keycode: number) {
-        this.keyStack.keyUp(keyFromKeycode(keycode));
+        let key = keyFromKeycode(keycode);
+        logger.log('debug', `key up: ${key}`);
+        this.keyStack.keyUp(key);
     }
 
     public handleMousePress() {
+        logger.log('debug', `pressed mouse`);
         this.keyBuf.reset();
         this.keyStack.reset();
     }
