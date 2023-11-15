@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import path from 'path';
+import { logger } from '../logging';
 
 export class DescriptionHandler {
   private jsonCommands: CommandInfo[];
@@ -13,10 +14,12 @@ export class DescriptionHandler {
     try {
       const data = fs.readFileSync(filePath, 'utf-8');
       return JSON.parse(data);
-    } catch (error) {
-      console.error(`Error reading/parsing JSON file: ${error}`);
-      return [];
+    } catch (e) {
+      if (e instanceof Error) {
+        logger.error(`error reading command descriptions: ${e.message}`);
+      }
     }
+    return [];
   }
 
   public getDescriptionForCommand(targetCommand: string): string | undefined {
