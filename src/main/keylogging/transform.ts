@@ -94,6 +94,7 @@ const keyMap = new Map<number, string>([
     [UiohookKey[9], "9"],
     [UiohookKey.Backquote, "`"],
     [UiohookKey.Delete, "delete"],
+    [UiohookKey.CapsLock, "capslock"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
