@@ -12,6 +12,8 @@ export class KeyLogger {
             if (keybinding.includes(" ")) {
                 let chords = keybinding.split(" ");
                 if (this.keyBuf.hasKeystroke(this.splitKeys(chords[0])) && this.splitKeys(chords[1])) {
+                    this.keyBuf.reset();
+                    this.keyStack.reset();
                     return true;
                 }
             } else {
