@@ -23,7 +23,7 @@
     "configuration": {
       "title": "Keypromoter",
       "properties": {
-        "keypromoter.loyalityLevel": {
+        "keypromoter.loyaltyLevel": {
           "type": "number",
           "default": 5,
           "description": "Specifies number of command executions using mouse before notification."

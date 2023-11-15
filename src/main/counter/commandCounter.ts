@@ -22,7 +22,7 @@ export class CommandCounter {
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter++;
             }
-            if (currCounter > this.getLoyalityLevel()) {
+            if (currCounter > this.getLoyaltyLevel()) {
                 vscode.window.showInformationMessage("You could use " + "'" + keybindings.join("' or '") + "'" + " to perform command " + commandId + "!");
                 currCounter = 0;
             }
@@ -46,7 +46,7 @@ export class CommandCounter {
             if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
             }
-            if (currCounter > this.getLoyalityLevel()) {
+            if (currCounter > this.getLoyaltyLevel()) {
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
             }
@@ -79,7 +79,7 @@ export class CommandCounter {
         }
     }
 
-    private getLoyalityLevel() : number {
+    private getLoyaltyLevel() : number {
         return vscode.workspace.getConfiguration("keypromoter").get("loyalityLevel") as number ?? 5;
     }
 }
