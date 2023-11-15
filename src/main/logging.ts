@@ -22,7 +22,7 @@ export interface Channel {
     append(value: string): void;
 }
 
-export function initLogger(level: string, outputChannel: Channel) {
+export function init(outputChannel: Channel) {
     logger.clear();
     const outputStream = new Writable({
         write(chunk: any, encoding, callback) {
@@ -31,5 +31,8 @@ export function initLogger(level: string, outputChannel: Channel) {
         }
     });
     logger.add(new winston.transports.Stream({ stream: outputStream }));
+}
+
+export function setLevel(level: string) {
     logger.level = level.toLowerCase();
 }
