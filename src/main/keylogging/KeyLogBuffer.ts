@@ -1,25 +1,25 @@
 export class KeyLogBuffer {
 
-    readonly size: number;
+    public readonly size: number;
 
     private buffer: Array<string>;
     private nextIndex = 0;
 
-    constructor(size: number) {
+    public constructor(size: number) {
         this.size = size;
         this.buffer = new Array(size);
     }
 
-    keyPressed(key: string) {
+    public keyPressed(key: string) {
         this.buffer[this.nextIndex] = key;
         this.nextIndex = (this.nextIndex + 1) % this.size;
     }
 
-    wasPressed(key: string): Boolean {
+    public wasPressed(key: string): Boolean {
         return this.buffer.includes(key);
     }
 
-    hasKeystroke(keystroke: string[]): Boolean {
+    public hasKeystroke(keystroke: string[]): Boolean {
         let doubleBuffer = this.buffer.concat(this.buffer);
         let firstKeyIndex = this.nextIndex;
         let lastKeyIndex = firstKeyIndex + this.size;
@@ -31,5 +31,9 @@ export class KeyLogBuffer {
             }
         }
         return false;
+    }
+
+    public reset() {
+        this.buffer.fill("");
     }
 }
