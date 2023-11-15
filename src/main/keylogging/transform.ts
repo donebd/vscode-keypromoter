@@ -96,6 +96,17 @@ const keyMap = new Map<number, string>([
     [UiohookKey.Delete, "delete"],
     [UiohookKey.CapsLock, "capslock"],
     [UiohookKey.Quote, "'"],
+    [UiohookKey.NumLock, "numlock"],
+    [UiohookKey.Numpad0, "numpad0"],
+    [UiohookKey.Numpad1, "numpad1"],
+    [UiohookKey.Numpad2, "numpad2"],
+    [UiohookKey.Numpad3, "numpad3"],
+    [UiohookKey.Numpad4, "numpad4"],
+    [UiohookKey.Numpad5, "numpad5"],
+    [UiohookKey.Numpad6, "numpad6"],
+    [UiohookKey.Numpad7, "numpad7"],
+    [UiohookKey.Numpad8, "numpad8"],
+    [UiohookKey.Numpad9, "numpad9"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
