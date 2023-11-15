@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Reading keybindings...');
 	const keybindingStorage = new KeybindingStorage(platform.get());
 	console.log(keybindingStorage.getKeybindingMap());
-	const commandCounter = new CommandCounter(0, keybindingStorage, keyLogger);
+	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
 	const subscriptionService = new SubscriptionService(commandCounter);
 	subscriptionService.listenForPossibleShortcutActions();
 }

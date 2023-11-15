@@ -7,12 +7,10 @@ export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
 
-    private readonly maxErrors: number;
     private readonly keybindingStorage: KeybindingStorage;
     private readonly keyLogger: KeyLogger;
 
-    constructor(maxErrors: number, keybindingStorage: KeybindingStorage, keyLogger: KeyLogger) {
-        this.maxErrors = maxErrors;
+    constructor(keybindingStorage: KeybindingStorage, keyLogger: KeyLogger) {
         this.keybindingStorage = keybindingStorage;
         this.keyLogger = keyLogger;
     }
@@ -24,7 +22,7 @@ export class CommandCounter {
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter++;
             }
-            if (currCounter > this.maxErrors) {
+            if (currCounter > this.getLoyalityLevel()) {
                 vscode.window.showInformationMessage("You could use " + keybindings.join(" or ") + " keybindings " + " to perform command " + commandId + "!");
                 currCounter = 0;
             }
@@ -48,7 +46,7 @@ export class CommandCounter {
             if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
             }
-            if (currCounter > this.maxErrors) {
+            if (currCounter > this.getLoyalityLevel()) {
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
             }
@@ -81,4 +79,7 @@ export class CommandCounter {
         }
     }
 
+    private getLoyalityLevel() : number {
+        return vscode.workspace.getConfiguration("keypromoter").get("loyalityLevel") as number ?? 5;
+    }
 }
