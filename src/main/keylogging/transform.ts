@@ -82,6 +82,16 @@ const keyMap = new Map<number, string>([
     [UiohookKey.ShiftRight, "shift"],
     [UiohookKey.Meta, "meta"],
     [UiohookKey.MetaRight, "meta"],
+    [UiohookKey[0], "0"],
+    [UiohookKey[1], "1"],
+    [UiohookKey[2], "2"],
+    [UiohookKey[3], "3"],
+    [UiohookKey[4], "4"],
+    [UiohookKey[5], "5"],
+    [UiohookKey[6], "6"],
+    [UiohookKey[7], "7"],
+    [UiohookKey[8], "8"],
+    [UiohookKey[9], "9"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
