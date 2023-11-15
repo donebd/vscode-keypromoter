@@ -36,7 +36,7 @@ export class KeybindingStorage {
             this.patch(keybindings, userJson);
         } catch (e) {
             if (e instanceof Error) {
-                logger.log('error', `error when loading user keybindings: ${e.message}`);
+                logger.error(`error when loading user keybindings: ${e.message}`);
             }
         }
         return keybindings;
@@ -56,7 +56,7 @@ export class KeybindingStorage {
             }
         } catch (e) {
             if (e instanceof Error) {
-                logger.log('error', `error when loading default keybindings: ${e.message}`);
+                logger.error(`error when loading default keybindings: ${e.message}`);
             }
         }
         return keybindings;

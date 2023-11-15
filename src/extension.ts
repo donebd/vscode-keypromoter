@@ -8,7 +8,7 @@ import { KeyLogger } from './main/keylogging/KeyLogger';
 import { logger } from './main/logging';
 
 export function activate(context: vscode.ExtensionContext) {
-	logger.log('info', "activating extension...");
+	logger.info("activating extension...");
 
 	let keyLogger = new KeyLogger();
 	uIOhook.on('keydown', (e) => {
@@ -26,11 +26,11 @@ export function activate(context: vscode.ExtensionContext) {
 	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
 	const subscriptionService = new SubscriptionService(commandCounter);
 	subscriptionService.listenForPossibleShortcutActions();
-	logger.log('info', "extension activated!");
+	logger.info("extension activated!");
 }
 
 export function deactivate() {
-	logger.log('info', "deactivating extension...");
+	logger.info("deactivating extension...");
 	uIOhook.stop();
-	logger.log('info', "extension deactivated!");
+	logger.info("extension deactivated!");
 }
