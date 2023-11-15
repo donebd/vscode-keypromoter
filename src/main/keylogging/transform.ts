@@ -93,6 +93,7 @@ const keyMap = new Map<number, string>([
     [UiohookKey[8], "8"],
     [UiohookKey[9], "9"],
     [UiohookKey.Backquote, "`"],
+    [UiohookKey.Delete, "delete"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
