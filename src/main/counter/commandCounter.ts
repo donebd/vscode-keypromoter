@@ -17,7 +17,7 @@ export class CommandCounter {
     }
 
     public handleCommand(commandId: string) {
-        const keybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
+        const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
@@ -38,7 +38,7 @@ export class CommandCounter {
         const commandIds = commandGroup.commandIds;
         const groupKeybindings: string[] = [];
         commandIds.forEach(commandId => {
-            const commandKeybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
+            const commandKeybindings = this.keybindingStorage.getKeybindingsFor(commandId);
             if (commandKeybindings) {
                 groupKeybindings.push(...commandKeybindings);
             }
@@ -66,10 +66,10 @@ export class CommandCounter {
             const goToFirstEditorCommand = CommandGroup.NavigateBetweenTabsGroup.commandIds[2];
             const goToSecondEditorCommand = CommandGroup.NavigateBetweenTabsGroup.commandIds[3];
 
-            const goNextShortcut = this.keybindingStorage.getKeybindingMap().get(goNextEditorCommand) ?? [""];
-            const goPreviousShortcut = this.keybindingStorage.getKeybindingMap().get(goPreviousEditorCommand) ?? [""];
-            const goToFirstShortcut = this.keybindingStorage.getKeybindingMap().get(goToFirstEditorCommand) ?? [""];
-            const goToSecondShortcut = this.keybindingStorage.getKeybindingMap().get(goToSecondEditorCommand) ?? [""];
+            const goNextShortcut = this.keybindingStorage.getKeybindingsFor(goNextEditorCommand) ?? [""];
+            const goPreviousShortcut = this.keybindingStorage.getKeybindingsFor(goPreviousEditorCommand) ?? [""];
+            const goToFirstShortcut = this.keybindingStorage.getKeybindingsFor(goToFirstEditorCommand) ?? [""];
+            const goToSecondShortcut = this.keybindingStorage.getKeybindingsFor(goToSecondEditorCommand) ?? [""];
 
 
             const checkAllShortcutsButton = "View all shortcuts";
