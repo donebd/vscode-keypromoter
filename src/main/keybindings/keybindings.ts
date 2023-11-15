@@ -26,6 +26,10 @@ export class KeybindingStorage {
         return this.keybindings.get(command) ?? [];
     }
 
+    public allKeybindings(): Map<string, string[]> {
+        return new Map(this.keybindings);
+    }
+
     private loadFullMap() {
         this.loadDefaultMap();
         let pathToUser = "";
