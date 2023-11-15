@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
+import { DescriptionHandler } from "../descriptions/descriptionHandler";
 import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogger } from '../keylogging/KeyLogger';
 import { logger } from '../logging';
@@ -7,6 +8,8 @@ import { logger } from '../logging';
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
+
+    private descriptionHandler = new DescriptionHandler();
 
     private readonly keybindingStorage: KeybindingStorage;
     private readonly keyLogger: KeyLogger;
@@ -26,7 +29,7 @@ export class CommandCounter {
             }
             if (currCounter > this.getLoyaltyLevel()) {
                 logger.info(`show info message for command ${commandId}`);
-                vscode.window.showInformationMessage("You could use " + "'" + keybindings.join("' or '") + "'" + " to perform command " + commandId + "!");
+                vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
                 currCounter = 0;
             }
             this.commandToCounter.set(commandId, currCounter);
@@ -84,7 +87,12 @@ export class CommandCounter {
         }
     }
 
-    private getLoyaltyLevel() : number {
+    private getLoyaltyLevel(): number {
         return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel") as number ?? 5;
+    }
+
+    private buildStyledMessage(keybindings: string[], commandId: string): string {
+        return "You could use " + keybindings.join(" or ") + " keybindings "
+            + " to perform " + this.descriptionHandler.getDescriptionForCommand(commandId) + " command!";
     }
 }
