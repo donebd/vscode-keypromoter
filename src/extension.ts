@@ -8,20 +8,8 @@ import { KeyLogger } from './main/keylogging/KeyLogger';
 import * as logging from './main/logging';
 import { logger } from './main/logging';
 
-function setLogLevel() {
-	let logLevel = vscode.workspace.getConfiguration("keypromoter").get("logger.loggingLevel") as string ?? 'Info';
-	logging.setLevel(logLevel);
-}
-
 export function activate(context: vscode.ExtensionContext) {
-	logging.init(vscode.window.createOutputChannel("Key Promoter", "log"));
-	setLogLevel();
-
-	context.subscriptions.push(
-		vscode.workspace.onDidChangeConfiguration((e) => {
-			setLogLevel();
-		})
-	);
+	initLogging(context);
 
 	logger.info("activating extension...");
 
@@ -48,4 +36,22 @@ export function deactivate() {
 	logger.info("deactivating extension...");
 	uIOhook.stop();
 	logger.info("extension deactivated!");
+}
+
+function initLogging(context: vscode.ExtensionContext) {
+	const section = "keypromoter";
+	const scope = "logger.loggingLevel";
+	function setLogLevel() {
+		let logLevel = vscode.workspace.getConfiguration(section).get(scope, 'Info');
+		logging.setLevel(logLevel);
+	}
+	logging.init(vscode.window.createOutputChannel("Key Promoter", "log"));
+	setLogLevel();
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeConfiguration((e) => {
+			if (e.affectsConfiguration(section)) {
+				setLogLevel();
+			}
+		})
+	);
 }
