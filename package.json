@@ -47,11 +47,6 @@
           "default": "Info",
           "enum": ["Error", "Warn", "Info", "Debug"],
           "description": "Specifies logging level."
-        },
-        "keypromoter.logger.logFilesPath": {
-          "type": "string",
-          "default": "",
-          "description": "Specifies the path to directory with log files."
         }
       }
     }
