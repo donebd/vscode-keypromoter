@@ -4,33 +4,29 @@ import { KeybindingStorage } from './keybindings';
 
 describe("Default Keybindings Test", () => {
 
-
     it("get linux default keybindings", () => {
-        const linuxStorage = new KeybindingStorage(Platform.LINUX);
-        let bindings = linuxStorage.getDefaultKeybindingMap();
-        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
-        assert.equal(countBindings(bindings), 858);
+        const linuxStorage = new KeybindingStorage(Platform.LINUX, true);
+        assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
+        assert.equal(countBindings(linuxStorage.allKeybindings()), 858);
     });
 
     it("get macos default keybindings", () => {
         const macStorage = new KeybindingStorage(Platform.MACOS);
-        let bindings = macStorage.getDefaultKeybindingMap();
-        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
-        assert.equal(countBindings(bindings), 925);
+        assert.deepEqual(macStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
+        assert.equal(countBindings(macStorage.allKeybindings()), 925);
     });
 
     it("get windows default keybindings", () => {
         const windowsStorage = new KeybindingStorage(Platform.WINDOWS);
-        let bindings = windowsStorage.getDefaultKeybindingMap();
-        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
-        assert.equal(countBindings(bindings), 866);
+        assert.deepEqual(windowsStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
+        assert.equal(countBindings(windowsStorage.allKeybindings()), 866);
     });
 
     it("get unsupported OS default keybindings", () => {
         const unsupportedStorage = new KeybindingStorage(Platform.UNSUPPORTED);
-        let bindings = unsupportedStorage.getDefaultKeybindingMap();
-        assert.equal(bindings.size, 0);
+        assert.equal(unsupportedStorage.allKeybindings().size, 0);
     });
+
 });
 
 function countBindings(bindings: Map<string, string[]>) {
@@ -59,11 +55,10 @@ describe("Patched Keybindings Test", () => {
             }
         ]
         `;
-        const linuxStorage = new KeybindingStorage(Platform.LINUX);
-        let bindings = linuxStorage.getDefaultKeybindingMap();
-        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
-        linuxStorage.patch(bindings, JsonPatch);
-        assert.deepEqual(bindings.get("editor.action.insertCursorAbove"), ["ctrl+shift+up", "numpad_add"]);
+        const linuxStorage = new KeybindingStorage(Platform.LINUX, true);
+        assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
+        linuxStorage.patch(JsonPatch);
+        assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "numpad_add"]);
     });
 
 });

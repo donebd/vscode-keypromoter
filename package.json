@@ -19,7 +19,42 @@
         "command": "vscode-keypromoter.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Keypromoter",
+      "properties": {
+        "keypromoter.loyaltyLevel": {
+          "type": "number",
+          "default": 5,
+          "description": "Specifies number of command executions using mouse before notification."
+        },
+        "keypromoter.ignoredCommands": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type" : "string",
+            "title": "ignored commands"
+          },
+          "description": "Specifies commands that will not be processed by the extension."
+        },
+        "keypromoter.suggestKeybindingsCreation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specifies whether to suggest creation of keybindings for commands without them."
+        },
+        "keypromoter.logger.loggingLevel": {
+          "type": "string",
+          "default": "Error",
+          "enum": ["Error", "Warning", "Info", "Debug"],
+          "description": "Specifies logging level."
+        },
+        "keypromoter.logger.logFilesPath": {
+          "type": "string",
+          "default": "",
+          "description": "Specifies the path to directory with log files."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -44,9 +79,10 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "rxjs": "^7.8.1",
     "json5": "^2.2.3",
-    "uiohook-napi": "^1.5.2"
+    "rxjs": "^7.8.1",
+    "uiohook-napi": "^1.5.2",
+    "winston": "^3.11.0"
   },
   "icon": "img/icons/KP_logo_128.png"
 }

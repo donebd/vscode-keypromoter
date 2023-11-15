@@ -1,0 +1,3403 @@
+[
+  {
+    "command": "workbench.action.exitZenMode",
+    "description": "Exit Zen Mode"
+  },
+  {
+    "command": "closeReferenceSearch",
+    "description": "Close Reference Search (stable peek disabled)"
+  },
+  {
+    "command": "closeReferenceSearch",
+    "description": "Close Reference Search (stable peek disabled)"
+  },
+  {
+    "command": "editor.closeTestPeek",
+    "description": "Close Test Peek"
+  },
+  {
+    "command": "cancelSelection",
+    "description": "Cancel Selection"
+  },
+  {
+    "command": "cancelSelection",
+    "description": "Cancel Selection"
+  },
+  {
+    "command": "cursorBottom",
+    "description": "Move Cursor to Bottom"
+  },
+  {
+    "command": "cursorBottomSelect",
+    "description": "Select to Bottom"
+  },
+  {
+    "command": "cursorColumnSelectDown",
+    "description": "Column Select Down"
+  },
+  {
+    "command": "cursorColumnSelectLeft",
+    "description": "Column Select Left"
+  },
+  {
+    "command": "cursorColumnSelectPageDown",
+    "description": "Column Select Page Down"
+  },
+  {
+    "command": "cursorColumnSelectPageUp",
+    "description": "Column Select Page Up"
+  },
+  {
+    "command": "cursorColumnSelectRight",
+    "description": "Column Select Right"
+  },
+  {
+    "command": "cursorColumnSelectUp",
+    "description": "Column Select Up"
+  },
+  {
+    "command": "cursorDown",
+    "description": "Move Cursor Down"
+  },
+  {
+    "command": "cursorDown",
+    "description": "Move Cursor Down"
+  },
+  {
+    "command": "cursorDownSelect",
+    "description": "Select Down"
+  },
+  {
+    "command": "cursorEnd",
+    "description": "Move Cursor to End"
+  },
+  {
+    "command": "cursorEnd",
+    "description": "Move Cursor to End"
+  },
+  {
+    "command": "cursorEndSelect",
+    "description": "Select to End"
+  },
+  {
+    "command": "cursorEndSelect",
+    "description": "Select to End"
+  },
+  {
+    "command": "cursorHome",
+    "description": "Move Cursor to Start"
+  },
+  {
+    "command": "cursorHome",
+    "description": "Move Cursor to Start"
+  },
+  {
+    "command": "cursorHomeSelect",
+    "description": "Select to Start"
+  },
+  {
+    "command": "cursorHomeSelect",
+    "description": "Select to Start"
+  },
+  {
+    "command": "cursorLeft",
+    "description": "Move Cursor Left"
+  },
+  {
+    "command": "cursorLeft",
+    "description": "Move Cursor Left"
+  },
+  {
+    "command": "cursorLeftSelect",
+    "description": "Select Left"
+  },
+  {
+    "command": "cursorLineEnd",
+    "description": "Move Cursor to Line End"
+  },
+  {
+    "command": "cursorLineEndSelect",
+    "description": "Select to Line End"
+  },
+  {
+    "command": "cursorLineStart",
+    "description": "Move Cursor to Line Start"
+  },
+  {
+    "command": "cursorLineStartSelect",
+    "description": "Select to Line Start"
+  },
+  {
+    "command": "cursorPageDown",
+    "description": "Move Cursor Page Down"
+  },
+  {
+    "command": "cursorPageDownSelect",
+    "description": "Select Page Down"
+  },
+  {
+    "command": "cursorPageUp",
+    "description": "Move Cursor Page Up"
+  },
+  {
+    "command": "cursorPageUpSelect",
+    "description": "Select Page Up"
+  },
+  {
+    "command": "cursorRight",
+    "description": "Move Cursor Right"
+  },
+  {
+    "command": "cursorRight",
+    "description": "Move Cursor Right"
+  },
+  {
+    "command": "cursorRightSelect",
+    "description": "Select Right"
+  },
+  {
+    "command": "cursorTop",
+    "description": "Move Cursor to Top"
+  },
+  {
+    "command": "cursorTopSelect",
+    "description": "Select to Top"
+  },
+  {
+    "command": "cursorUp",
+    "description": "Move Cursor Up"
+  },
+  {
+    "command": "cursorUp",
+    "description": "Move Cursor Up"
+  },
+  {
+    "command": "cursorUpSelect",
+    "description": "Select Up"
+  },
+  {
+    "command": "deleteLeft",
+    "description": "Delete Left"
+  },
+  {
+    "command": "deleteLeft",
+    "description": "Delete Left"
+  },
+  {
+    "command": "deleteLeft",
+    "description": "Delete Left"
+  },
+  {
+    "command": "deleteLeft",
+    "description": "Backspace"
+  },
+  {
+    "command": "deleteRight",
+    "description": "Delete"
+  },
+  {
+    "command": "deleteRight",
+    "description": "Delete"
+  },
+  {
+    "command": "deleteRight",
+    "description": "Delete"
+  },
+  {
+    "command": "editor.action.selectAll",
+    "description": "Select All"
+  },
+  {
+    "command": "execCopy",
+    "description": "Copy"
+  },
+  {
+    "command": "execCut",
+    "description": "Cut"
+  },
+  {
+    "command": "execPaste",
+    "description": "Paste"
+  },
+  {
+    "command": "expandLineSelection",
+    "description": "Expand Line Selection"
+  },
+  {
+    "command": "inlineChat.arrowOutDown",
+    "description": "Inline Chat Arrow Out Down"
+  },
+  {
+    "command": "inlineChat.arrowOutUp",
+    "description": "Inline Chat Arrow Out Up"
+  },
+  {
+    "command": "lineBreakInsert",
+    "description": "Line Break Insert"
+  },
+  {
+    "command": "notebook.focusNextEditor",
+    "description": "Notebook Focus Next Editor"
+  },
+  {
+    "command": "outdent",
+    "description": "Outdent"
+  },
+  {
+    "command": "redo",
+    "description": "Redo"
+  },
+  {
+    "command": "scrollLineDown",
+    "description": "Scroll Line Down"
+  },
+  {
+    "command": "scrollLineUp",
+    "description": "Scroll Line Up"
+  },
+  {
+    "command": "scrollPageDown",
+    "description": "Scroll Page Down"
+  },
+  {
+    "command": "scrollPageUp",
+    "description": "Scroll Page Up"
+  },
+  {
+    "command": "tab",
+    "description": "Tab"
+  },
+  {
+    "command": "undo",
+    "description": "Undo"
+  },
+  {
+    "command": "cursorColumnSelectDown",
+    "description": "Cursor Column Select Down"
+  },
+  {
+    "command": "cursorColumnSelectLeft",
+    "description": "Cursor Column Select Left"
+  },
+  {
+    "command": "cursorColumnSelectPageDown",
+    "description": "Cursor Column Select Page Down"
+  },
+  {
+    "command": "cursorColumnSelectPageUp",
+    "description": "Cursor Column Select Page Up"
+  },
+  {
+    "command": "cursorColumnSelectRight",
+    "description": "Cursor Column Select Right"
+  },
+  {
+    "command": "cursorColumnSelectUp",
+    "description": "Cursor Column Select Up"
+  },
+  {
+    "command": "removeSecondaryCursors",
+    "description": "Remove Secondary Cursors"
+  },
+  {
+    "command": "removeSecondaryCursors",
+    "description": "Remove Secondary Cursors"
+  },
+  {
+    "command": "inlineChat.accept",
+    "description": "Inline Chat Accept"
+  },
+  {
+    "command": "inlineChat.focus",
+    "description": "Inline Chat Focus"
+  },
+  {
+    "command": "inlineChat.nextFromHistory",
+    "description": "Inline Chat Next From History"
+  },
+  {
+    "command": "inlineChat.previousFromHistory",
+    "description": "Inline Chat Previous From History"
+  },
+  {
+    "command": "goToNextReference",
+    "description": "Go To Next Reference"
+  },
+  {
+    "command": "goToNextReference",
+    "description": "Go To Next Reference"
+  },
+  {
+    "command": "goToPreviousReference",
+    "description": "Go To Previous Reference"
+  },
+  {
+    "command": "goToPreviousReference",
+    "description": "Go To Previous Reference"
+  },
+  {
+    "command": "refactorPreview.apply",
+    "description": "Apply Refactor Preview"
+  },
+  {
+    "command": "testing.editFocusedTest",
+    "description": "Edit Focused Test"
+  },
+  {
+    "command": "notebook.cell.quitEdit",
+    "description": "Quit Notebook Cell Edit"
+  },
+  {
+    "command": "notebook.cell.quitEdit",
+    "description": "Quit Notebook Cell Edit"
+  },
+  {
+    "command": "inlineChat.cancel",
+    "description": "Cancel Inline Chat"
+  },
+  {
+    "command": "actions.find",
+    "description": "Find"
+  },
+  {
+    "command": "actions.findWithSelection",
+    "description": "Find With Selection"
+  },
+  {
+    "command": "breakpointWidget.action.acceptInput",
+    "description": "Breakpoint Widget Accept Input"
+  },
+  {
+    "command": "chat.action.acceptInput",
+    "description": "Chat Action Accept Input"
+  },
+  {
+    "command": "chat.action.focus",
+    "description": "Chat Action Focus"
+  },
+  {
+    "command": "chat.action.submitSecondaryAgent",
+    "description": "Chat Action Submit Secondary Agent"
+  },
+  {
+    "command": "closeBreakpointWidget",
+    "description": "Close Breakpoint Widget"
+  },
+  {
+    "command": "closeBreakpointWidget",
+    "description": "Close Breakpoint Widget"
+  },
+  {
+    "command": "cursorUndo",
+    "description": "Cursor Undo"
+  },
+  {
+    "command": "cursorWordEndRight",
+    "description": "Cursor Word End Right"
+  },
+  {
+    "command": "cursorWordEndRightSelect",
+    "description": "Select to the End of Word to the Right"
+  },
+  {
+    "command": "cursorWordLeft",
+    "description": "Move Cursor to the Beginning of Word to the Left"
+  },
+  {
+    "command": "cursorWordLeftSelect",
+    "description": "Select to the Beginning of Word to the Left"
+  },
+  {
+    "command": "cursorWordPartLeft",
+    "description": "Move Cursor to the Beginning of Word Part to the Left"
+  },
+  {
+    "command": "cursorWordPartLeftSelect",
+    "description": "Select to the Beginning of Word Part to the Left"
+  },
+  {
+    "command": "cursorWordPartRight",
+    "description": "Move Cursor to the End of Word Part to the Right"
+  },
+  {
+    "command": "cursorWordPartRightSelect",
+    "description": "Select to the End of Word Part to the Right"
+  },
+  {
+    "command": "deleteAllLeft",
+    "description": "Delete All to the Left"
+  },
+  {
+    "command": "deleteAllRight",
+    "description": "Delete All to the Right"
+  },
+  {
+    "command": "deleteAllRight",
+    "description": "Delete All to the Right"
+  },
+  {
+    "command": "deleteWordLeft",
+    "description": "Delete Word to the Left"
+  },
+  {
+    "command": "deleteWordPartLeft",
+    "description": "Delete Word Part to the Left"
+  },
+  {
+    "command": "deleteWordPartRight",
+    "description": "Delete Word Part to the Right"
+  },
+  {
+    "command": "deleteWordRight",
+    "description": "Delete Word to the Right"
+  },
+  {
+    "command": "editor.action.accessibleDiffViewer.next",
+    "description": "Next Change in Accessible Diff Viewer"
+  },
+  {
+    "command": "editor.action.accessibleDiffViewer.prev",
+    "description": "Previous Change in Accessible Diff Viewer"
+  },
+  {
+    "command": "editor.action.addCommentLine",
+    "description": "Add Comment Line"
+  },
+  {
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "description": "Add Selection to Next Find Match"
+  },
+  {
+    "command": "editor.action.autoFix",
+    "description": "Auto Fix"
+  },
+  {
+    "command": "editor.action.blockComment",
+    "description": "Block Comment"
+  },
+  {
+    "command": "editor.action.cancelSelectionAnchor",
+    "description": "Cancel Selection Anchor"
+  },
+  {
+    "command": "editor.action.changeAll",
+    "description": "Change All Occurrences"
+  },
+  {
+    "command": "editor.action.clipboardCopyAction",
+    "description": "Copy to Clipboard"
+  },
+  {
+    "command": "editor.action.clipboardCutAction",
+    "description": "Cut to Clipboard"
+  },
+  {
+    "command": "editor.action.clipboardPasteAction",
+    "description": "Paste from Clipboard"
+  },
+  {
+    "command": "editor.action.commentLine",
+    "description": "Comment Line"
+  },
+  {
+    "command": "editor.action.copyLinesDownAction",
+    "description": "Copy Lines Down"
+  },
+  {
+    "command": "editor.action.copyLinesUpAction",
+    "description": "Copy Lines Up"
+  },
+  {
+    "command": "editor.action.deleteLines",
+    "description": "Delete Lines"
+  },
+  {
+    "command": "editor.action.dirtydiff.next",
+    "description": "Next Change in Dirty Diff"
+  },
+  {
+    "command": "editor.action.dirtydiff.previous",
+    "description": "Previous Change in Dirty Diff"
+  },
+  {
+    "command": "editor.action.extensioneditor.findNext",
+    "description": "Find Next in Extension Editor"
+  },
+  {
+    "command": "editor.action.extensioneditor.findPrevious",
+    "description": "Find Previous in Extension Editor"
+  },
+  {
+    "command": "editor.action.extensioneditor.showfind",
+    "description": "Show Find in Extension Editor"
+  },
+  {
+    "command": "editor.action.formatDocument",
+    "description": "Format Document"
+  },
+  {
+    "command": "editor.action.formatDocument.none",
+    "description": "Format Document (None)"
+  },
+  {
+    "command": "editor.action.formatSelection",
+    "description": "Format Selection"
+  },
+  {
+    "command": "editor.action.goToBottomHover",
+    "description": "Go to Bottom in Hover"
+  },
+  {
+    "command": "editor.action.goToBottomHover",
+    "description": "Go to Bottom in Hover"
+  },
+  {
+    "command": "editor.action.goToFocusedStickyScrollLine",
+    "description": "Go to Focused Sticky Scroll Line"
+  },
+  {
+    "command": "editor.action.goToImplementation",
+    "description": "Go to Implementation"
+  },
+  {
+    "command": "editor.action.goToReferences",
+    "description": "Go to References"
+  },
+  {
+    "command": "editor.action.goToTopHover",
+    "description": "Go to Top in Hover"
+  },
+  {
+    "command": "editor.action.goToTopHover",
+    "description": "Go to Top in Hover"
+  },
+  {
+    "command": "editor.action.hideColorPicker",
+    "description": "Hide Color Picker"
+  },
+  {
+    "command": "editor.action.inPlaceReplace.down",
+    "description": "In-Place Replace Down"
+  },
+  {
+    "command": "editor.action.inPlaceReplace.up",
+    "description": "In-Place Replace Up"
+  },
+  {
+    "command": "editor.action.indentLines",
+    "description": "Indent Lines"
+  },
+  {
+    "command": "editor.action.inlineSuggest.hide",
+    "description": "Hide Inline Suggestion"
+  },
+  {
+    "command": "editor.action.inlineSuggest.showNext",
+    "description": "Show Next Inline Suggestion"
+  },
+  {
+    "command": "editor.action.inlineSuggest.showPrevious",
+    "description": "Show Previous Inline Suggestion"
+  },
+  {
+    "command": "editor.action.insertColorWithStandaloneColorPicker",
+    "description": "Insert Color with Standalone Color Picker"
+  },
+  {
+    "command": "editor.action.insertCursorAbove",
+    "description": "Insert Cursor Above"
+  },
+  {
+    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+    "description": "Insert Cursor at End of Each Line Selected"
+  },
+  {
+    "command": "editor.action.insertCursorBelow",
+    "description": "Insert Cursor Below"
+  },
+  {
+    "command": "editor.action.insertLineAfter",
+    "description": "Insert Line After"
+  },
+  {
+    "command": "editor.action.insertLineBefore",
+    "description": "Insert Line Before"
+  },
+  {
+    "command": "editor.action.joinLines",
+    "description": "Join Lines"
+  },
+  {
+    "command": "editor.action.jumpToBracket",
+    "description": "Jump to Bracket"
+  },
+  {
+    "command": "editor.action.linkedEditing",
+    "description": "Linked Editing"
+  },
+  {
+    "command": "editor.action.marker.next",
+    "description": "Next Marker"
+  },
+  {
+    "command": "editor.action.marker.nextInFiles",
+    "description": "Next Marker in Files"
+  },
+  {
+    "command": "editor.action.marker.prev",
+    "description": "Previous Marker"
+  },
+  {
+    "command": "editor.action.marker.prevInFiles",
+    "description": "Previous Marker in Files"
+  },
+  {
+    "command": "editor.action.moveLinesDownAction",
+    "description": "Move Lines Down"
+  },
+  {
+    "command": "editor.action.moveLinesUpAction",
+    "description": "Move Lines Up"
+  },
+  {
+    "command": "editor.action.moveSelectionToNextFindMatch",
+    "description": "Move the selection to the next find match"
+  },
+  {
+    "command": "editor.action.nextCommentThreadAction",
+    "description": "Move to the next comment thread"
+  },
+  {
+    "command": "editor.action.nextCommentingRange",
+    "description": "Move to the next commenting range"
+  },
+  {
+    "command": "editor.action.nextMatchFindAction",
+    "description": "Move to the next find match"
+  },
+  {
+    "command": "editor.action.nextMatchFindAction",
+    "description": "Move to the next find match"
+  },
+  {
+    "command": "editor.action.nextMatchFindAction",
+    "description": "Move to the next find match"
+  },
+  {
+    "command": "editor.action.nextSelectionMatchFindAction",
+    "description": "Move to the next selection match"
+  },
+  {
+    "command": "editor.action.organizeImports",
+    "description": "Organize imports in the active file"
+  },
+  {
+    "command": "editor.action.outdentLines",
+    "description": "Outdent the selected lines"
+  },
+  {
+    "command": "editor.action.pageDownHover",
+    "description": "Page down while hovering"
+  },
+  {
+    "command": "editor.action.pageDownHover",
+    "description": "Page down while hovering"
+  },
+  {
+    "command": "editor.action.pageUpHover",
+    "description": "Page up while hovering"
+  },
+  {
+    "command": "editor.action.pageUpHover",
+    "description": "Page up while hovering"
+  },
+  {
+    "command": "editor.action.peekDefinition",
+    "description": "Peek at the definition"
+  },
+  {
+    "command": "editor.action.peekImplementation",
+    "description": "Peek at the implementation"
+  },
+  {
+    "command": "editor.action.previousCommentThreadAction",
+    "description": "Move to the previous comment thread"
+  },
+  {
+    "command": "editor.action.previousCommentingRange",
+    "description": "Move to the previous commenting range"
+  },
+  {
+    "command": "editor.action.previousMatchFindAction",
+    "description": "Move to the previous find match"
+  },
+  {
+    "command": "editor.action.previousMatchFindAction",
+    "description": "Move to the previous find match"
+  },
+  {
+    "command": "editor.action.previousMatchFindAction",
+    "description": "Move to the previous find match"
+  },
+  {
+    "command": "editor.action.previousSelectionMatchFindAction",
+    "description": "Move to the previous selection match"
+  },
+  {
+    "command": "editor.action.quickFix",
+    "description": "Quick fix"
+  },
+  {
+    "command": "editor.action.refactor",
+    "description": "Refactor"
+  },
+  {
+    "command": "editor.action.removeBrackets",
+    "description": "Remove brackets"
+  },
+  {
+    "command": "editor.action.removeCommentLine",
+    "description": "Remove comment line"
+  },
+  {
+    "command": "editor.action.rename",
+    "description": "Rename"
+  },
+  {
+    "command": "editor.action.revealDefinition",
+    "description": "Reveal definition"
+  },
+  {
+    "command": "editor.action.revealDefinition",
+    "description": "Reveal definition"
+  },
+  {
+    "command": "editor.action.revealDefinitionAside",
+    "description": "Reveal definition aside"
+  },
+  {
+    "command": "editor.action.revealDefinitionAside",
+    "description": "Reveal definition aside"
+  },
+  {
+    "command": "editor.action.scrollDownHover",
+    "description": "Scroll down while hovering"
+  },
+  {
+    "command": "editor.action.scrollLeftHover",
+    "description": "Scroll left while hovering"
+  },
+  {
+    "command": "editor.action.scrollRightHover",
+    "description": "Scroll right while hovering"
+  },
+  {
+    "command": "editor.action.scrollUpHover",
+    "description": "Scroll up while hovering"
+  },
+  {
+    "command": "editor.action.selectEditor",
+    "description": "Select editor"
+  },
+  {
+    "command": "editor.action.selectFromAnchorToCursor",
+    "description": "Select from anchor to cursor"
+  },
+  {
+    "command": "editor.action.selectHighlights",
+    "description": "Select highlights"
+  },
+  {
+    "command": "editor.action.selectNextStickyScrollLine",
+    "description": "Select the next sticky scroll line"
+  },
+  {
+    "command": "editor.action.selectPreviousStickyScrollLine",
+    "description": "Select the previous sticky scroll line"
+  },
+  {
+    "command": "editor.action.setSelectionAnchor",
+    "description": "Set the selection anchor"
+  },
+  {
+    "command": "editor.action.showContextMenu",
+    "description": "Show context menu"
+  },
+  {
+    "command": "editor.action.showHover",
+    "description": "Show hover"
+  },
+  {
+    "command": "editor.action.smartSelect.expand",
+    "description": "Expand smart selection"
+  },
+  {
+    "command": "editor.action.smartSelect.expand",
+    "description": "Expand smart selection"
+  },
+  {
+    "command": "editor.action.smartSelect.shrink",
+    "description": "Shrink smart selection"
+  },
+  {
+    "command": "editor.action.smartSelect.shrink",
+    "description": "Shrink smart selection"
+  },
+  {
+    "command": "editor.action.startFindReplaceAction",
+    "description": "Start find and replace action"
+  },
+  {
+    "command": "editor.action.submitComment",
+    "description": "Submit comment"
+  },
+  {
+    "command": "editor.action.toggleTabFocusMode",
+    "description": "Toggle tab focus mode"
+  },
+  {
+    "command": "editor.action.toggleWordWrap",
+    "description": "Toggle word wrap"
+  },
+  {
+    "command": "editor.action.transposeLetters",
+    "description": "Transpose letters"
+  },
+  {
+    "command": "editor.action.triggerParameterHints",
+    "description": "Trigger parameter hints"
+  },
+  {
+    "command": "editor.action.triggerSuggest",
+    "description": "Trigger suggest"
+  },
+  {
+    "command": "editor.action.triggerSuggest",
+    "description": "Trigger suggest"
+  },
+  {
+    "command": "editor.action.triggerSuggest",
+    "description": "Trigger suggest"
+  },
+  {
+    "command": "editor.action.trimTrailingWhitespace",
+    "description": "Trim trailing whitespace"
+  },
+  {
+    "command": "editor.action.webvieweditor.findNext",
+    "description": "Find next in webview editor"
+  },
+  {
+    "command": "editor.action.webvieweditor.findPrevious",
+    "description": "Find previous in webview editor"
+  },
+  {
+    "command": "editor.action.webvieweditor.hideFind",
+    "description": "Hide find in webview editor"
+  },
+  {
+    "command": "editor.action.webvieweditor.showFind",
+    "description": "Show find in webview editor"
+  },
+  {
+    "command": "editor.action.wordHighlight.next",
+    "description": "Go to the next word highlight"
+  },
+  {
+    "command": "editor.action.wordHighlight.prev",
+    "description": "Go to the previous word highlight"
+  },
+  {
+    "command": "editor.cancelOperation",
+    "description": "Cancel operation"
+  },
+  {
+    "command": "editor.changeDropType",
+    "description": "Change drop type"
+  },
+  {
+    "command": "editor.changePasteType",
+    "description": "Change paste type"
+  },
+  {
+    "command": "editor.createFoldingRangeFromSelection",
+    "description": "Create folding range from selection"
+  },
+  {
+    "command": "editor.debug.action.closeExceptionWidget",
+    "description": "Close exception widget"
+  },
+  {
+    "command": "editor.debug.action.showDebugHover",
+    "description": "Show debug hover"
+  },
+  {
+    "command": "editor.debug.action.toggleBreakpoint",
+    "description": "Toggle breakpoint"
+  },
+  {
+    "command": "editor.emmet.action.expandAbbreviation",
+    "description": "Expand abbreviation"
+  },
+  {
+    "command": "editor.fold",
+    "description": "Fold"
+  },
+  {
+    "command": "editor.foldAll",
+    "description": "Fold all"
+  },
+  {
+    "command": "editor.foldAllBlockComments",
+    "description": "Fold all block comments"
+  },
+  {
+    "command": "editor.foldAllExcept",
+    "description": "Fold all except"
+  },
+  {
+    "command": "editor.foldAllMarkerRegions",
+    "description": "Fold all marker regions"
+  },
+  {
+    "command": "editor.foldLevel1",
+    "description": "Fold level 1"
+  },
+  {
+    "command": "editor.foldLevel2",
+    "description": "Fold level 2"
+  },
+  {
+    "command": "editor.foldLevel3",
+    "description": "Fold level 3"
+  },
+  {
+    "command": "editor.foldLevel4",
+    "description": "Fold level 4"
+  },
+  {
+    "command": "editor.foldLevel5",
+    "description": "Fold level 5"
+  },
+  {
+    "command": "editor.foldLevel6",
+    "description": "Fold level 6"
+  },
+  {
+    "command": "editor.foldLevel7",
+    "description": "Fold level 7"
+  },
+  {
+    "command": "editor.foldRecursively",
+    "description": "Fold recursively"
+  },
+  {
+    "command": "editor.gotoNextSymbolFromResult",
+    "description": "Go to next symbol from result"
+  },
+  {
+    "command": "editor.gotoNextSymbolFromResult.cancel",
+    "description": "Cancel go to next symbol from result"
+  },
+  {
+    "command": "editor.removeManualFoldingRanges",
+    "description": "Remove manual folding ranges"
+  },
+  {
+    "command": "editor.toggleFold",
+    "description": "Toggle fold"
+  },
+  {
+    "command": "editor.unfold",
+    "description": "Unfold"
+  },
+  {
+    "command": "editor.unfoldAll",
+    "description": "Unfold all"
+  },
+  {
+    "command": "editor.unfoldAllExcept",
+    "description": "Unfold all except"
+  },
+  {
+    "command": "editor.unfoldAllMarkerRegions",
+    "description": "Unfold all marker regions in the editor"
+  },
+  {
+    "command": "editor.unfoldRecursively",
+    "description": "Unfold the editor content recursively"
+  },
+  {
+    "command": "inlayHints.stopReadingLineWithHint",
+    "description": "Stop reading a line with hints using the 'escape' key"
+  },
+  {
+    "command": "inlineChat.discard",
+    "description": "Discard inline chat when 'escape' key is pressed"
+  },
+  {
+    "command": "inlineChat.stop",
+    "description": "Stop inline chat when 'escape' key is pressed"
+  },
+  {
+    "command": "insertSnippet",
+    "description": "Insert a snippet in the editor"
+  },
+  {
+    "command": "interactive.acceptChanges",
+    "description": "Accept changes in interactive mode"
+  },
+  {
+    "command": "interactive.execute",
+    "description": "Execute interactive mode"
+  },
+  {
+    "command": "notebook.cell.cursorPageDown",
+    "description": "Move cursor down in notebook cell"
+  },
+  {
+    "command": "notebook.cell.cursorPageDownSelect",
+    "description": "Select and move cursor down in a notebook cell"
+  },
+  {
+    "command": "notebook.cell.cursorPageUp",
+    "description": "Move cursor up in a notebook cell"
+  },
+  {
+    "command": "notebook.cell.cursorPageUpSelect",
+    "description": "Select and move cursor up in a notebook cell"
+  },
+  {
+    "command": "notebook.cell.execute",
+    "description": "Execute the current notebook cell"
+  },
+  {
+    "command": "notebook.cell.executeAndInsertBelow",
+    "description": "Execute the current cell and insert a new cell below"
+  },
+  {
+    "command": "notebook.cell.executeAndSelectBelow",
+    "description": "Execute the current cell and select the cell below"
+  },
+  {
+    "command": "notebook.cell.pasteAbove",
+    "description": "Paste content above the current cell in the notebook"
+  },
+  {
+    "command": "notebook.focusNextEditor",
+    "description": "Focus on the next editor in the notebook"
+  },
+  {
+    "command": "notebook.focusPreviousEditor",
+    "description": "Focus on the previous editor in the notebook"
+  },
+  {
+    "command": "notebook.formatCell",
+    "description": "Format the content of the notebook cell"
+  },
+  {
+    "command": "openReferenceToSide",
+    "description": "Open reference to the side in the editor"
+  },
+  {
+    "command": "repl.action.acceptInput",
+    "description": "Accept input in the REPL (Read-Eval-Print Loop)"
+  },
+  {
+    "command": "repl.action.filter",
+    "description": "Filter content in the REPL"
+  },
+  {
+    "command": "rerunSearchEditorSearch",
+    "description": "Rerun the search in the search editor"
+  },
+  {
+    "command": "search.action.focusQueryEditorWidget",
+    "description": "Focus on the query editor widget in the search"
+  },
+  {
+    "command": "search.searchEditor.action.deleteFileResults",
+    "description": "Delete file results in the search editor"
+  },
+  {
+    "command": "settings.action.clearSearchResults",
+    "description": "Clear search results in the settings editor"
+  },
+  {
+    "command": "settings.action.focusSettingsFile",
+    "description": "Focus on the settings file in the settings search"
+  },
+  {
+    "command": "settings.action.search",
+    "description": "Search in the settings editor"
+  },
+  {
+    "command": "toggleExplainMode",
+    "description": "Toggle explain mode when the suggest widget is visible"
+  },
+  {
+    "command": "togglePeekWidgetFocus",
+    "description": "Toggle focus on the peek widget in the reference search editor"
+  },
+  {
+    "command": "welcome.goBack",
+    "description": "Go back in the welcome page when on the getting started page"
+  },
+  {
+    "command": "workbench.action.addComment",
+    "description": "Add a comment in the workbench"
+  },
+  {
+    "command": "workbench.action.chat.runInTerminal",
+    "description": "Run in the terminal in chat mode in the workbench"
+  },
+  {
+    "command": "workbench.action.editor.nextChange",
+    "description": "Go to the next change in the editor"
+  },
+  {
+    "command": "workbench.action.editor.previousChange",
+    "description": "Go to the previous change in the editor"
+  },
+  {
+    "command": "workbench.action.hideComment",
+    "description": "Hide comment in the workbench"
+  },
+  {
+    "command": "editor.action.inlineSuggest.acceptNextWord",
+    "description": "Accept the next suggested word in inline suggestion"
+  },
+  {
+    "command": "testing.goToNextMessage",
+    "description": "Go to the next testing message in the editor"
+  },
+  {
+    "command": "testing.goToPreviousMessage",
+    "description": "Go to the previous testing message in the editor"
+  },
+  {
+    "command": "closeFindWidget",
+    "description": "Close the find widget in the editor"
+  },
+  {
+    "command": "editor.action.replaceAll",
+    "description": "Replace all occurrences in the editor"
+  },
+  {
+    "command": "editor.action.replaceOne",
+    "description": "Replace the current occurrence in the editor"
+  },
+  {
+    "command": "editor.action.selectAllMatches",
+    "description": "Select all occurrences in the editor"
+  },
+  {
+    "command": "toggleFindCaseSensitive",
+    "description": "Toggle Find Case Sensitive"
+  },
+  {
+    "command": "toggleFindInSelection",
+    "description": "Toggle Find In Selection"
+  },
+  {
+    "command": "toggleFindRegex",
+    "description": "Toggle Find Regex"
+  },
+  {
+    "command": "toggleFindWholeWord",
+    "description": "Toggle Find Whole Word"
+  },
+  {
+    "command": "togglePreserveCase",
+    "description": "Toggle Preserve Case"
+  },
+  {
+    "command": "interactive.acceptChanges",
+    "description": "Accept Changes in Interactive Mode"
+  },
+  {
+    "command": "jumpToNextSnippetPlaceholder",
+    "description": "Jump to Next Snippet Placeholder"
+  },
+  {
+    "command": "jumpToPrevSnippetPlaceholder",
+    "description": "Jump to Previous Snippet Placeholder"
+  },
+  {
+    "command": "leaveEditorMessage",
+    "description": "Leave Editor Message"
+  },
+  {
+    "command": "leaveSnippet",
+    "description": "Leave Snippet"
+  },
+  {
+    "command": "closeDirtyDiff",
+    "description": "Close Dirty Diff"
+  },
+  {
+    "command": "closeMarkersNavigation",
+    "description": "Close Markers Navigation"
+  },
+  {
+    "command": "notifications.hideToasts",
+    "description": "Hide Toast Notifications"
+  },
+  {
+    "command": "closeParameterHints",
+    "description": "Close Parameter Hints"
+  },
+  {
+    "command": "showNextParameterHint",
+    "description": "Show Next Parameter Hint"
+  },
+  {
+    "command": "showPrevParameterHint",
+    "description": "Show Previous Parameter Hint"
+  },
+  {
+    "command": "acceptAlternativeSelectedSuggestion",
+    "description": "Accept Alternative Selected Suggestion"
+  },
+  {
+    "command": "acceptSelectedSuggestion",
+    "description": "Accept Selected Suggestion"
+  },
+  {
+    "command": "focusSuggestion",
+    "description": "Focus Suggestion"
+  },
+  {
+    "command": "hideSuggestWidget",
+    "description": "Hide Suggest Widget"
+  },
+  {
+    "command": "insertBestCompletion",
+    "description": "Insert Best Completion"
+  },
+  {
+    "command": "insertNextSuggestion",
+    "description": "Insert Next Suggestion"
+  },
+  {
+    "command": "insertPrevSuggestion",
+    "description": "Insert Previous Suggestion"
+  },
+  {
+    "command": "selectNextPageSuggestion",
+    "description": "Select Next Page Suggestion"
+  },
+  {
+    "command": "selectPrevPageSuggestion",
+    "description": "Select Previous Page Suggestion"
+  },
+  {
+    "command": "selectNextSuggestion",
+    "description": "Select Next Suggestion"
+  },
+  {
+    "command": "selectPrevSuggestion",
+    "description": "Select Previous Suggestion"
+  },
+  {
+    "command": "toggleSuggestionDetails",
+    "description": "Toggle Suggestion Details"
+  },
+  {
+    "command": "toggleSuggestionFocus",
+    "description": "Toggle Suggestion Focus"
+  },
+  {
+    "command": "acceptRenameInput",
+    "description": "Accept Rename Input"
+  },
+  {
+    "command": "acceptRenameInputWithPreview",
+    "description": "Accept Rename Input With Preview"
+  },
+  {
+    "command": "cancelLinkedEditingInput",
+    "description": "Cancel Linked Editing Input"
+  },
+  {
+    "command": "cancelLinkedEditingInput",
+    "description": "Cancel Linked Editing Input"
+  },
+  {
+    "command": "cancelRenameInput",
+    "description": "Cancel Rename Input"
+  },
+  {
+    "command": "cancelRenameInput",
+    "description": "Cancel Rename Input"
+  },
+  {
+    "command": "addCursorsAtSearchResults",
+    "description": "Add Cursors At Search Results"
+  },
+  {
+    "command": "breadcrumbs.focus",
+    "description": "Breadcrumbs Focus"
+  },
+  {
+    "command": "breadcrumbs.focusAndSelect",
+    "description": "Breadcrumbs Focus And Select"
+  },
+  {
+    "command": "breadcrumbs.focusNext",
+    "description": "Breadcrumbs Focus Next"
+  },
+  {
+    "command": "breadcrumbs.focusNext",
+    "description": "Breadcrumbs Focus Next"
+  },
+  {
+    "command": "breadcrumbs.focusPrevious",
+    "description": "Breadcrumbs Focus Previous"
+  },
+  {
+    "command": "breadcrumbs.focusPrevious",
+    "description": "Breadcrumbs Focus Previous"
+  },
+  {
+    "command": "breadcrumbs.revealFocused",
+    "description": "Breadcrumbs Reveal Focused"
+  },
+  {
+    "command": "breadcrumbs.revealFocused",
+    "description": "Breadcrumbs Reveal Focused"
+  },
+  {
+    "command": "breadcrumbs.revealFocusedFromTreeAside",
+    "description": "Breadcrumbs Reveal Focused From Tree Aside"
+  },
+  {
+    "command": "breadcrumbs.selectFocused",
+    "description": "Breadcrumbs Select Focused"
+  },
+  {
+    "command": "breadcrumbs.selectFocused",
+    "description": "Breadcrumbs Select Focused"
+  },
+  {
+    "command": "breadcrumbs.toggleToOn",
+    "description": "Breadcrumbs Toggle To On"
+  },
+  {
+    "command": "closeReplaceInFilesWidget",
+    "description": "Close Replace In Files Widget"
+  },
+  {
+    "command": "commentsClearFilterText",
+    "description": "Comments Clear Filter Text"
+  },
+  {
+    "command": "commentsFocusFilter",
+    "description": "Comments Focus Filter"
+  },
+  {
+    "command": "commentsFocusViewFromFilter",
+    "description": "Comments Focus View From Filter"
+  },
+  {
+    "command": "copyFilePath",
+    "description": "Copy File Path"
+  },
+  {
+    "command": "copyFilePath",
+    "description": "Copy File Path"
+  },
+  {
+    "command": "copyRelativeFilePath",
+    "description": "Copy Relative File Path"
+  },
+  {
+    "command": "copyRelativeFilePath",
+    "description": "Copy Relative File Path"
+  },
+  {
+    "command": "debug.openBreakpointToSide",
+    "description": "Debug Open Breakpoint To Side"
+  },
+  {
+    "command": "debug.openBreakpointToSide",
+    "description": "Debug Open Breakpoint To Side"
+  },
+  {
+    "command": "debug.openView",
+    "description": "Debug Open View"
+  },
+  {
+    "command": "debug.openView",
+    "description": "Debug Open View"
+  },
+  {
+    "command": "debug.removeBreakpoint",
+    "description": "Debug Remove Breakpoint"
+  },
+  {
+    "command": "debug.removeWatchExpression",
+    "description": "Debug Remove Watch Expression"
+  },
+  {
+    "command": "decreaseSearchEditorContextLines",
+    "description": "Decrease Search Editor Context Lines"
+  },
+  {
+    "command": "editor.action.accessibilityHelp",
+    "description": "Editor Accessibility Help"
+  },
+  {
+    "command": "editor.action.accessibleView",
+    "description": "Editor Accessible View"
+  },
+  {
+    "command": "editor.action.accessibleViewAcceptInlineCompletion",
+    "description": "Editor Accessible View Accept Inline Completion"
+  },
+  {
+    "command": "editor.action.accessibleViewDisableHint",
+    "description": "Editor Accessible View Disable Hint"
+  },
+  {
+    "command": "editor.action.accessibleViewNext",
+    "description": "Editor Accessible View Next"
+  },
+  {
+    "command": "editor.action.accessibleViewPrevious",
+    "description": "Navigate to the previous accessible view"
+  },
+  {
+    "command": "editor.action.defineKeybinding",
+    "description": "Define a keybinding in user keybindings.json"
+  },
+  {
+    "command": "editor.action.inlineSuggest.commit",
+    "description": "Commit inline suggestion"
+  },
+  {
+    "command": "editor.debug.action.toggleInlineBreakpoint",
+    "description": "Toggle inline breakpoint"
+  },
+  {
+    "command": "editor.detectLanguage",
+    "description": "Detect the language for the editor content"
+  },
+  {
+    "command": "editor.refocusCallHierarchy",
+    "description": "Refocus on the call hierarchy"
+  },
+  {
+    "command": "editor.refocusTypeHierarchy",
+    "description": "Refocus on the type hierarchy"
+  },
+  {
+    "command": "editor.showCallHierarchy",
+    "description": "Show the call hierarchy"
+  },
+  {
+    "command": "editor.showIncomingCalls",
+    "description": "Show incoming calls in the call hierarchy"
+  },
+  {
+    "command": "editor.showOutgoingCalls",
+    "description": "Show outgoing calls in the call hierarchy"
+  },
+  {
+    "command": "editor.showSubtypes",
+    "description": "Show subtypes in the type hierarchy"
+  },
+  {
+    "command": "editor.showSupertypes",
+    "description": "Show supertypes in the type hierarchy"
+  },
+  {
+    "command": "explorer.openToSide",
+    "description": "Open explorer to the side"
+  },
+  {
+    "command": "filesExplorer.findInFolder",
+    "description": "Find in folder in Files explorer"
+  },
+  {
+    "command": "history.showNext",
+    "description": "Show next history entry"
+  },
+  {
+    "command": "history.showPrevious",
+    "description": "Show previous history entry"
+  },
+  {
+    "command": "iconSelectBox.focusDown",
+    "description": "Focus down in icon select box"
+  },
+  {
+    "command": "iconSelectBox.focusNext",
+    "description": "Focus next in icon select box"
+  },
+  {
+    "command": "iconSelectBox.focusPrevious",
+    "description": "Focus previous in icon select box"
+  },
+  {
+    "command": "iconSelectBox.focusUp",
+    "description": "Focus up in icon select box"
+  },
+  {
+    "command": "iconSelectBox.selectFocused",
+    "description": "Select focused item in icon select box"
+  },
+  {
+    "command": "increaseSearchEditorContextLines",
+    "description": "Increase search editor context lines"
+  },
+  {
+    "command": "inlineChat.start",
+    "description": "Start inline chat"
+  },
+  {
+    "command": "inlineChat.unstash",
+    "description": "Unstash inline chat session"
+  },
+  {
+    "command": "interactive.history.next",
+    "description": "Move to the next item in interactive history"
+  },
+  {
+    "command": "interactive.history.previous",
+    "description": "Move to the previous item in interactive history"
+  },
+  {
+    "command": "interactive.scrollToBottom",
+    "description": "Scroll the interactive editor to the bottom"
+  },
+  {
+    "command": "interactive.scrollToTop",
+    "description": "Scroll the interactive editor to the top"
+  },
+  {
+    "command": "keybindings.editor.acceptWhenExpression",
+    "description": "Accept when expression in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.addKeybinding",
+    "description": "Add keybinding in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.clearSearchResults",
+    "description": "Clear search results in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.copyKeybindingEntry",
+    "description": "Copy keybinding entry in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.defineKeybinding",
+    "description": "Define keybinding in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.defineWhenExpression",
+    "description": "Define when expression in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.focusKeybindings",
+    "description": "Focus on keybindings in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.recordSearchKeys",
+    "description": "Record search keys in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.rejectWhenExpression",
+    "description": "Reject when expression in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.removeKeybinding",
+    "description": "Remove keybinding in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.searchKeybindings",
+    "description": "Search keybindings in keybindings editor"
+  },
+  {
+    "command": "keybindings.editor.toggleSortByPrecedence",
+    "description": "Toggle sort by precedence in keybindings editor"
+  },
+  {
+    "command": "list.clear",
+    "description": "Clear selection in list"
+  },
+  {
+    "command": "list.closeFind",
+    "description": "Close find in list"
+  },
+  {
+    "command": "list.collapse",
+    "description": "Collapse item in list"
+  },
+  {
+    "command": "list.collapseAll",
+    "description": "Collapse all items in list"
+  },
+  {
+    "command": "list.expand",
+    "description": "Expand item in list"
+  },
+  {
+    "command": "list.expandSelectionDown",
+    "description": "Expand selection down in list"
+  },
+  {
+    "command": "list.expandSelectionUp",
+    "description": "Expand selection up in list"
+  },
+  {
+    "command": "list.find",
+    "description": "Find in list"
+  },
+  {
+    "command": "list.focusDown",
+    "description": "Focus down in list"
+  },
+  {
+    "command": "list.focusFirst",
+    "description": "Focus on the first item in list"
+  },
+  {
+    "command": "list.focusLast",
+    "description": "Focus on the last item in list"
+  },
+  {
+    "command": "list.focusPageDown",
+    "description": "Focus page down in list"
+  },
+  {
+    "command": "list.focusPageUp",
+    "description": "Focus page up in list"
+  },
+  {
+    "command": "list.focusUp",
+    "description": "Focus up in list"
+  },
+  {
+    "command": "list.scrollDown",
+    "description": "Scroll down in list"
+  },
+  {
+    "command": "list.scrollUp",
+    "description": "Scroll up in list"
+  },
+  {
+    "command": "list.select",
+    "description": "Select item in list"
+  },
+  {
+    "command": "list.select",
+    "description": "Select item in list"
+  },
+  {
+    "command": "list.selectAll",
+    "description": "Select all items in list"
+  },
+  {
+    "command": "list.toggleExpand",
+    "description": "Toggle expand item in list"
+  },
+  {
+    "command": "list.toggleSelection",
+    "description": "Toggle selection in list"
+  },
+  {
+    "command": "notebook.cell.changeToCode",
+    "description": "Change notebook cell to code"
+  },
+  {
+    "command": "notebook.cell.changeToMarkdown",
+    "description": "Change notebook cell to markdown"
+  },
+  {
+    "command": "notebook.cell.clearOutputs",
+    "description": "Clear outputs of notebook cell"
+  },
+  {
+    "command": "notebook.cell.collapseCellInput",
+    "description": "Collapse cell input in notebook cell"
+  },
+  {
+    "command": "notebook.cell.collapseCellOutput",
+    "description": "Collapse cell output in notebook cell"
+  },
+  {
+    "command": "notebook.cell.copyDown",
+    "description": "Copy cell content down in notebook"
+  },
+  {
+    "command": "notebook.cell.copyUp",
+    "description": "Copy cell content up in notebook"
+  },
+  {
+    "command": "notebook.cell.delete",
+    "description": "Delete notebook cell"
+  },
+  {
+    "command": "notebook.cell.detectLanguage",
+    "description": "Detect language in notebook cell"
+  },
+  {
+    "command": "notebook.cell.edit",
+    "description": "Edit notebook cell"
+  },
+  {
+    "command": "notebook.cell.expandCellInput",
+    "description": "Expand cell input in notebook cell"
+  },
+  {
+    "command": "notebook.cell.expandCellOutput",
+    "description": "Expand cell output in notebook cell"
+  },
+  {
+    "command": "notebook.cell.focusInOutput",
+    "description": "Focus in output of notebook cell"
+  },
+  {
+    "command": "notebook.cell.focusOutOutput",
+    "description": "Focus out of output in notebook cell"
+  },
+  {
+    "command": "notebook.cell.insertCodeCellAbove",
+    "description": "Insert code cell above in notebook"
+  },
+  {
+    "command": "notebook.cell.insertCodeCellBelow",
+    "description": "Insert code cell below in notebook"
+  },
+  {
+    "command": "notebook.cell.joinAbove",
+    "description": "Join cells above in notebook"
+  },
+  {
+    "command": "notebook.cell.joinBelow",
+    "description": "Join cells below in notebook"
+  },
+  {
+    "command": "notebook.cell.moveDown",
+    "description": "Move cell down in notebook"
+  },
+  {
+    "command": "notebook.cell.moveUp",
+    "description": "Move cell up in notebook"
+  },
+  {
+    "command": "notebook.cell.split",
+    "description": "Split notebook cell"
+  },
+  {
+    "command": "notebook.cell.toggleOutputScrolling",
+    "description": "Toggle output scrolling in notebook cell"
+  },
+  {
+    "command": "notebook.centerActiveCell",
+    "description": "Center active cell in notebook"
+  },
+  {
+    "command": "notebook.diff.action.next",
+    "description": "Go to next diff action in notebook text diff editor"
+  },
+  {
+    "command": "notebook.diff.action.previous",
+    "description": "Go to previous diff action in notebook text diff editor"
+  },
+  {
+    "command": "notebook.find",
+    "description": "Find in notebook editor"
+  },
+  {
+    "command": "notebook.focusBottom",
+    "description": "Focus to bottom in notebook"
+  },
+  {
+    "command": "notebook.focusNextEditor",
+    "description": "Focus on next editor in notebook"
+  },
+  {
+    "command": "notebook.focusNextEditor",
+    "description": "Focus on next editor in notebook"
+  },
+  {
+    "command": "notebook.focusNextEditor",
+    "description": "Focus on next editor in notebook"
+  },
+  {
+    "command": "notebook.focusPreviousEditor",
+    "description": "Focus on previous editor in notebook"
+  },
+  {
+    "command": "notebook.focusPreviousEditor",
+    "description": "Focus on previous editor in notebook"
+  },
+  {
+    "command": "notebook.focusTop",
+    "description": "Focus to top in notebook"
+  },
+  {
+    "command": "notebook.fold",
+    "description": "Fold in notebook"
+  },
+  {
+    "command": "notebook.fold",
+    "description": "Fold in notebook"
+  },
+  {
+    "command": "notebook.format",
+    "description": "Format notebook"
+  },
+  {
+    "command": "notebook.hideFind",
+    "description": "Hide find in notebook"
+  },
+  {
+    "command": "notebook.unfold",
+    "description": "Unfold in notebook"
+  },
+  {
+    "command": "notebook.unfold",
+    "description": "Unfold in notebook"
+  },
+  {
+    "command": "notification.acceptPrimaryAction",
+    "description": "Accept primary action in notification"
+  },
+  {
+    "command": "notification.clear",
+    "description": "Clear notification"
+  },
+  {
+    "command": "notification.collapse",
+    "description": "Collapse notification"
+  },
+  {
+    "command": "notification.expand",
+    "description": "Expand notification"
+  },
+  {
+    "command": "notification.toggle",
+    "description": "Toggle notification"
+  },
+  {
+    "command": "notification.toggle",
+    "description": "Toggle notification"
+  },
+  {
+    "command": "notifications.focusFirstToast",
+    "description": "Focus on the first toast notification"
+  },
+  {
+    "command": "notifications.focusFirstToast",
+    "description": "Focus on the first toast notification"
+  },
+  {
+    "command": "notifications.focusLastToast",
+    "description": "Focus on the last toast notification"
+  },
+  {
+    "command": "notifications.focusLastToast",
+    "description": "Focus on the last toast notification"
+  },
+  {
+    "command": "notifications.focusNextToast",
+    "description": "Focus on the next toast notification"
+  },
+  {
+    "command": "notifications.focusPreviousToast",
+    "description": "Focus on the previous toast notification"
+  },
+  {
+    "command": "notifications.showList",
+    "description": "Show list of notifications"
+  },
+  {
+    "command": "problems.action.clearFilterText",
+    "description": "Clear filter text in problems view"
+  },
+  {
+    "command": "problems.action.copy",
+    "description": "Copy selected problem in problems view"
+  },
+  {
+    "command": "problems.action.focusFilter",
+    "description": "Focus on filter in problems view"
+  },
+  {
+    "command": "problems.action.focusProblemsFromFilter",
+    "description": "Focus on problems from filter in problems view"
+  },
+  {
+    "command": "problems.action.open",
+    "description": "Open selected problem in problems view"
+  },
+  {
+    "command": "problems.action.open",
+    "description": "Open selected problem in problems view"
+  },
+  {
+    "command": "problems.action.openToSide",
+    "description": "Open selected problem to the side in problems view"
+  },
+  {
+    "command": "problems.action.showQuickFixes",
+    "description": "Show quick fixes for selected problem in problems view"
+  },
+  {
+    "command": "refactorPreview.toggleCheckedState",
+    "description": "Toggle checked state in refactor preview"
+  },
+  {
+    "command": "revealFileInOS",
+    "description": "Reveal file in OS"
+  },
+  {
+    "command": "revealReference",
+    "description": "Reveal reference in list"
+  },
+  {
+    "command": "revealReference",
+    "description": "Reveal reference in list"
+  },
+  {
+    "command": "saveAll",
+    "description": "Save all files"
+  },
+  {
+    "command": "scm.acceptInput",
+    "description": "Accept SCM input"
+  },
+  {
+    "command": "scm.forceViewNextCommit",
+    "description": "Force view next commit in SCM"
+  },
+  {
+    "command": "scm.forceViewPreviousCommit",
+    "description": "Force view previous commit in SCM"
+  },
+  {
+    "command": "scm.viewNextCommit",
+    "description": "View next commit in SCM"
+  },
+  {
+    "command": "scm.viewPreviousCommit",
+    "description": "View previous commit in SCM"
+  },
+  {
+    "command": "search.action.cancel",
+    "description": "Cancel search action"
+  },
+  {
+    "command": "search.action.copyMatch",
+    "description": "Copy match in search results"
+  },
+  {
+    "command": "search.action.copyPath",
+    "description": "Copy path in search results"
+  },
+  {
+    "command": "search.action.focusNextSearchResult",
+    "description": "Focus on next search result in search view"
+  },
+  {
+    "command": "search.action.focusPreviousSearchResult",
+    "description": "Focus on previous search result in search view"
+  },
+  {
+    "command": "search.action.focusSearchFromResults",
+    "description": "Focus on search from results in search view"
+  },
+  {
+    "command": "search.action.openInEditor",
+    "description": "Open search result in editor in search view"
+  },
+  {
+    "command": "search.action.openResult",
+    "description": "Open search result in search view"
+  },
+  {
+    "command": "search.action.openResult",
+    "description": "Open search result in search view"
+  },
+  {
+    "command": "search.action.openResultToSide",
+    "description": "Open search result to side in search view"
+  },
+  {
+    "command": "search.action.remove",
+    "description": "Remove search result in search view"
+  },
+  {
+    "command": "search.action.replace",
+    "description": "Replace in search results"
+  },
+  {
+    "command": "search.action.replaceAll",
+    "description": "Replace all in search results"
+  },
+  {
+    "command": "search.action.replaceAllInFile",
+    "description": "Replace all in file in search results"
+  },
+  {
+    "command": "search.action.replaceAllInFile",
+    "description": "Replace all in file in search results"
+  },
+  {
+    "command": "search.action.replaceAllInFolder",
+    "description": "Replace all in folder in search results"
+  },
+  {
+    "command": "search.action.replaceAllInFolder",
+    "description": "Replace all in folder in search results"
+  },
+  {
+    "command": "search.action.restrictSearchToFolder",
+    "description": "Restrict search to folder in search results"
+  },
+  {
+    "command": "search.focus.nextInputBox",
+    "description": "Focus on next input box in search view"
+  },
+  {
+    "command": "search.focus.previousInputBox",
+    "description": "Focus on previous input box in search view"
+  },
+  {
+    "command": "selectAllSearchEditorMatches",
+    "description": "Select all matches in search editor"
+  },
+  {
+    "command": "settings.action.focusLevelUp",
+    "description": "Focus on the level up action in settings editor"
+  },
+  {
+    "command": "settings.action.focusSettingControl",
+    "description": "Focus on setting control in settings editor"
+  },
+  {
+    "command": "settings.action.focusSettingsFromSearch",
+    "description": "Focus on settings from search in settings editor"
+  },
+  {
+    "command": "settings.action.focusSettingsList",
+    "description": "Focus on settings list in settings editor"
+  },
+  {
+    "command": "settings.action.focusTOC",
+    "description": "Focus on Table of Contents in settings editor"
+  },
+  {
+    "command": "settings.action.showContextMenu",
+    "description": "Show context menu in settings editor"
+  },
+  {
+    "command": "testing.cancelRun",
+    "description": "Cancel run in testing"
+  },
+  {
+    "command": "testing.debugAll",
+    "description": "Debug all in testing"
+  },
+  {
+    "command": "testing.debugAtCursor",
+    "description": "Debug at cursor in testing"
+  },
+  {
+    "command": "testing.debugCurrentFile",
+    "description": "Debug current file in testing"
+  },
+  {
+    "command": "testing.debugFailTests",
+    "description": "Debug fail tests in testing"
+  },
+  {
+    "command": "testing.debugLastRun",
+    "description": "Debug last run in testing"
+  },
+  {
+    "command": "testing.openOutputPeek",
+    "description": "Open output peek in testing"
+  },
+  {
+    "command": "testing.reRunFailTests",
+    "description": "Re-run fail tests in testing"
+  },
+  {
+    "command": "testing.reRunLastRun",
+    "description": "Re-run last run in testing"
+  },
+  {
+    "command": "testing.refreshTests",
+    "description": "Refresh tests in testing"
+  },
+  {
+    "command": "testing.runAll",
+    "description": "Run all tests in testing"
+  },
+  {
+    "command": "testing.runAtCursor",
+    "description": "Run at cursor in testing"
+  },
+  {
+    "command": "testing.runCurrentFile",
+    "description": "Run current file in testing"
+  },
+  {
+    "command": "testing.showMostRecentOutput",
+    "description": "Show most recent output in testing"
+  },
+  {
+    "command": "testing.toggleInlineTestOutput",
+    "description": "Toggle inline test output in testing"
+  },
+  {
+    "command": "testing.toggleTestingPeekHistory",
+    "description": "Toggle testing peek history"
+  },
+  {
+    "command": "toggleSearchCaseSensitive",
+    "description": "Toggle search case sensitivity"
+  },
+  {
+    "command": "toggleSearchEditorCaseSensitive",
+    "description": "Toggle search editor case sensitivity"
+  },
+  {
+    "command": "toggleSearchEditorContextLines",
+    "description": "Toggle search editor context lines"
+  },
+  {
+    "command": "toggleSearchEditorRegex",
+    "description": "Toggle search editor regex"
+  },
+  {
+    "command": "toggleSearchEditorWholeWord",
+    "description": "Toggle search editor whole word"
+  },
+  {
+    "command": "toggleSearchPreserveCase",
+    "description": "Toggle search preserve case"
+  },
+  {
+    "command": "toggleSearchRegex",
+    "description": "Toggle search regex"
+  },
+  {
+    "command": "toggleSearchWholeWord",
+    "description": "Toggle search whole word"
+  },
+  {
+    "command": "welcome.showNewFileEntries",
+    "description": "Show new file entries in welcome"
+  },
+  {
+    "command": "widgetNavigation.focusNext",
+    "description": "Focus on next widget navigation"
+  },
+  {
+    "command": "widgetNavigation.focusPrevious",
+    "description": "Focus on previous widget navigation"
+  },
+  {
+    "command": "workbench.action.chat.clear",
+    "description": "Clear chat"
+  },
+  {
+    "command": "workbench.action.chat.focusInput",
+    "description": "Focus on chat input"
+  },
+  {
+    "command": "workbench.action.chat.insertCodeBlock",
+    "description": "Insert code block in chat"
+  },
+  {
+    "command": "workbench.action.chat.nextCodeBlock",
+    "description": "Move to the next code block in chat"
+  },
+  {
+    "command": "workbench.action.chat.nextFileTree",
+    "description": "Move to the next file tree in chat"
+  },
+  {
+    "command": "workbench.action.chat.open",
+    "description": "Open chat"
+  },
+  {
+    "command": "workbench.action.chat.previousCodeBlock",
+    "description": "Move to the previous code block in chat"
+  },
+  {
+    "command": "workbench.action.chat.previousFileTree",
+    "description": "Move to the previous file tree in chat"
+  },
+  {
+    "command": "workbench.action.chat.remove",
+    "description": "Remove chat"
+  },
+  {
+    "command": "workbench.action.chat.runInTerminal",
+    "description": "Run in terminal in chat"
+  },
+  {
+    "command": "workbench.action.closeActiveEditor",
+    "description": "Close active editor"
+  },
+  {
+    "command": "workbench.action.closeAllEditors",
+    "description": "Close all editors"
+  },
+  {
+    "command": "workbench.action.closeAllGroups",
+    "description": "Close all groups"
+  },
+  {
+    "command": "workbench.action.closeEditorsInGroup",
+    "description": "Close editors in group"
+  },
+  {
+    "command": "workbench.action.closeFolder",
+    "description": "Close folder"
+  },
+  {
+    "command": "workbench.action.closeGroup",
+    "description": "Close group"
+  },
+  {
+    "command": "workbench.action.closeOtherEditors",
+    "description": "Close other editors"
+  },
+  {
+    "command": "workbench.action.closeQuickOpen",
+    "description": "Close quick open"
+  },
+  {
+    "command": "workbench.action.closeUnmodifiedEditors",
+    "description": "Close unmodified editors"
+  },
+  {
+    "command": "workbench.action.closeWindow",
+    "description": "Close window"
+  },
+  {
+    "command": "workbench.action.compareEditor.nextChange",
+    "description": "Move to the next change in compare editor"
+  },
+  {
+    "command": "workbench.action.compareEditor.openSide",
+    "description": "Open side in compare editor"
+  },
+  {
+    "command": "workbench.action.compareEditor.previousChange",
+    "description": "Move to the previous change in compare editor"
+  },
+  {
+    "command": "workbench.action.debug.disconnect",
+    "description": "Disconnect debug session"
+  },
+  {
+    "command": "workbench.action.debug.restart",
+    "description": "Restart debug session"
+  },
+  {
+    "command": "workbench.action.debug.run",
+    "description": "Run debug session"
+  },
+  {
+    "command": "workbench.action.debug.start",
+    "description": "Start debug session"
+  },
+  {
+    "command": "workbench.action.debug.stepIntoTarget",
+    "description": "Step into target in debug mode"
+  },
+  {
+    "command": "workbench.action.debug.stepOut",
+    "description": "Step out in debug mode"
+  },
+  {
+    "command": "workbench.action.debug.stepOver",
+    "description": "Step over in debug mode"
+  },
+  {
+    "command": "workbench.action.debug.stop",
+    "description": "Stop debug session"
+  },
+  {
+    "command": "workbench.action.editor.changeLanguageMode",
+    "description": "Change language mode in editor"
+  },
+  {
+    "command": "workbench.action.files.copyPathOfActiveFile",
+    "description": "Copy path of active file"
+  },
+  {
+    "command": "workbench.action.files.newUntitledFile",
+    "description": "Create a new untitled file"
+  },
+  {
+    "command": "workbench.action.files.openFile",
+    "description": "Open file"
+  },
+  {
+    "command": "workbench.action.files.openFileFolder",
+    "description": "Open file folder"
+  },
+  {
+    "command": "workbench.action.files.openFolderViaWorkspace",
+    "description": "Open folder via workspace"
+  },
+  {
+    "command": "workbench.action.files.openLocalFileFolder",
+    "description": "Open local file folder"
+  },
+  {
+    "command": "workbench.action.files.revealActiveFileInWindows",
+    "description": "Reveal active file in Windows"
+  },
+  {
+    "command": "workbench.action.files.save",
+    "description": "Save file"
+  },
+  {
+    "command": "workbench.action.files.saveAs",
+    "description": "Save file as"
+  },
+  {
+    "command": "workbench.action.files.saveLocalFile",
+    "description": "Save local file"
+  },
+  {
+    "command": "workbench.action.files.saveWithoutFormatting",
+    "description": "Save without formatting"
+  },
+  {
+    "command": "workbench.action.files.showOpenedFileInNewWindow",
+    "description": "Show opened file in new window"
+  },
+  {
+    "command": "workbench.action.findInFiles",
+    "description": "Find in files"
+  },
+  {
+    "command": "workbench.action.focusAboveGroup",
+    "description": "Focus above group"
+  },
+  {
+    "command": "workbench.action.focusBelowGroup",
+    "description": "Focus below group"
+  },
+  {
+    "command": "workbench.action.focusEighthEditorGroup",
+    "description": "Focus eighth editor group"
+  },
+  {
+    "command": "workbench.action.focusFifthEditorGroup",
+    "description": "Focus fifth editor group"
+  },
+  {
+    "command": "workbench.action.focusFirstEditorGroup",
+    "description": "Focus first editor group"
+  },
+  {
+    "command": "workbench.action.focusFourthEditorGroup",
+    "description": "Focus fourth editor group"
+  },
+  {
+    "command": "workbench.action.focusLeftGroup",
+    "description": "Focus left group"
+  },
+  {
+    "command": "workbench.action.focusNextPart",
+    "description": "Focus next part"
+  },
+  {
+    "command": "workbench.action.focusPreviousPart",
+    "description": "Focus on the previous editor part"
+  },
+  {
+    "command": "workbench.action.focusRightGroup",
+    "description": "Focus on the editor group to the right"
+  },
+  {
+    "command": "workbench.action.focusSecondEditorGroup",
+    "description": "Focus on the second editor group"
+  },
+  {
+    "command": "workbench.action.focusSeventhEditorGroup",
+    "description": "Focus on the seventh editor group"
+  },
+  {
+    "command": "workbench.action.focusSideBar",
+    "description": "Focus on the sidebar"
+  },
+  {
+    "command": "workbench.action.focusSixthEditorGroup",
+    "description": "Focus on the sixth editor group"
+  },
+  {
+    "command": "workbench.action.focusThirdEditorGroup",
+    "description": "Focus on the third editor group"
+  },
+  {
+    "command": "workbench.action.gotoLine",
+    "description": "Go to a specific line in the editor"
+  },
+  {
+    "command": "workbench.action.gotoSymbol",
+    "description": "Go to a symbol in the editor"
+  },
+  {
+    "command": "workbench.action.interactivePlayground.arrowDown",
+    "description": "Move down in the interactive playground"
+  },
+  {
+    "command": "workbench.action.interactivePlayground.arrowUp",
+    "description": "Move up in the interactive playground"
+  },
+  {
+    "command": "workbench.action.interactivePlayground.pageDown",
+    "description": "Page down in the interactive playground"
+  },
+  {
+    "command": "workbench.action.interactivePlayground.pageUp",
+    "description": "Page up in the interactive playground"
+  },
+  {
+    "command": "workbench.action.joinEditorInGroup",
+    "description": "Join the editors in the active group"
+  },
+  {
+    "command": "workbench.action.keepEditor",
+    "description": "Keep the current editor open"
+  },
+  {
+    "command": "workbench.action.keybindingsReference",
+    "description": "Open the keybindings reference"
+  },
+  {
+    "command": "workbench.action.lastEditorInGroup",
+    "description": "Focus on the last editor in the group"
+  },
+  {
+    "command": "workbench.action.moveActiveEditorGroupDown",
+    "description": "Move the active editor group down"
+  },
+  {
+    "command": "workbench.action.moveActiveEditorGroupLeft",
+    "description": "Move the active editor group to the left"
+  },
+  {
+    "command": "workbench.action.moveActiveEditorGroupRight",
+    "description": "Move the active editor group to the right"
+  },
+  {
+    "command": "workbench.action.moveActiveEditorGroupUp",
+    "description": "Move the active editor group up"
+  },
+  {
+    "command": "workbench.action.moveEditorLeftInGroup",
+    "description": "Move the editor to the left in the group"
+  },
+  {
+    "command": "workbench.action.moveEditorRightInGroup",
+    "description": "Move the editor to the right in the group"
+  },
+  {
+    "command": "workbench.action.moveEditorToFirstGroup",
+    "description": "Move the editor to the first group"
+  },
+  {
+    "command": "workbench.action.moveEditorToLastGroup",
+    "description": "Move the editor to the last group"
+  },
+  {
+    "command": "workbench.action.moveEditorToNextGroup",
+    "description": "Move the editor to the next group"
+  },
+  {
+    "command": "workbench.action.moveEditorToPreviousGroup",
+    "description": "Move the editor to the previous group"
+  },
+  {
+    "command": "workbench.action.navigateBack",
+    "description": "Navigate back in the editor history"
+  },
+  {
+    "command": "workbench.action.navigateForward",
+    "description": "Navigate forward in the editor history"
+  },
+  {
+    "command": "workbench.action.navigateToLastEditLocation",
+    "description": "Navigate to the last edit location"
+  },
+  {
+    "command": "workbench.action.newWindow",
+    "description": "Open a new window"
+  },
+  {
+    "command": "workbench.action.nextEditor",
+    "description": "Focus on the next editor"
+  },
+  {
+    "command": "workbench.action.nextEditorInGroup",
+    "description": "Focus on the next editor in the group"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex1",
+    "description": "Open the editor at index 1"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex2",
+    "description": "Open the editor at index 2"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex3",
+    "description": "Open the editor at index 3"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex4",
+    "description": "Open the editor at index 4"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex5",
+    "description": "Open the editor at index 5"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex6",
+    "description": "Open the editor at index 6"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex7",
+    "description": "Open the editor at index 7"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex8",
+    "description": "Open the editor at index 8"
+  },
+  {
+    "command": "workbench.action.openEditorAtIndex9",
+    "description": "Open the editor at index 9"
+  },
+  {
+    "command": "workbench.action.openGlobalKeybindings",
+    "description": "Open global keybindings"
+  },
+  {
+    "command": "workbench.action.openRecent",
+    "description": "Open recent files"
+  },
+  {
+    "command": "workbench.action.openSettings",
+    "description": "Open settings"
+  },
+  {
+    "command": "workbench.action.output.toggleOutput",
+    "description": "Toggle output panel"
+  },
+  {
+    "command": "workbench.action.pinEditor",
+    "description": "Pin the current editor"
+  },
+  {
+    "command": "workbench.action.previousEditor",
+    "description": "Focus on the previous editor"
+  },
+  {
+    "command": "workbench.action.previousEditorInGroup",
+    "description": "Focus on the previous editor in the group"
+  },
+  {
+    "command": "workbench.action.quickOpen",
+    "description": "Quickly open a file"
+  },
+  {
+    "command": "workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "description": "Quickly open the least recently used editor in the group"
+  },
+  {
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+    "description": "Quickly open the previously used editor in the group"
+  },
+  {
+    "command": "workbench.action.quickOpenView",
+    "description": "Open Quick Open view"
+  },
+  {
+    "command": "workbench.action.quickchat.toggle",
+    "description": "Toggle Quick Chat"
+  },
+  {
+    "command": "workbench.action.quit",
+    "description": "Quit VS Code"
+  },
+  {
+    "command": "workbench.action.remote.showMenu",
+    "description": "Show Remote menu"
+  },
+  {
+    "command": "workbench.action.reopenClosedEditor",
+    "description": "Reopen Closed Editor"
+  },
+  {
+    "command": "workbench.action.replaceInFiles",
+    "description": "Replace in Files"
+  },
+  {
+    "command": "workbench.action.search.toggleQueryDetails",
+    "description": "Toggle Search Query Details"
+  },
+  {
+    "command": "workbench.action.selectTheme",
+    "description": "Select Theme"
+  },
+  {
+    "command": "workbench.action.showAllEditors",
+    "description": "Show All Editors"
+  },
+  {
+    "command": "workbench.action.showAllSymbols",
+    "description": "Show All Symbols"
+  },
+  {
+    "command": "workbench.action.showCommands",
+    "description": "Show Command Palette"
+  },
+  {
+    "command": "workbench.action.showTreeHover",
+    "description": "Show Tree Hover"
+  },
+  {
+    "command": "workbench.action.splitEditor",
+    "description": "Split Editor"
+  },
+  {
+    "command": "workbench.action.splitEditorDown",
+    "description": "Split Editor Down"
+  },
+  {
+    "command": "workbench.action.splitEditorInGroup",
+    "description": "Split Editor in Group"
+  },
+  {
+    "command": "workbench.action.splitEditorLeft",
+    "description": "Split Editor Left"
+  },
+  {
+    "command": "workbench.action.splitEditorOrthogonal",
+    "description": "Split Editor Orthogonal"
+  },
+  {
+    "command": "workbench.action.splitEditorRight",
+    "description": "Split Editor Right"
+  },
+  {
+    "command": "workbench.action.splitEditorUp",
+    "description": "Split Editor Up"
+  },
+  {
+    "command": "workbench.action.switchWindow",
+    "description": "Switch Window"
+  },
+  {
+    "command": "workbench.action.tasks.build",
+    "description": "Build Task"
+  },
+  {
+    "command": "workbench.action.terminal.clearSelection",
+    "description": "Clear Selection in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.copySelection",
+    "description": "Copy Selection in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.findNext",
+    "description": "Find Next in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.findPrevious",
+    "description": "Find Previous in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.focus",
+    "description": "Focus on Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.focusAccessibleBuffer",
+    "description": "Focus on Accessible Buffer in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.focusFind",
+    "description": "Focus on Terminal Find"
+  },
+  {
+    "command": "workbench.action.terminal.focusHover",
+    "description": "Focus on Terminal Hover"
+  },
+  {
+    "command": "workbench.action.terminal.focusNext",
+    "description": "Focus on Next Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.focusNextPane",
+    "description": "Focus on Next Terminal Pane"
+  },
+  {
+    "command": "workbench.action.terminal.focusPrevious",
+    "description": "Focus on Previous Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.focusPreviousPane",
+    "description": "Focus on Previous Terminal Pane"
+  },
+  {
+    "command": "workbench.action.terminal.focusTabs",
+    "description": "Focus on Terminal Tabs"
+  },
+  {
+    "command": "workbench.action.terminal.goToRecentDirectory",
+    "description": "Go to Recent Directory in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.hideFind",
+    "description": "Hide Terminal Find"
+  },
+  {
+    "command": "workbench.action.terminal.killActiveTab",
+    "description": "Kill Active Tab in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.killEditor",
+    "description": "Kill Terminal Editor"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "description": "Create New Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.openNativeConsole",
+    "description": "Open Native Terminal Console"
+  },
+  {
+    "command": "workbench.action.terminal.paste",
+    "description": "Paste in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.renameActiveTab",
+    "description": "Rename Active Tab in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneDown",
+    "description": "Resize Terminal Pane Down"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneLeft",
+    "description": "Resize Terminal Pane Left"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneRight",
+    "description": "Resize Terminal Pane Right"
+  },
+  {
+    "command": "workbench.action.terminal.resizePaneUp",
+    "description": "Resize Terminal Pane Up"
+  },
+  {
+    "command": "workbench.action.terminal.runRecentCommand",
+    "description": "Run Recent Terminal Command"
+  },
+  {
+    "command": "workbench.action.terminal.scrollDown",
+    "description": "Scroll Down in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollDownPage",
+    "description": "Scroll Down Page in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollToBottom",
+    "description": "Scroll to Bottom in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollToNextCommand",
+    "description": "Scroll to Next Command in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollToPreviousCommand",
+    "description": "Scroll to Previous Command in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollToTop",
+    "description": "Scroll to Top in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.scrollUp",
+    "description": "Scroll Up in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectAll",
+    "description": "Select All in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectToNextCommand",
+    "description": "Select to Next Command in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectToPreviousCommand",
+    "description": "Select to Previous Command in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.sendSequence",
+    "description": "Send specified sequence in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.showQuickFixes",
+    "description": "Show Quick Fixes in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.sizeToContentWidth",
+    "description": "Size Terminal to Content Width"
+  },
+  {
+    "command": "workbench.action.terminal.split",
+    "description": "Split Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.splitActiveTab",
+    "description": "Split Active Tab in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.toggleFindCaseSensitive",
+    "description": "Toggle Terminal Find Case Sensitivity"
+  },
+  {
+    "command": "workbench.action.terminal.toggleFindRegex",
+    "description": "Toggle Terminal Find Regex"
+  },
+  {
+    "command": "workbench.action.terminal.toggleFindWholeWord",
+    "description": "Toggle Terminal Find Whole Word"
+  },
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "description": "Toggle Terminal"
+  },
+  {
+    "command": "workbench.action.toggleAuxiliaryBar",
+    "description": "Toggle Auxiliary Bar"
+  },
+  {
+    "command": "workbench.action.toggleEditorGroupLayout",
+    "description": "Toggle Editor Group Layout"
+  },
+  {
+    "command": "workbench.action.toggleFullScreen",
+    "description": "Toggle Full Screen",
+    "when": "!isIOS"
+  },
+  {
+    "command": "workbench.action.toggleMaximizeEditorGroup",
+    "description": "Toggle Maximize Editor Group",
+    "when": "maximizedEditorGroup || multipleEditorGroups"
+  },
+  {
+    "command": "workbench.action.togglePanel",
+    "description": "Toggle Panel"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "description": "Toggle Sidebar Visibility"
+  },
+  {
+    "command": "workbench.action.toggleZenMode",
+    "description": "Toggle Zen Mode"
+  },
+  {
+    "command": "workbench.action.unpinEditor",
+    "description": "Unpin Editor",
+    "when": "activeEditorIsPinned"
+  },
+  {
+    "command": "workbench.action.zoomIn",
+    "description": "Zoom In"
+  },
+  {
+    "command": "workbench.action.zoomOut",
+    "description": "Zoom Out"
+  },
+  {
+    "command": "workbench.action.zoomReset",
+    "description": "Zoom Reset"
+  },
+  {
+    "command": "workbench.actions.view.problems",
+    "description": "View Problems",
+    "when": "workbench.panel.markers.view.active"
+  },
+  {
+    "command": "workbench.banner.focusBanner",
+    "description": "Focus Banner",
+    "when": "bannerFocused"
+  },
+  {
+    "command": "workbench.banner.focusNextAction",
+    "description": "Focus Next Action",
+    "when": "bannerFocused"
+  },
+  {
+    "command": "workbench.banner.focusNextAction",
+    "description": "Focus Previous Action",
+    "when": "bannerFocused"
+  },
+  {
+    "command": "workbench.banner.focusPreviousAction",
+    "description": "Focus Previous Action",
+    "when": "bannerFocused"
+  },
+  {
+    "command": "workbench.debug.action.toggleRepl",
+    "description": "Toggle REPL",
+    "when": "workbench.panel.repl.view.active"
+  },
+  {
+    "command": "workbench.files.action.compareWithClipboard",
+    "description": "Compare with Clipboard"
+  },
+  {
+    "command": "workbench.files.action.compareWithSaved",
+    "description": "Compare with Saved"
+  },
+  {
+    "command": "workbench.files.action.focusOpenEditorsView",
+    "description": "Focus Open Editors View",
+    "when": "workbench.explorer.openEditorsView.active"
+  },
+  {
+    "command": "workbench.statusBar.clearFocus",
+    "description": "Clear Status Bar Focus",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusFirst",
+    "description": "Focus First in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusLast",
+    "description": "Focus Last in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusNext",
+    "description": "Focus Next in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusNext",
+    "description": "Focus Next in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusPrevious",
+    "description": "Focus Previous in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.statusBar.focusPrevious",
+    "description": "Focus Previous in Status Bar",
+    "when": "statusBarFocused"
+  },
+  {
+    "command": "workbench.view.debug",
+    "description": "Show Debug View"
+  },
+  {
+    "command": "workbench.view.explorer",
+    "description": "Show Explorer View"
+  },
+  {
+    "command": "workbench.view.extensions",
+    "description": "Show Extensions View"
+  },
+  {
+    "command": "workbench.view.scm",
+    "description": "Show Source Control View"
+  },
+  {
+    "command": "workbench.view.search",
+    "description": "Show Search View"
+  },
+  {
+    "command": "breadcrumbs.focusNextWithPicker",
+    "description": "Focus Next Breadcrumb with Picker"
+  },
+  {
+    "command": "breadcrumbs.focusPreviousWithPicker",
+    "description": "Focus Previous Breadcrumb with Picker"
+  },
+  {
+    "command": "breadcrumbs.selectEditor",
+    "description": "Select Editor from Breadcrumbs"
+  },
+  {
+    "command": "views.moveViewDown",
+    "description": "Move Focused View Down"
+  },
+  {
+    "command": "views.moveViewLeft",
+    "description": "Move Focused View Left"
+  },
+  {
+    "command": "views.moveViewRight",
+    "description": "Move Focused View Right"
+  },
+  {
+    "command": "views.moveViewUp",
+    "description": "Move Focused View Up"
+  },
+  {
+    "command": "workbench.action.debug.nextConsole",
+    "description": "Move to Next Console in Debug"
+  },
+  {
+    "command": "workbench.action.debug.prevConsole",
+    "description": "Move to Previous Console in Debug"
+  },
+  {
+    "command": "workbench.action.terminal.acceptSelectedSuggestion",
+    "description": "Accept Selected Suggestion"
+  },
+  {
+    "command": "workbench.action.terminal.acceptSelectedSuggestion",
+    "description": "Accept Selected Suggestion"
+  },
+  {
+    "command": "workbench.action.terminal.clear",
+    "description": "Clear Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.hideSuggestWidget",
+    "description": "Hide Terminal Suggestion Widget"
+  },
+  {
+    "command": "workbench.action.terminal.openDetectedLink",
+    "description": "Open Detected Link in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.openDetectedLink",
+    "description": "Open Detected Link in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectNextPageSuggestion",
+    "description": "Select Next Page Suggestion in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectNextSuggestion",
+    "description": "Select Next Suggestion in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectPrevPageSuggestion",
+    "description": "Select Previous Page Suggestion in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.selectPrevSuggestion",
+    "description": "Select Previous Suggestion in Terminal"
+  },
+  {
+    "command": "workbench.action.debug.pause",
+    "description": "Pause Debugging"
+  },
+  {
+    "command": "workbench.action.terminal.accessibleBufferGoToNextCommand",
+    "description": "Accessible Buffer Go To Next Command in Terminal"
+  },
+  {
+    "command": "workbench.action.terminal.accessibleBufferGoToPreviousCommand",
+    "description": "Accessible Buffer Go To Previous Command in Terminal"
+  },
+  {
+    "command": "debug.renameWatchExpression",
+    "description": "Rename Watch Expression"
+  },
+  {
+    "command": "debug.setVariable",
+    "description": "Set Variable"
+  },
+  {
+    "command": "debug.toggleBreakpoint",
+    "description": "Toggle Breakpoint"
+  },
+  {
+    "command": "notebook.cell.quitEdit",
+    "description": "Quit Editing Notebook Cell"
+  },
+  {
+    "command": "deleteFile",
+    "description": "Delete File"
+  },
+  {
+    "command": "deleteFile",
+    "description": "Delete File"
+  },
+  {
+    "command": "editor.action.accessibleViewGoToSymbol",
+    "description": "Accessible View Go To Symbol"
+  },
+  {
+    "command": "editor.action.accessibleViewGoToSymbol",
+    "description": "Accessible View Go To Symbol"
+  },
+  {
+    "command": "editor.action.toggleScreenReaderAccessibilityMode",
+    "description": "Toggle Screen Reader Accessibility Mode"
+  },
+  {
+    "command": "editor.action.toggleScreenReaderAccessibilityMode",
+    "description": "Toggle Screen Reader Accessibility Mode"
+  },
+  {
+    "command": "editor.closeCallHierarchy",
+    "description": "Close Call Hierarchy"
+  },
+  {
+    "command": "editor.closeTypeHierarchy",
+    "description": "Close Type Hierarchy"
+  },
+  {
+    "command": "explorer.openAndPassFocus",
+    "description": "Open and Pass Focus in Explorer"
+  },
+  {
+    "command": "filesExplorer.cancelCut",
+    "description": "Cancel Cut in Files Explorer"
+  },
+  {
+    "command": "filesExplorer.copy",
+    "description": "Copy in Files Explorer"
+  },
+  {
+    "command": "filesExplorer.cut",
+    "description": "Cut in Files Explorer"
+  },
+  {
+    "command": "filesExplorer.openFilePreserveFocus",
+    "description": "Open File and Preserve Focus in Files Explorer"
+  },
+  {
+    "command": "filesExplorer.paste",
+    "description": "Paste in Files Explorer"
+  },
+  {
+    "command": "firstCompressedFolder",
+    "description": "Go to First Compressed Folder"
+  },
+  {
+    "command": "lastCompressedFolder",
+    "description": "Go to Last Compressed Folder"
+  },
+  {
+    "command": "moveFileToTrash",
+    "description": "Move File to Trash"
+  },
+  {
+    "command": "moveFileToTrash",
+    "description": "Move File to Trash"
+  },
+  {
+    "command": "nextCompressedFolder",
+    "description": "Go to Next Compressed Folder"
+  },
+  {
+    "command": "previousCompressedFolder",
+    "description": "Go to Previous Compressed Folder"
+  },
+  {
+    "command": "remote.tunnel.closeInline",
+    "description": "Close Tunnel Inline"
+  },
+  {
+    "command": "remote.tunnel.closeInline",
+    "description": "Close Tunnel Inline"
+  },
+  {
+    "command": "remote.tunnel.copyAddressInline",
+    "description": "Copy Address Inline"
+  },
+  {
+    "command": "remote.tunnel.label",
+    "description": "Label Tunnel"
+  },
+  {
+    "command": "renameFile",
+    "description": "Rename File"
+  },
+  {
+    "command": "workbench.action.debug.continue",
+    "description": "Continue Debugging"
+  },
+  {
+    "command": "workbench.action.debug.stepInto",
+    "description": "Step Into Debugging"
+  },
+  {
+    "command": "closeReferenceSearch",
+    "description": "Close Reference Search"
+  },
+  {
+    "command": "notifications.hideList",
+    "description": "Hide Notifications List"
+  },
+  {
+    "command": "workbench.action.quickInputBack",
+    "description": "Quick Input Back"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigateNextInEditorPicker",
+    "description": "Navigate Next in Editor Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+    "description": "Navigate Next in File Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigateNextInRecentFilesPicker",
+    "description": "Navigate Next in Recent Files Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigateNextInViewPicker",
+    "description": "Navigate Next in View Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigatePreviousInEditorPicker",
+    "description": "Navigate Previous in Editor Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "description": "Navigate Previous in File Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
+    "description": "Navigate Previous in Recent Files Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenNavigatePreviousInViewPicker",
+    "description": "Navigate Previous in View Picker"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectNext",
+    "description": "Select Next in Quick Open"
+  },
+  {
+    "command": "workbench.action.quickOpenSelectPrevious",
+    "description": "Select Previous in Quick Open"
+  },
+  {
+    "command": "workbench.action.reloadWindow",
+    "description": "Reload Window"
+  },
+  {
+    "command": "workbench.action.terminal.searchWorkspace",
+    "description": "Search Workspace in Terminal"
+  },
+  {
+    "command": "workbench.action.toggleDevTools",
+    "description": "Toggle Developer Tools"
+  },
+  {
+    "command": "notifications.hideToasts",
+    "description": "Hide Toast Notifications"
+  },
+  {
+    "command": "workbench.action.chat.stopListening",
+    "description": "Stop Listening in Voice Chat"
+  },
+  {
+    "command": "workbench.action.chat.stopListeningInChatEditor",
+    "description": "Stop Listening in Voice Chat (Editor)"
+  },
+  {
+    "command": "workbench.action.chat.stopListeningInChatView",
+    "description": "Stop Listening in Voice Chat (View)"
+  },
+  {
+    "command": "workbench.action.chat.stopListeningInInlineChat",
+    "description": "Stop Listening in Inline Voice Chat"
+  },
+  {
+    "command": "workbench.action.chat.stopListeningInQuickChat",
+    "description": "Stop Listening in Quick Voice Chat"
+  },
+  {
+    "command": "extension.node-debug.startWithStopOnEntry",
+    "description": "Start Node Debugging with Stop on Entry"
+  },
+  {
+    "command": "git.stageSelectedRanges",
+    "description": "Stage Selected Ranges in Git"
+  },
+  {
+    "command": "markdown.showPreview",
+    "description": "Show Markdown Preview"
+  },
+  {
+    "command": "references-view.findReferences",
+    "description": "Find References"
+  },
+  {
+    "command": "extension.node-debug.startWithStopOnEntry",
+    "description": "Start Node Debugging with Stop on Entry"
+  },
+  {
+    "command": "git.unstageSelectedRanges",
+    "description": "Unstage Selected Ranges in Git"
+  },
+  {
+    "command": "markdown.showPreviewToSide",
+    "description": "Show Markdown Preview to the Side"
+  },
+  {
+    "command": "references-view.next",
+    "description": "Go to Next Reference"
+  },
+  {
+    "command": "git.revertSelectedRanges",
+    "description": "Revert Selected Ranges in Git"
+  },
+  {
+    "command": "references-view.prev",
+    "description": "Go to Previous Reference"
+  },
+  {
+    "command": "references-view.showCallHierarchy",
+    "description": "Show Call Hierarchy in References View"
+  },
+  {
+    "command": "acceptSelectedCodeAction",
+    "description": "Accept Selected Code Action"
+  },
+  {
+    "command": "hideCodeActionWidget",
+    "description": "Hide Code Action Widget"
+  },
+  {
+    "command": "previewSelectedCodeAction",
+    "description": "Preview Selected Code Action"
+  },
+  {
+    "command": "selectNextCodeAction",
+    "description": "Select Next Code Action"
+  },
+  {
+    "command": "selectPrevCodeAction",
+    "description": "Select Previous Code Action"
+  },
+  {
+    "command": "diffEditor.exitCompareMove",
+    "description": "Exit Compare Move in Diff Editor"
+  }
+]
