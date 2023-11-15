@@ -61,4 +61,16 @@ describe("Key Logger Test", () => {
         assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["a b"]), true);
     });
+
+    it("mouse press", () => {
+        let keyLogger = new KeyLogger();
+        keyLogger.handleKeyDown(UiohookKey.A);
+        keyLogger.handleKeyDown(UiohookKey.B);
+        assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), true);
+        keyLogger.handleMousePress();
+        assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["a"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["b"]), false);
+    });
+
 });
