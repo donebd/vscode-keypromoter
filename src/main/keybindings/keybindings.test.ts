@@ -24,7 +24,7 @@ describe("Default Keybindings Test", () => {
 
     it("get unsupported OS default keybindings", () => {
         const unsupportedStorage = new KeybindingStorage(Platform.UNSUPPORTED);
-        assert.equal(unsupportedStorage.allKeybindings(), 0);
+        assert.equal(unsupportedStorage.allKeybindings().size, 0);
     });
 
 });
