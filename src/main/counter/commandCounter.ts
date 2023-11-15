@@ -6,8 +6,10 @@ import { KeyLogger } from '../keylogging/KeyLogger';
 import { logger } from '../logging';
 
 export class CommandCounter {
-    private commandToCounter = new Map<string, number>();
-    private commandGroupToCounter = new Map<string, number>();
+    private internalCommandToCounter = new Map<string, number>();
+    private internalCommandGroupToCounter = new Map<string, number>();
+    private publicCommandToCounter = new Map<string, number>();
+    private publicCommandGroupToCounter = new Map<string, number>();
 
     private descriptionHandler = new DescriptionHandler();
 
@@ -22,9 +24,11 @@ export class CommandCounter {
     public handleCommand(commandId: string, times: number = 1) {
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
-            let currCounter = this.commandToCounter.get(commandId) ?? 0;
+            let currCounter = this.internalCommandToCounter.get(commandId) ?? 0;
+            let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter += times;
+                publicCounter += times;
                 logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
             if (currCounter > this.getLoyaltyLevel()) {
@@ -32,7 +36,8 @@ export class CommandCounter {
                 vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
                 currCounter = 0;
             }
-            this.commandToCounter.set(commandId, currCounter);
+            this.internalCommandToCounter.set(commandId, currCounter);
+            this.publicCommandToCounter.set(commandId, publicCounter);
         }
     }
 
@@ -48,7 +53,8 @@ export class CommandCounter {
         });
 
         if (groupKeybindings.length !== 0) {
-            let currCounter = this.commandGroupToCounter.get(groupId) ?? 0;
+            let currCounter = this.internalCommandGroupToCounter.get(groupId) ?? 0;
+            let publicCounter = this.publicCommandGroupToCounter.get(groupId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
                 logger.debug(`user did not use keybindings for group ${groupId}, counter = ${currCounter}`);
@@ -58,7 +64,8 @@ export class CommandCounter {
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
             }
-            this.commandGroupToCounter.set(groupId, currCounter);
+            this.internalCommandGroupToCounter.set(groupId, currCounter);
+            this.publicCommandGroupToCounter.set(groupId, publicCounter);
         }
     }
 
@@ -76,8 +83,9 @@ export class CommandCounter {
 
 
             const checkAllShortcutsButton = "View all shortcuts";
+            const publicCounter = this.publicCommandGroupToCounter.get(groupId)!;
             vscode.window.showInformationMessage(
-                `You could use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... keybindings to navigate between editors. You can also check all keybindings for this.`,
+                `You could use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... keybindings to navigate between editors. Shortcut unused counter: ${publicCounter}, You can also check all keybindings for this.`,
                 checkAllShortcutsButton
             ).then(button => {
                 if (button === checkAllShortcutsButton) {
@@ -92,7 +100,8 @@ export class CommandCounter {
     }
 
     private buildStyledMessage(keybindings: string[], commandId: string): string {
+        const publicCounter = this.publicCommandToCounter.get(commandId)!;
         const description = this.descriptionHandler.getDescriptionForCommand(commandId) ?? commandId;
-        return `You could use keybindings: ${keybindings.join(" or ")} to perform ${description} command!`;
+        return `You could use keybindings: ${keybindings.join(" or ")} to perform ${description} command! Shortcut unused counter: ${publicCounter}`;
     }
 }
