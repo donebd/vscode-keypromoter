@@ -2,21 +2,27 @@ import path from 'path';
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
 import { CommandCounter } from '../main/counter/commandCounter';
-import { CommandGroup } from '../models/commandGroup';
 import { logger } from '../main/logging';
+import { CommandGroup } from '../models/commandGroup';
 
 export class SubscriptionService {
 
     private readonly pipe = new Subject<[string, ...any]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
     private readonly commandCounter: CommandCounter;
+    private readonly ignoreCommandList = [
+        "notification.expand",
+        "notification.clear",
+        "notification.collapse"
+    ];
 
     constructor(commandCounter: CommandCounter) {
         this.commandCounter = commandCounter;
     }
 
     public async listenForPossibleShortcutActions() {
-        const commandIds = await vscode.commands.getCommands(true);
+        const commandIds = (await vscode.commands.getCommands(true))
+            .filter(id => this.ignoreCommandList.find(it => it === id) === undefined);
         this.listenVscodeCommands(commandIds);
         this.listenPublicVscodeApi();
     }
@@ -43,7 +49,7 @@ export class SubscriptionService {
             const commandId = next[0];
             const pipeArgs = next[1];
             logger.debug(`command ${commandId} was executed!`);
-            if (next[1]) {
+            if (pipeArgs) {
                 await vscode.commands.executeCommand(commandId, pipeArgs);
             } else {
                 await vscode.commands.executeCommand(commandId);
@@ -72,19 +78,32 @@ export class SubscriptionService {
         // And not only text editor is text editor (LOL)
         // Output view defined as text editor too
         vscode.window.onDidChangeActiveTextEditor((textEditor) => {
+            const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
+            const actualStateTabs = openEditors.map(tab => tab.label);
             if (!textEditor) {
+                if (openEditors.length === 0) {
+                    const times = previousStateTabs.length - actualStateTabs.length;
+                    this.commandCounter.handleCommand("workbench.action.closeActiveEditor", times);
+                    previousStateTabs = actualStateTabs;
+                }
                 activeTextEditor = textEditor;
                 return;
             }
 
             if (!activeTextEditor) {
-                if (!textEditor.document.fileName.includes(path.sep)) {
-                    // It's some of output view. Don't need handle explicity (handled by commands)
+                const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
+                if (!textEditor.document.fileName.includes(path.sep) || textEditor.document.isClosed || activeTab?.label.includes(`↔`)) {
+                    // It's some of not text editor view
                     return;
                 }
 
-                const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
-                const actualStateTabs = openEditors.map(tab => tab.label);
+                if (previousStateTabs.length > actualStateTabs.length) {
+                    const times = previousStateTabs.length - actualStateTabs.length;
+                    this.commandCounter.handleCommand("workbench.action.closeActiveEditor", times);
+                    activeTextEditor = textEditor.document.fileName;
+                    previousStateTabs = actualStateTabs;
+                    return;
+                }
                 if (openEditors.length === 1 || !equalsCheck(previousStateTabs, actualStateTabs)) {
                     this.commandCounter.handleCommand("workbench.action.quickOpen");
                     activeTextEditor = textEditor.document.fileName;

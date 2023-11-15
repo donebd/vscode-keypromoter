@@ -19,12 +19,12 @@ export class CommandCounter {
         this.keyLogger = keyLogger;
     }
 
-    public handleCommand(commandId: string) {
+    public handleCommand(commandId: string, times: number = 1) {
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
-                currCounter++;
+                currCounter += times;
                 logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
             if (currCounter > this.getLoyaltyLevel()) {
@@ -92,7 +92,7 @@ export class CommandCounter {
     }
 
     private buildStyledMessage(keybindings: string[], commandId: string): string {
-        return "You could use " + keybindings.join(" or ") + " keybindings "
-            + " to perform " + this.descriptionHandler.getDescriptionForCommand(commandId) + " command!";
+        const description = this.descriptionHandler.getDescriptionForCommand(commandId) ?? commandId;
+        return `You could use keybindings: ${keybindings.join(" or ")} to perform ${description} command!`;
     }
 }
