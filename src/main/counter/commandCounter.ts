@@ -96,7 +96,7 @@ export class CommandCounter {
     }
 
     private getLoyaltyLevel(): number {
-        return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel") as number ?? 5;
+        return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel", 5);
     }
 
     private buildStyledMessage(keybindings: string[], commandId: string): string {
