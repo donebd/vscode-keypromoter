@@ -15,10 +15,6 @@ export class KeyLogBuffer {
         this.nextIndex = (this.nextIndex + 1) % this.size;
     }
 
-    public wasPressed(key: string): Boolean {
-        return this.buffer.includes(key);
-    }
-
     public hasKeystroke(keystroke: string[]): Boolean {
         let doubleBuffer = this.buffer.concat(this.buffer);
         let firstKeyIndex = this.nextIndex;

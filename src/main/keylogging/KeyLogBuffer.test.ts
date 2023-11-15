@@ -5,29 +5,29 @@ describe("Key Log Buffer Test", () => {
 
     it("buffer size 1", () => {
         var buf = new KeyLogBuffer(1);
-        assert.equal(buf.wasPressed("A"), false);
+        assert.equal(buf.hasKeystroke(["A"]), false);
         buf.keyPressed("A");
-        assert.equal(buf.wasPressed("A"), true);
-        assert.equal(buf.wasPressed("B"), false);
+        assert.equal(buf.hasKeystroke(["A"]), true);
+        assert.equal(buf.hasKeystroke(["B"]), false);
         buf.keyPressed("B");
-        assert.equal(buf.wasPressed("A"), false);
-        assert.equal(buf.wasPressed("B"), true);
+        assert.equal(buf.hasKeystroke(["A"]), false);
+        assert.equal(buf.hasKeystroke(["B"]), true);
     });
 
     it("buffer size 2", () => {
         var buf = new KeyLogBuffer(2);
-        assert.equal(buf.wasPressed("A"), false);
-        assert.equal(buf.wasPressed("B"), false);
+        assert.equal(buf.hasKeystroke(["A"]), false);
+        assert.equal(buf.hasKeystroke(["B"]), false);
         buf.keyPressed("A");
-        assert.equal(buf.wasPressed("A"), true);
-        assert.equal(buf.wasPressed("B"), false);
+        assert.equal(buf.hasKeystroke(["A"]), true);
+        assert.equal(buf.hasKeystroke(["B"]), false);
         buf.keyPressed("B");
-        assert.equal(buf.wasPressed("A"), true);
-        assert.equal(buf.wasPressed("B"), true);
+        assert.equal(buf.hasKeystroke(["A"]), true);
+        assert.equal(buf.hasKeystroke(["B"]), true);
         buf.keyPressed("C");
-        assert.equal(buf.wasPressed("A"), false);
-        assert.equal(buf.wasPressed("B"), true);
-        assert.equal(buf.wasPressed("C"), true);
+        assert.equal(buf.hasKeystroke(["A"]), false);
+        assert.equal(buf.hasKeystroke(["B"]), true);
+        assert.equal(buf.hasKeystroke(["C"]), true);
     });
 
     it("keystrokes", () => {
@@ -61,9 +61,9 @@ describe("Key Log Buffer Test", () => {
         buf.keyPressed("B");
         buf.keyPressed("C");
         buf.reset();
-        assert.equal(buf.wasPressed("A"), false);
-        assert.equal(buf.wasPressed("B"), false);
-        assert.equal(buf.wasPressed("C"), false);
+        assert.equal(buf.hasKeystroke(["A"]), false);
+        assert.equal(buf.hasKeystroke(["B"]), false);
+        assert.equal(buf.hasKeystroke(["C"]), false);
     });
 
 });
