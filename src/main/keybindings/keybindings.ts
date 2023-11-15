@@ -11,12 +11,23 @@ class Keybinding {
 
 export class KeybindingStorage {
 
-    constructor(
-        private readonly platform: Platform
-    ) { }
+    private readonly keybindings: Map<string, string[]>;
 
-    public getKeybindingMap(): Map<string, string[]> {
-        let keybindings = this.getDefaultKeybindingMap();
+    constructor(private readonly platform: Platform, defaultOnly: boolean = false) {
+        this.keybindings = new Map<string, string[]>();
+        if (defaultOnly) {
+            this.loadDefaultMap();
+        } else {
+            this.loadFullMap();
+        }
+     }
+
+    public getKeybindingsFor(command: string): string[] {
+        return this.keybindings.get(command) ?? [];
+    }
+
+    private loadFullMap() {
+        this.loadDefaultMap();
         let pathToUser = "";
         switch (this.platform) {
             case Platform.LINUX:
@@ -33,36 +44,32 @@ export class KeybindingStorage {
             pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
                 .replace(/\//g, this.platform === Platform.WINDOWS ? "\\" : "/");
             let userJson = readFileSync(pathToUser).toString();
-            this.patch(keybindings, userJson);
+            this.patch(userJson);
         } catch (e) {
             if (e instanceof Error) {
                 logger.error(`error when loading user keybindings: ${e.message}`);
             }
         }
-        return keybindings;
     }
 
-    
-    public getDefaultKeybindingMap(): Map<string, string[]> {
-        let keybindings = new Map<string, string[]>();
+    private loadDefaultMap() {
         try {
             let p = path.resolve(__dirname, `../../.././default-keybindings/${this.platform}.keybindings.json`);
             let file = readFileSync(p);
             let document = json.parse<Keybinding[]>(file.toString());
             for (let i in document) {
-                let keystrokes = keybindings.get(document[i].command) ?? new Array<string>();
+                let keystrokes = this.keybindings.get(document[i].command) ?? new Array<string>();
                 keystrokes.push(document[i].key);
-                keybindings.set(document[i].command, keystrokes);
+                this.keybindings.set(document[i].command, keystrokes);
             }
         } catch (e) {
             if (e instanceof Error) {
                 logger.error(`error when loading default keybindings: ${e.message}`);
             }
         }
-        return keybindings;
     }
 
-    public patch(keybindings: Map<string, string[]>, JsonPatch: string) {
+    public patch(JsonPatch: string) {
         let patch = json.parse<Keybinding[]>(JsonPatch);
         for (let i in patch) {
             let key = patch[i].key;
@@ -70,13 +77,13 @@ export class KeybindingStorage {
             let keystrokes: Array<string>;
             if (command.startsWith("-")) {
                 command = command.slice(1);
-                keystrokes = keybindings.get(command) ?? new Array<string>();
+                keystrokes = this.keybindings.get(command) ?? new Array<string>();
                 keystrokes = keystrokes.filter(other => other !== key);
             } else {
-                keystrokes = keybindings.get(command) ?? new Array<string>();
+                keystrokes = this.keybindings.get(command) ?? new Array<string>();
                 keystrokes.push(key);
             }
-            keybindings.set(command, keystrokes);
+            this.keybindings.set(command, keystrokes);
         }
     }
 
