@@ -11,7 +11,6 @@ export const logger: winston.Logger = winston.createLogger({
         winston.format.timestamp({
             format: "HH:mm:ss",
         }),
-        winston.format.colorize({ all: true }),
         winston.format.printf(info => `[${info.timestamp}] ${info.level}: ${info.message}`),
     ),
     transports: [
