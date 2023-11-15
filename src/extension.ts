@@ -23,8 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 	uIOhook.start();
 
 	const keybindingStorage = new KeybindingStorage(platform.get());
-	const commandCounter = new CommandCounter(0, keybindingStorage, keyLogger);
-
+	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
 	const subscriptionService = new SubscriptionService(commandCounter);
 	subscriptionService.listenForPossibleShortcutActions();
 	logger.log('info', "extension activated!");
