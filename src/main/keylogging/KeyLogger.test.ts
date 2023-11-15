@@ -52,4 +52,13 @@ describe("Key Logger Test", () => {
         assert.equal(keyLogger.hasAnyKeybinding(["alt+down"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["alt+up"]), true);
     });
+
+    it("chords", () => {
+        let keyLogger = new KeyLogger();
+        keyLogger.handleKeyDown(UiohookKey.A);
+        keyLogger.handleKeyUp(UiohookKey.A);
+        keyLogger.handleKeyDown(UiohookKey.B);
+        assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["a b"]), true);
+    });
 });

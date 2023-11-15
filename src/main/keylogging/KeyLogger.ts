@@ -9,12 +9,22 @@ export class KeyLogger {
 
     public hasAnyKeybinding(keybindings: string[]): boolean {
         for (let keybinding of keybindings) {
-            let keySequence = keybinding.split(/\+| /);
-            if (this.keyStack.hasKeystroke(keySequence)) {
-                return true;
+            if (keybinding.includes(" ")) {
+                let chords = keybinding.split(" ");
+                if (this.keyBuf.hasKeystroke(this.splitKeys(chords[0])) && this.splitKeys(chords[1])) {
+                    return true;
+                }
+            } else {
+                if (this.keyStack.hasKeystroke(this.splitKeys(keybinding))) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private splitKeys(keybinding: string) {
+        return keybinding.split(/\+/);
     }
 
     public handleKeyDown(keycode: number) {
