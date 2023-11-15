@@ -12,13 +12,9 @@ const outputStream = new Writable({
 
 const level = 'info';
 
-const format = winston.format.printf(({ level, message, label, timestamp }) => {
-    return `${timestamp} [${label}] ${level}: ${message}`;
-});
-
 export const logger = winston.createLogger({
     level: level,
-    format: format,
+    format: winston.format.simple(),
     transports: [
         new winston.transports.Stream({ stream: outputStream })
     ]
