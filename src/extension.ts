@@ -1,12 +1,13 @@
-import * as vscode from 'vscode';
 import { uIOhook } from 'uiohook-napi';
-import { SubscriptionService } from './services/subscriptionService';
+import * as vscode from 'vscode';
 import { CommandCounter } from './main/counter/commandCounter';
-import * as platform from './main/platform';
+import { FileHelper } from './main/helper/fileHelper';
 import { KeybindingStorage } from './main/keybindings/keybindings';
 import { KeyLogger } from './main/keylogging/KeyLogger';
 import * as logging from './main/logging';
 import { logger } from './main/logging';
+import * as platform from './main/platform';
+import { SubscriptionService } from './services/subscriptionService';
 
 export function activate(context: vscode.ExtensionContext) {
 	initLogging(context);
@@ -27,7 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const keybindingStorage = new KeybindingStorage(platform.get());
 	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
-	const subscriptionService = new SubscriptionService(commandCounter);
+	const fileHelper = new FileHelper();
+	const subscriptionService = new SubscriptionService(commandCounter, fileHelper);
 	subscriptionService.listenForPossibleShortcutActions();
 	logger.info("extension activated!");
 }

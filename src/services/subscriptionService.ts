@@ -2,6 +2,7 @@ import path from 'path';
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
 import { CommandCounter } from '../main/counter/commandCounter';
+import { FileHelper } from '../main/helper/fileHelper';
 import { logger } from '../main/logging';
 import { CommandGroup } from '../models/commandGroup';
 
@@ -10,14 +11,16 @@ export class SubscriptionService {
     private readonly pipe = new Subject<[string, ...any]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
     private readonly commandCounter: CommandCounter;
+    private readonly fileHelper: FileHelper;
     private readonly ignoreCommandList = [
         "notification.expand",
         "notification.clear",
         "notification.collapse"
     ];
 
-    constructor(commandCounter: CommandCounter) {
+    constructor(commandCounter: CommandCounter, fileHelper: FileHelper) {
         this.commandCounter = commandCounter;
+        this.fileHelper = fileHelper;
     }
 
     public async listenForPossibleShortcutActions() {
@@ -92,8 +95,15 @@ export class SubscriptionService {
 
             if (!activeTextEditor) {
                 const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
-                if (!textEditor.document.fileName.includes(path.sep) || textEditor.document.isClosed || activeTab?.label.includes(`↔`)) {
-                    // It's some of not text editor view
+                const workspaceFolder = this.fileHelper.getCurrentWorkspacePath();
+                const isDocumentInWorkspace = textEditor.document.fileName.includes(workspaceFolder);
+                if (
+                    !textEditor.document.fileName.includes(path.sep) ||
+                    textEditor.document.isClosed ||
+                    activeTab?.label.includes(`↔`) ||
+                    !isDocumentInWorkspace
+                ) {
+                    // It's some of not text editor view or text editor not in workspace
                     return;
                 }
 

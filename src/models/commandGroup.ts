@@ -20,6 +20,8 @@ export class CommandGroup {
             "workbench.action.openEditorAtIndex7",
             "workbench.action.openEditorAtIndex8",
             "workbench.action.openEditorAtIndex9",
+            "workbench.action.navigateForward",
+            "workbench.action.navigateBack"
         ]
     };
 

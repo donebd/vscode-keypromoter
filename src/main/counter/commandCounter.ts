@@ -26,11 +26,17 @@ export class CommandCounter {
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.internalCommandToCounter.get(commandId) ?? 0;
             let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
+
             if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter += times;
                 publicCounter += times;
                 logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
+            } else {
+                currCounter -= times;
+                currCounter = (currCounter < 0) ? 0 : currCounter;
+                logger.debug(`user did used keybinding for command ${commandId}, counter = ${currCounter}`);
             }
+
             if (currCounter > this.getLoyaltyLevel()) {
                 logger.info(`show info message for command ${commandId}`);
                 vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
@@ -55,10 +61,17 @@ export class CommandCounter {
         if (groupKeybindings.length !== 0) {
             let currCounter = this.internalCommandGroupToCounter.get(groupId) ?? 0;
             let publicCounter = this.publicCommandGroupToCounter.get(groupId) ?? 0;
+
             if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
+                publicCounter++;
                 logger.debug(`user did not use keybindings for group ${groupId}, counter = ${currCounter}`);
+            } else {
+                currCounter -= 1;
+                currCounter = (currCounter < 0) ? 0 : currCounter;
+                logger.debug(`user did used keybinding for group ${groupId}, counter = ${currCounter}`);
             }
+
             if (currCounter > this.getLoyaltyLevel()) {
                 logger.info(`show info message for group ${groupId}`);
                 this.suggestToUseGroupShortcut(groupId);
