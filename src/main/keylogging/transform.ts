@@ -107,6 +107,10 @@ const keyMap = new Map<number, string>([
     [UiohookKey.Numpad7, "numpad7"],
     [UiohookKey.Numpad8, "numpad8"],
     [UiohookKey.Numpad9, "numpad9"],
+    [UiohookKey.NumpadAdd, "numpad_add"],
+    [UiohookKey.NumpadMultiply, "numpad_multiply"],
+    [UiohookKey.NumpadSubtract, "numpad_subtract"],
+    [UiohookKey.NumpadDivide, "numpad_divide"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
