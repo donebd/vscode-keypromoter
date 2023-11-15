@@ -5,10 +5,23 @@ import { CommandCounter } from './main/counter/commandCounter';
 import * as platform from './main/platform';
 import { KeybindingStorage } from './main/keybindings/keybindings';
 import { KeyLogger } from './main/keylogging/KeyLogger';
-import { logger, initLogger } from './main/logging';
+import * as logging from './main/logging';
+import { logger } from './main/logging';
+
+function setLogLevel() {
+	let logLevel = vscode.workspace.getConfiguration("keypromoter").get("logger.loggingLevel") as string ?? 'Info';
+	logging.setLevel(logLevel);
+}
 
 export function activate(context: vscode.ExtensionContext) {
-	initLogger(vscode.window.createOutputChannel("Key Promoter", "log"));
+	logging.init(vscode.window.createOutputChannel("Key Promoter", "log"));
+	setLogLevel();
+
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeConfiguration((e) => {
+			setLogLevel();
+		})
+	);
 
 	logger.info("activating extension...");
 
