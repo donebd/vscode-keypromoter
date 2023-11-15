@@ -13,7 +13,7 @@ describe("Key Logger Test", () => {
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), false);
     });
 
-    it("many keys", () => {
+    it("two keys", () => {
         let keyLogger = new KeyLogger();
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w"]), false);
@@ -30,6 +30,16 @@ describe("Key Logger Test", () => {
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["w+ctrl"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl"]), false);
+    });
+
+    it("many keys", () => {
+        let keyLogger = new KeyLogger();
+        assert.equal(keyLogger.hasAnyKeybinding(["ctrl+shift+w"]), false);
+        keyLogger.handleKeyDown(UiohookKey.Ctrl);
+        keyLogger.handleKeyDown(UiohookKey.Shift);
+        keyLogger.handleKeyDown(UiohookKey.W);
+        assert.equal(keyLogger.hasAnyKeybinding(["ctrl+shift+w"]), true);
+        assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w+shift", "w+shift+ctrl", "shift+w+ctrl"]), false);
     });
 
 });
