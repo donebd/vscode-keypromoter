@@ -93,4 +93,8 @@ export class CommandCounter {
     public handleKeyPress(keycode: number) {
         this.keyBuf.keyPressed(keyFromKeycode(keycode));
     }
+
+    public handleMousePress() {
+        this.keyBuf.reset();
+    }
 }
