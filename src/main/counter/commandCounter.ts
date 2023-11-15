@@ -80,6 +80,6 @@ export class CommandCounter {
     }
 
     private getLoyaltyLevel() : number {
-        return vscode.workspace.getConfiguration("keypromoter").get("loyalityLevel") as number ?? 5;
+        return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel") as number ?? 5;
     }
 }
