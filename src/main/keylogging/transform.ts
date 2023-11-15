@@ -115,6 +115,13 @@ const keyMap = new Map<number, string>([
     [UiohookKey.NumpadArrowRight, "right"],
     [UiohookKey.NumpadArrowUp, "up"],
     [UiohookKey.NumpadArrowDown, "down"],
+    [UiohookKey.NumpadDecimal, "numpad_decimal"],
+    [UiohookKey.NumpadDelete, "delete"],
+    [UiohookKey.NumpadInsert, "insert"],
+    [UiohookKey.NumpadHome, "home"],
+    [UiohookKey.NumpadPageUp, "pageup"],
+    [UiohookKey.NumpadPageDown, "pagedown"],
+    [UiohookKey.NumpadEnd, "end"],
 ]);
 
 export function keyFromKeycode(keycode: number): string {
