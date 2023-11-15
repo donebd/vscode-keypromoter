@@ -7,19 +7,19 @@ export class KeyDownStack {
     }
 
     public keyDown(key: string) {
-
+        this.stack.push(key);
     }
 
     public keyUp(key: string) {
 
     }
 
-    public hasKeystroke() {
-
+    public hasKeystroke(keystroke: string[]) {
+        return this.stack.toString() === keystroke.toString();
     }
 
     public reset() {
-        
+
     }
 
 }
