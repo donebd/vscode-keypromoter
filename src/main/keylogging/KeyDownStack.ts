@@ -11,7 +11,7 @@ export class KeyDownStack {
     }
 
     public keyUp(key: string) {
-
+        this.stack = this.stack.filter(other => other !== key);
     }
 
     public hasKeystroke(keystroke: string[]) {

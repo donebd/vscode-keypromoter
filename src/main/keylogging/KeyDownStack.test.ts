@@ -24,4 +24,13 @@ describe("Key Down Stack Test", () => {
         assert.equal(stack.hasKeystroke(["B", "A", "C"]), false);
     });
 
+    it("single key up", () => {
+        let stack = new KeyDownStack();
+        stack.keyDown("A");
+        stack.keyUp("B");
+        assert.equal(stack.hasKeystroke(["A"]), true);
+        stack.keyUp("A");
+        assert.equal(stack.hasKeystroke(["A"]), false);
+    });
+
 });
