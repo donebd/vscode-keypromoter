@@ -3,11 +3,15 @@ import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
 import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
 import { keyFromKeycode } from "../keylogging/transform";
+import * as path from 'path';
+import { DescriptionHandler } from "../descriptions/descriptionHandler";
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
     private keyBuf = new KeyLogBuffer(5);
+    private path_to_descriptions = path.resolve(__dirname, `../../.././default-keybindings/descriptions/command_descriptions.json`);
+    private descriptionHandler = new DescriptionHandler(this.path_to_descriptions);
 
     private readonly maxErrors: number;
     private readonly keybindingStorage: KeybindingStorage;
@@ -29,7 +33,7 @@ export class CommandCounter {
                 currCounter++;
             }
             if (currCounter > this.maxErrors) {
-                vscode.window.showInformationMessage("You could use " + keybindings.join(" or ") + " keybindings " + " to perform command " + commandId + "!");
+                vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
                 currCounter = 0;
             }
             this.commandToCounter.set(commandId, currCounter);
@@ -96,5 +100,10 @@ export class CommandCounter {
 
     public handleMousePress() {
         this.keyBuf.reset();
+    }
+
+    private buildStyledMessage(keybindings: string[], commandId: string): string {
+        return "You could use " + keybindings.join(" or ") + " keybindings "
+        + " to perform " + this.descriptionHandler.getDescriptionForCommand(commandId) + " command!";
     }
 }
