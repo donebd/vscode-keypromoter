@@ -1,10 +1,12 @@
 import * as fs from 'fs';
+import path from 'path';
 
 export class DescriptionHandler {
   private jsonCommands: CommandInfo[];
+  private pathToDescriptions = path.resolve(__dirname, `../../.././default-keybindings/descriptions/command_descriptions.json`);
 
-  constructor(filePath: string) {
-    this.jsonCommands = this.readJsonFile(filePath);
+  constructor() {
+    this.jsonCommands = this.readJsonFile(this.pathToDescriptions);
   }
 
   private readJsonFile(filePath: string): CommandInfo[] {

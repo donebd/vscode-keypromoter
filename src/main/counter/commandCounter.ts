@@ -1,38 +1,34 @@
 import * as vscode from 'vscode';
 import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
-import { KeybindingStorage } from "../keybindings/keybindings";
-import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
-import { keyFromKeycode } from "../keylogging/transform";
-import * as path from 'path';
 import { DescriptionHandler } from "../descriptions/descriptionHandler";
+import { KeybindingStorage } from "../keybindings/keybindings";
+import { KeyLogger } from '../keylogging/KeyLogger';
+import { logger } from '../logging';
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
-    private keyBuf = new KeyLogBuffer(5);
-    private path_to_descriptions = path.resolve(__dirname, `../../.././default-keybindings/descriptions/command_descriptions.json`);
-    private descriptionHandler = new DescriptionHandler(this.path_to_descriptions);
 
-    private readonly maxErrors: number;
+    private descriptionHandler = new DescriptionHandler();
+
     private readonly keybindingStorage: KeybindingStorage;
+    private readonly keyLogger: KeyLogger;
 
-    constructor(maxErrors: number, keybindingStorage: KeybindingStorage) {
-        this.maxErrors = maxErrors;
+    constructor(keybindingStorage: KeybindingStorage, keyLogger: KeyLogger) {
         this.keybindingStorage = keybindingStorage;
+        this.keyLogger = keyLogger;
     }
 
     public handleCommand(commandId: string) {
-        const keybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
+        const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
-            let keybindingUsed = false;
-            for (let keybinding of keybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
-            }
-            if (!keybindingUsed) {
+            if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
                 currCounter++;
+                logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
-            if (currCounter > this.maxErrors) {
+            if (currCounter > this.getLoyaltyLevel()) {
+                logger.info(`show info message for command ${commandId}`);
                 vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
                 currCounter = 0;
             }
@@ -45,7 +41,7 @@ export class CommandCounter {
         const commandIds = commandGroup.commandIds;
         const groupKeybindings: string[] = [];
         commandIds.forEach(commandId => {
-            const commandKeybindings = this.keybindingStorage.getKeybindingMap().get(commandId);
+            const commandKeybindings = this.keybindingStorage.getKeybindingsFor(commandId);
             if (commandKeybindings) {
                 groupKeybindings.push(...commandKeybindings);
             }
@@ -53,14 +49,12 @@ export class CommandCounter {
 
         if (groupKeybindings.length !== 0) {
             let currCounter = this.commandGroupToCounter.get(groupId) ?? 0;
-            let keybindingUsed = false;
-            for (let keybinding of groupKeybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
-            }
-            if (!keybindingUsed) {
+            if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
+                logger.debug(`user did not use keybindings for group ${groupId}, counter = ${currCounter}`);
             }
-            if (currCounter > this.maxErrors) {
+            if (currCounter > this.getLoyaltyLevel()) {
+                logger.info(`show info message for group ${groupId}`);
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
             }
@@ -75,15 +69,15 @@ export class CommandCounter {
             const goToFirstEditorCommand = CommandGroup.NavigateBetweenTabsGroup.commandIds[2];
             const goToSecondEditorCommand = CommandGroup.NavigateBetweenTabsGroup.commandIds[3];
 
-            const goNextShortcut = this.keybindingStorage.getKeybindingMap().get(goNextEditorCommand) ?? [""];
-            const goPreviousShortcut = this.keybindingStorage.getKeybindingMap().get(goPreviousEditorCommand) ?? [""];
-            const goToFirstShortcut = this.keybindingStorage.getKeybindingMap().get(goToFirstEditorCommand) ?? [""];
-            const goToSecondShortcut = this.keybindingStorage.getKeybindingMap().get(goToSecondEditorCommand) ?? [""];
+            const goNextShortcut = this.keybindingStorage.getKeybindingsFor(goNextEditorCommand) ?? [""];
+            const goPreviousShortcut = this.keybindingStorage.getKeybindingsFor(goPreviousEditorCommand) ?? [""];
+            const goToFirstShortcut = this.keybindingStorage.getKeybindingsFor(goToFirstEditorCommand) ?? [""];
+            const goToSecondShortcut = this.keybindingStorage.getKeybindingsFor(goToSecondEditorCommand) ?? [""];
 
 
             const checkAllShortcutsButton = "View all shortcuts";
             vscode.window.showInformationMessage(
-                `You could use ${goNextShortcut}/${goPreviousShortcut} or ${goToFirstShortcut}, ${goToSecondShortcut}... keybindings to navigate between editors. You can also check all keybindings for this.`,
+                `You could use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... keybindings to navigate between editors. You can also check all keybindings for this.`,
                 checkAllShortcutsButton
             ).then(button => {
                 if (button === checkAllShortcutsButton) {
@@ -93,17 +87,12 @@ export class CommandCounter {
         }
     }
 
-
-    public handleKeyPress(keycode: number) {
-        this.keyBuf.keyPressed(keyFromKeycode(keycode));
-    }
-
-    public handleMousePress() {
-        this.keyBuf.reset();
+    private getLoyaltyLevel(): number {
+        return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel") as number ?? 5;
     }
 
     private buildStyledMessage(keybindings: string[], commandId: string): string {
         return "You could use " + keybindings.join(" or ") + " keybindings "
-        + " to perform " + this.descriptionHandler.getDescriptionForCommand(commandId) + " command!";
+            + " to perform " + this.descriptionHandler.getDescriptionForCommand(commandId) + " command!";
     }
 }
