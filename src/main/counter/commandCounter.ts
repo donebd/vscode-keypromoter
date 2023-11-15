@@ -25,7 +25,7 @@ export class CommandCounter {
             let currCounter = this.commandToCounter.get(commandId) ?? 0;
             let keybindingUsed = false;
             for (let keybinding of keybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
+                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /));
             }
             if (!keybindingUsed) {
                 currCounter++;
@@ -53,7 +53,7 @@ export class CommandCounter {
             let currCounter = this.commandGroupToCounter.get(groupId) ?? 0;
             let keybindingUsed = false;
             for (let keybinding of groupKeybindings) {
-                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /)).valueOf();
+                keybindingUsed = keybindingUsed || this.keyBuf.hasKeystroke(keybinding.split(/\+| /));
             }
             if (!keybindingUsed) {
                 currCounter++;
