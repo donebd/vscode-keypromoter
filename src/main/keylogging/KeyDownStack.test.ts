@@ -11,7 +11,9 @@ describe("Key Down Stack Test", () => {
 
     it("many keys down", () => {
         let stack = new KeyDownStack();
+        assert.equal(stack.hasKeystroke([]), true);
         stack.keyDown("A");
+        assert.equal(stack.hasKeystroke([]), false);
         stack.keyDown("B");
         stack.keyDown("C");
         assert.equal(stack.hasKeystroke(["A"]), false);
@@ -31,6 +33,24 @@ describe("Key Down Stack Test", () => {
         assert.equal(stack.hasKeystroke(["A"]), true);
         stack.keyUp("A");
         assert.equal(stack.hasKeystroke(["A"]), false);
+        assert.equal(stack.hasKeystroke([]), true);
+    });
+
+    it("many keys up", () => {
+        let stack = new KeyDownStack();
+        stack.keyDown("A");
+        stack.keyDown("B");
+        stack.keyDown("C");
+        assert.equal(stack.hasKeystroke(["A", "B", "C"]), true);
+        stack.keyUp("B");
+        assert.equal(stack.hasKeystroke(["A", "B", "C"]), false);
+        assert.equal(stack.hasKeystroke(["A", "C"]), true);
+        stack.keyUp("A");
+        assert.equal(stack.hasKeystroke(["A", "C"]), false);
+        assert.equal(stack.hasKeystroke(["C"]), true);
+        stack.keyUp("C");
+        assert.equal(stack.hasKeystroke(["C"]), false);
+        assert.equal(stack.hasKeystroke([]), true);
     });
 
 });
