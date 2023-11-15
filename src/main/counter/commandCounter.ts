@@ -23,7 +23,7 @@ export class CommandCounter {
                 currCounter++;
             }
             if (currCounter > this.getLoyalityLevel()) {
-                vscode.window.showInformationMessage("You could use " + keybindings.join(" or ") + " keybindings " + " to perform command " + commandId + "!");
+                vscode.window.showInformationMessage("You could use " + "'" + keybindings.join("' or '") + "'" + " to perform command " + commandId + "!");
                 currCounter = 0;
             }
             this.commandToCounter.set(commandId, currCounter);
@@ -69,7 +69,7 @@ export class CommandCounter {
 
             const checkAllShortcutsButton = "View all shortcuts";
             vscode.window.showInformationMessage(
-                `You could use ${goNextShortcut}/${goPreviousShortcut} or ${goToFirstShortcut}, ${goToSecondShortcut}... keybindings to navigate between editors. You can also check all keybindings for this.`,
+                `You could use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... keybindings to navigate between editors. You can also check all keybindings for this.`,
                 checkAllShortcutsButton
             ).then(button => {
                 if (button === checkAllShortcutsButton) {
