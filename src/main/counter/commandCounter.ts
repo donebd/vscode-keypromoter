@@ -2,12 +2,14 @@ import * as vscode from 'vscode';
 import { CommandGroup, CommandGroupModel } from '../../models/commandGroup';
 import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
+import { KeyDownStack } from "../keylogging/KeyDownStack";
 import { keyFromKeycode } from "../keylogging/transform";
 
 export class CommandCounter {
     private commandToCounter = new Map<string, number>();
     private commandGroupToCounter = new Map<string, number>();
     private keyBuf = new KeyLogBuffer(5);
+    private keyStack = new KeyDownStack();
 
     private readonly maxErrors: number;
     private readonly keybindingStorage: KeybindingStorage;
@@ -89,12 +91,18 @@ export class CommandCounter {
         }
     }
 
+    public handleKeyDown(keycode: number) {
+        let key = keyFromKeycode(keycode);
+        this.keyBuf.keyPressed(key);
+        this.keyStack.keyDown(key);
+    }
 
-    public handleKeyPress(keycode: number) {
-        this.keyBuf.keyPressed(keyFromKeycode(keycode));
+    public handleKeyUp(keycode: number) {
+        this.keyStack.keyUp(keyFromKeycode(keycode));
     }
 
     public handleMousePress() {
         this.keyBuf.reset();
+        this.keyStack.reset();
     }
 }

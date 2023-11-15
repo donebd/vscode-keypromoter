@@ -11,7 +11,7 @@ import { KeybindingStorage } from './main/keybindings/keybindings';
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	uIOhook.on('keydown', (e) => {
-		commandCounter.handleKeyPress(e.keycode);
+		commandCounter.handleKeyDown(e.keycode);
 	});
 	uIOhook.on('mousedown', (_) => {
 		commandCounter.handleMousePress();
