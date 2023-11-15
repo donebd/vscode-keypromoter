@@ -85,7 +85,7 @@ export class CommandCounter {
             const checkAllShortcutsButton = "View all shortcuts";
             const publicCounter = this.publicCommandGroupToCounter.get(groupId)!;
             vscode.window.showInformationMessage(
-                `You could use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... keybindings to navigate between editors. Shortcut unused counter: ${publicCounter}, You can also check all keybindings for this.`,
+                `Tip: you can use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... to navigate between editors. You missed ${publicCounter} times! You can also check keybindings for all commands.`,
                 checkAllShortcutsButton
             ).then(button => {
                 if (button === checkAllShortcutsButton) {
@@ -102,6 +102,6 @@ export class CommandCounter {
     private buildStyledMessage(keybindings: string[], commandId: string): string {
         const publicCounter = this.publicCommandToCounter.get(commandId)!;
         const description = this.descriptionHandler.getDescriptionForCommand(commandId) ?? commandId;
-        return `You could use keybindings: ${keybindings.join(" or ")} to perform ${description} command! Shortcut unused counter: ${publicCounter}`;
+        return `Tip: you can use <${keybindings.join("> or <")}> to perform command '${description}'. You missed ${publicCounter} times!`;
     }
 }
