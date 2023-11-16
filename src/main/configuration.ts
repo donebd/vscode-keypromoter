@@ -47,6 +47,9 @@ export function getSuggestKeybindingCreation(): boolean {
 export function setSuggestKeybindingCreation(value: boolean) {
     try {
         vscode.workspace.getConfiguration(section).update(suggestKeybindingCreationScope, value, vscode.ConfigurationTarget.Global);
+        if (getSuggestKeybindingCreation() !== value) {
+            throw new Error(`configuration was not saved`);
+        }
         logger.info(`updated 'suggest keybinding creation' setting to '${value}'`);
     } catch (e) {
         if (e instanceof Error) {   
