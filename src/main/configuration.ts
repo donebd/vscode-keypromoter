@@ -27,7 +27,10 @@ export function addIgnoreCommand(command: string) {
     let ignored = getIgnoreCommands().filter(it => it !== command);
     ignored.push(command);
     try {
-        vscode.workspace.getConfiguration(section).update(section, ignored, vscode.ConfigurationTarget.Global);
+        vscode.workspace.getConfiguration(section).update(ignoredCommandsScope, ignored, vscode.ConfigurationTarget.Global);
+        if (getIgnoreCommands().sort().toString() !== ignored.sort().toString()) {
+            throw new Error(`configuration was not saved`);
+        }
         logger.info(`added command ${command} to ignore list (with total length of ${ignored.length})`);
     } catch (e) {
         if (e instanceof Error) {   
