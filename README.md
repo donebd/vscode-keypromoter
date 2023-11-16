@@ -24,7 +24,7 @@ Extension that helps you to learn shortcuts while you are working.
 * Some of the default editor actions are not supported
 * Other extensions commands are not supported
 
-## Instalation
+## Installation
 
 (**SOON**)
 
