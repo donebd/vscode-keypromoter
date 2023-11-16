@@ -1,71 +1,27 @@
-# vscode-keypromoter README
+# Key Promoter
 
-This is the README for your extension "vscode-keypromoter". After writing up a brief description, we recommend including the following sections.
+Extension that helps you to learn shortcuts while you are working.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* When you use the mouse on a button inside the editor, the extension will shows you the keyboard shortcut that you should have used instead.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+* For buttons that don't have a shortcut, the extension prompts you with the possibility to directly create one by opening the menu.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+|Name|Description|Default|
+|-|-|-|
+|`keypromoter.loyaltyLevel`|Number of command executions using mouse before notification|`5`|
+|`keypromoter.ignoredCommands`|List of commands that will not be processed by the extension|`[]`|
+|`keypromoter.suggestKeybindingCreation`|Specifies whether to suggest creation of keybindings for commands without them|`true`|
+|`keypromoter.logger.loggingLevel`|Control logging level|`"Info"`|
 
-For example:
+## Limitations
 
-This extension contributes the following settings:
+* Some of the default editor actions are not supported
+* Other extensions commands are not supported
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Instalation
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+(**SOON**)
