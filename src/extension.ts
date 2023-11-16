@@ -8,6 +8,7 @@ import * as logging from './main/logging';
 import { logger } from './main/logging';
 import * as platform from './main/platform';
 import { SubscriptionService } from './services/subscriptionService';
+import * as configuration from './main/configuration';
 
 export function activate(context: vscode.ExtensionContext) {
 	initLogging(context);
@@ -41,17 +42,15 @@ export function deactivate() {
 }
 
 function initLogging(context: vscode.ExtensionContext) {
-	const section = "keypromoter";
-	const scope = "logger.loggingLevel";
 	function setLogLevel() {
-		let logLevel = vscode.workspace.getConfiguration(section).get(scope, 'Info');
+		let logLevel = configuration.getLogLevel();
 		logging.setLevel(logLevel);
 	}
 	logging.init(vscode.window.createOutputChannel("Key Promoter", "log"));
 	setLogLevel();
 	context.subscriptions.push(
 		vscode.workspace.onDidChangeConfiguration((e) => {
-			if (e.affectsConfiguration(section)) {
+			if (configuration.didAffectLogLevel(e)) {
 				setLogLevel();
 			}
 		})

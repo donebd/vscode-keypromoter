@@ -4,6 +4,7 @@ import { DescriptionHandler } from "../descriptions/descriptionHandler";
 import { KeybindingStorage } from "../keybindings/keybindings";
 import { KeyLogger } from '../keylogging/KeyLogger';
 import { logger } from '../logging';
+import * as configuration from '../configuration';
 
 export class CommandCounter {
     private internalCommandToCounter = new Map<string, number>();
@@ -22,6 +23,10 @@ export class CommandCounter {
     }
 
     public handleCommand(commandId: string, times: number = 1) {
+        if (configuration.getIgnoreCommands().includes(commandId)) {
+            logger.info(`ignoring command ${commandId} from ignore list`);
+            return;
+        }
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.internalCommandToCounter.get(commandId) ?? 0;
@@ -37,9 +42,17 @@ export class CommandCounter {
                 logger.debug(`user did use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
 
-            if (currCounter > this.getLoyaltyLevel()) {
+            if (currCounter > configuration.getLoyaltyLevel()) {
                 logger.info(`show info message for command ${commandId}`);
-                vscode.window.showInformationMessage(this.buildStyledMessage(keybindings, commandId));
+                const ignoreBtn = "Add to ignore list";
+                vscode.window.showInformationMessage(
+                    this.buildStyledMessage(keybindings, commandId),
+                    ignoreBtn
+                ).then(button => {
+                    if (button === ignoreBtn) {
+                        configuration.addIgnoreCommand(commandId);
+                    }
+                });
                 currCounter = 0;
             }
             this.internalCommandToCounter.set(commandId, currCounter);
@@ -72,7 +85,7 @@ export class CommandCounter {
                 logger.debug(`user did use keybinding for group ${groupId}, counter = ${currCounter}`);
             }
 
-            if (currCounter > this.getLoyaltyLevel()) {
+            if (currCounter > configuration.getLoyaltyLevel()) {
                 logger.info(`show info message for group ${groupId}`);
                 this.suggestToUseGroupShortcut(groupId);
                 currCounter = 0;
@@ -106,10 +119,6 @@ export class CommandCounter {
                 }
             });
         }
-    }
-
-    private getLoyaltyLevel(): number {
-        return vscode.workspace.getConfiguration("keypromoter").get("loyaltyLevel", 5);
     }
 
     private buildStyledMessage(keybindings: string[], commandId: string): string {
