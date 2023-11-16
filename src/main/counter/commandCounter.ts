@@ -34,7 +34,7 @@ export class CommandCounter {
             } else {
                 currCounter -= times;
                 currCounter = (currCounter < 0) ? 0 : currCounter;
-                logger.debug(`user did used keybinding for command ${commandId}, counter = ${currCounter}`);
+                logger.debug(`user did use keybinding for command ${commandId}, counter = ${currCounter}`);
             }
 
             if (currCounter > this.getLoyaltyLevel()) {
@@ -69,7 +69,7 @@ export class CommandCounter {
             } else {
                 currCounter -= 1;
                 currCounter = (currCounter < 0) ? 0 : currCounter;
-                logger.debug(`user did used keybinding for group ${groupId}, counter = ${currCounter}`);
+                logger.debug(`user did use keybinding for group ${groupId}, counter = ${currCounter}`);
             }
 
             if (currCounter > this.getLoyaltyLevel()) {
