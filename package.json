@@ -21,7 +21,7 @@
       }
     ],
     "configuration": {
-      "title": "Keypromoter",
+      "title": "Key Promoter",
       "properties": {
         "keypromoter.loyaltyLevel": {
           "type": "number",
