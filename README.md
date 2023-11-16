@@ -25,3 +25,7 @@ Extension that helps you to learn shortcuts while you are working.
 ## Instalation
 
 (**SOON**)
+
+## Troubleshooting
+
+Use `Key Promoter` output panel to see logs. You can change log level in settings.
