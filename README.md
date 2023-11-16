@@ -4,6 +4,8 @@ Extension that helps you to learn shortcuts while you are working.
 
 ## Features
 
+![example](img/key_promoter.gif)
+
 * When you use the mouse on a button inside the editor, the extension will shows you the keyboard shortcut that you should have used instead.
 
 * For buttons that don't have a shortcut, the extension prompts you with the possibility to directly create one by opening the menu.
@@ -29,3 +31,5 @@ Extension that helps you to learn shortcuts while you are working.
 ## Troubleshooting
 
 Use `Key Promoter` output panel to see logs. You can change log level in settings.
+
+![troubleshooting](img/troubleshooting.png)
