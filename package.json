@@ -37,7 +37,7 @@
           },
           "description": "Specifies commands that will not be processed by the extension."
         },
-        "keypromoter.suggestKeybindingsCreation": {
+        "keypromoter.suggestKeybindingCreation": {
           "type": "boolean",
           "default": true,
           "description": "Specifies whether to suggest creation of keybindings for commands without them."

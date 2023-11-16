@@ -6,6 +6,7 @@ const section = "keypromoter";
 const logLevelScope = "logger.loggingLevel";
 const loyaltyLevelScope = "loyaltyLevel";
 const ignoredCommandsScope = "ignoredCommands";
+const suggestKeybindingCreationScope = "suggestKeybindingCreation";
 
 export function getLogLevel(): string {
     return vscode.workspace.getConfiguration(section).get(logLevelScope, 'Info');
@@ -35,6 +36,21 @@ export function addIgnoreCommand(command: string) {
     } catch (e) {
         if (e instanceof Error) {   
             logger.error(`error when adding command ${command} to ignore list: ${e.message}`);
+        }
+    }
+}
+
+export function getSuggestKeybindingCreation(): boolean {
+    return vscode.workspace.getConfiguration(section).get(suggestKeybindingCreationScope, true);
+}
+
+export function setSuggestKeybindingCreation(value: boolean) {
+    try {
+        vscode.workspace.getConfiguration(section).update(suggestKeybindingCreationScope, value, vscode.ConfigurationTarget.Global);
+        logger.info(`updated 'suggest keybinding creation' setting to '${value}'`);
+    } catch (e) {
+        if (e instanceof Error) {   
+            logger.error(`error when updating 'suggest keybinding creation' setting: ${e.message}`);
         }
     }
 }

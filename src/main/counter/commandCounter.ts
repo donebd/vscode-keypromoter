@@ -33,19 +33,28 @@ export class CommandCounter {
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
 
         if (keybindings.length === 0) {
+            if (!configuration.getSuggestKeybindingCreation()) {
+                logger.info(`suggestions for commands without keybindings are disabled, including ${commandId}`);
+                return;
+            }
             internalCounter += times;
             publicCounter += times;
             logger.debug(`command ${commandId} doesn't have a keybinding, counter = ${internalCounter}`);
             if (internalCounter > configuration.getLoyaltyLevel()) {
-                const suggestToAddShortcut = "Add keybinding";
+                const suggestToAddShortcut = "Add Keybinding";
+                const disableSuggestions = "Disable Suggestions";
                 const description = this.descriptionHandler.getDescriptionForCommand(commandId) ?? commandId;
                 vscode.window.showInformationMessage(
                     `You used command '${description}' more than ${publicCounter} times - you can add a shortcut for quicker access.`,
-                    suggestToAddShortcut
+                    suggestToAddShortcut,
+                    disableSuggestions
                 ).then(button => {
                     if (button === suggestToAddShortcut) {
                         logger.info("opening keybindings menu for suggested command");
                         vscode.commands.executeCommand("workbench.action.openGlobalKeybindings", commandId);
+                    }
+                    if (button === disableSuggestions) {
+                        configuration.setSuggestKeybindingCreation(false);
                     }
                 });
                 internalCounter = 0;
