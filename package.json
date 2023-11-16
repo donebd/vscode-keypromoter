@@ -30,7 +30,7 @@
         },
         "keypromoter.ignoredCommands": {
           "type": "array",
-          "default": [],
+          "default": ["type"],
           "items": {
             "type" : "string",
             "title": "ignored commands"
