@@ -15,12 +15,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "vscode-keypromoter.helloWorld",
-        "title": "Hello World"
-      }
-    ],
     "configuration": {
       "title": "Key Promoter",
       "properties": {
