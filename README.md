@@ -28,8 +28,22 @@ Extension that helps you to learn shortcuts while you are working.
 
 (**SOON**)
 
+## Manual installation
+
+1. Clone repo:
+```
+git clone git@github.com:donebd/vscode-keypromoter.git
+```
+2. Write in terminal:
+```
+npm run build
+```
+3. Install builded .vsix file
+
+![Manual .vsix installation](img/manual_vsix_installation.jpg)
+
 ## Troubleshooting
 
 Use `Key Promoter` output panel to see logs. You can change log level in settings.
 
-![troubleshooting](img/troubleshooting.png)
+![Troubleshooting](img/troubleshooting.png)

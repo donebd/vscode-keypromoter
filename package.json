@@ -3,6 +3,10 @@
   "displayName": "Key Promoter",
   "publisher": "donebd",
   "description": "Learn shortcuts while you are working",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donebd/vscode-keypromoter"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
@@ -49,6 +53,7 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
+    "build": "npm install && vsce package",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",

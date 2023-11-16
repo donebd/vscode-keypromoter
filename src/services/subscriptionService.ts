@@ -12,10 +12,19 @@ export class SubscriptionService {
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
     private readonly commandCounter: CommandCounter;
     private readonly fileHelper: FileHelper;
-    private readonly ignoreCommandList = [
+    private readonly ignoreCommandToListenList = [
         "notification.expand",
         "notification.clear",
-        "notification.collapse"
+        "notification.collapse",
+        "type",
+        "compositionEnd",
+        "compositionStart",
+        "compositionType",
+        "default:replacePreviousChar",
+        "cursorLeft",
+        "cursorRight",
+        "cursorUp",
+        "cursorDown"
     ];
 
     constructor(commandCounter: CommandCounter, fileHelper: FileHelper) {
@@ -25,7 +34,7 @@ export class SubscriptionService {
 
     public async listenForPossibleShortcutActions() {
         const commandIds = (await vscode.commands.getCommands(true))
-            .filter(id => this.ignoreCommandList.find(it => it === id) === undefined);
+            .filter(id => this.ignoreCommandToListenList.find(it => it === id) === undefined);
         this.listenVscodeCommands(commandIds);
         this.listenPublicVscodeApi();
     }
