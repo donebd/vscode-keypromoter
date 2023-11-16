@@ -27,22 +27,40 @@ export class CommandCounter {
             logger.info(`ignoring command ${commandId} from ignore list`);
             return;
         }
+
+        let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
+        let internalCounter = this.internalCommandToCounter.get(commandId) ?? 0;
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
-        if (keybindings !== undefined && keybindings !== null) {
-            let currCounter = this.internalCommandToCounter.get(commandId) ?? 0;
-            let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
 
-            if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
-                currCounter += times;
-                publicCounter += times;
-                logger.debug(`user did not use keybinding for command ${commandId}, counter = ${currCounter}`);
-            } else {
-                currCounter -= times;
-                currCounter = (currCounter < 0) ? 0 : currCounter;
-                logger.debug(`user did use keybinding for command ${commandId}, counter = ${currCounter}`);
+        if (keybindings.length === 0) {
+            internalCounter += times;
+            publicCounter += times;
+            logger.debug(`command ${commandId} doesn't have a keybinding, counter = ${internalCounter}`);
+            if (internalCounter > configuration.getLoyaltyLevel()) {
+                const suggestToAddShortcut = "Add keybinding";
+                const description = this.descriptionHandler.getDescriptionForCommand(commandId) ?? commandId;
+                vscode.window.showInformationMessage(
+                    `You used command '${description}' more than ${publicCounter} times - you can add a shortcut for quicker access.`,
+                    suggestToAddShortcut
+                ).then(button => {
+                    if (button === suggestToAddShortcut) {
+                        logger.info("opening keybindings menu for suggested command");
+                        vscode.commands.executeCommand("workbench.action.openGlobalKeybindings", commandId);
+                    }
+                });
+                internalCounter = 0;
             }
-
-            if (currCounter > configuration.getLoyaltyLevel()) {
+        } else {
+            if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
+                internalCounter += times;
+                publicCounter += times;
+                logger.debug(`user did not use keybinding for command ${commandId}, counter = ${internalCounter}`);
+            } else {
+                internalCounter -= times;
+                internalCounter = (internalCounter < 0) ? 0 : internalCounter;
+                logger.debug(`user did use keybinding for command ${commandId}, counter = ${internalCounter}`);
+            }
+            if (internalCounter > configuration.getLoyaltyLevel()) {
                 logger.info(`show info message for command ${commandId}`);
                 const ignoreBtn = "Add to ignore list";
                 vscode.window.showInformationMessage(
@@ -53,11 +71,11 @@ export class CommandCounter {
                         configuration.addIgnoreCommand(commandId);
                     }
                 });
-                currCounter = 0;
+                internalCounter = 0;
             }
-            this.internalCommandToCounter.set(commandId, currCounter);
-            this.publicCommandToCounter.set(commandId, publicCounter);
         }
+        this.internalCommandToCounter.set(commandId, internalCounter);
+        this.publicCommandToCounter.set(commandId, publicCounter);
     }
 
     public handleCommandGroup(commandGroup: CommandGroupModel) {
