@@ -2897,13 +2897,11 @@
   },
   {
     "command": "workbench.action.toggleFullScreen",
-    "description": "Toggle Full Screen",
-    "when": "!isIOS"
+    "description": "Toggle Full Screen"
   },
   {
     "command": "workbench.action.toggleMaximizeEditorGroup",
-    "description": "Toggle Maximize Editor Group",
-    "when": "maximizedEditorGroup || multipleEditorGroups"
+    "description": "Toggle Maximize Editor Group"
   },
   {
     "command": "workbench.action.togglePanel",
@@ -2919,8 +2917,7 @@
   },
   {
     "command": "workbench.action.unpinEditor",
-    "description": "Unpin Editor",
-    "when": "activeEditorIsPinned"
+    "description": "Unpin Editor"
   },
   {
     "command": "workbench.action.zoomIn",
@@ -2936,33 +2933,27 @@
   },
   {
     "command": "workbench.actions.view.problems",
-    "description": "View Problems",
-    "when": "workbench.panel.markers.view.active"
+    "description": "View Problems"
   },
   {
     "command": "workbench.banner.focusBanner",
-    "description": "Focus Banner",
-    "when": "bannerFocused"
+    "description": "Focus Banner"
   },
   {
     "command": "workbench.banner.focusNextAction",
-    "description": "Focus Next Action",
-    "when": "bannerFocused"
+    "description": "Focus Next Action"
   },
   {
     "command": "workbench.banner.focusNextAction",
-    "description": "Focus Previous Action",
-    "when": "bannerFocused"
+    "description": "Focus Previous Action"
   },
   {
     "command": "workbench.banner.focusPreviousAction",
-    "description": "Focus Previous Action",
-    "when": "bannerFocused"
+    "description": "Focus Previous Action"
   },
   {
     "command": "workbench.debug.action.toggleRepl",
-    "description": "Toggle REPL",
-    "when": "workbench.panel.repl.view.active"
+    "description": "Toggle REPL"
   },
   {
     "command": "workbench.files.action.compareWithClipboard",
@@ -2974,43 +2965,35 @@
   },
   {
     "command": "workbench.files.action.focusOpenEditorsView",
-    "description": "Focus Open Editors View",
-    "when": "workbench.explorer.openEditorsView.active"
+    "description": "Focus Open Editors View"
   },
   {
     "command": "workbench.statusBar.clearFocus",
-    "description": "Clear Status Bar Focus",
-    "when": "statusBarFocused"
+    "description": "Clear Status Bar Focus"
   },
   {
     "command": "workbench.statusBar.focusFirst",
-    "description": "Focus First in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus First in Status Bar"
   },
   {
     "command": "workbench.statusBar.focusLast",
-    "description": "Focus Last in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus Last in Status Bar"
   },
   {
     "command": "workbench.statusBar.focusNext",
-    "description": "Focus Next in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus Next in Status Bar"
   },
   {
     "command": "workbench.statusBar.focusNext",
-    "description": "Focus Next in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus Next in Status Bar"
   },
   {
     "command": "workbench.statusBar.focusPrevious",
-    "description": "Focus Previous in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus Previous in Status Bar"
   },
   {
     "command": "workbench.statusBar.focusPrevious",
-    "description": "Focus Previous in Status Bar",
-    "when": "statusBarFocused"
+    "description": "Focus Previous in Status Bar"
   },
   {
     "command": "workbench.view.debug",
@@ -3399,5 +3382,9 @@
   {
     "command": "diffEditor.exitCompareMove",
     "description": "Exit Compare Move in Diff Editor"
+  },
+  {
+    "command": "editor.action.goToTypeDefinition",
+    "description": "Go to type definition"
   }
 ]
