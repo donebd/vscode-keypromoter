@@ -23,6 +23,10 @@ export class CommandCounter {
     }
 
     public handleCommand(commandId: string, times: number = 1) {
+        if (configuration.getIgnoreCommands().includes(commandId)) {
+            logger.info(`ignoring command ${commandId} from ignore list`);
+            return;
+        }
         const keybindings = this.keybindingStorage.getKeybindingsFor(commandId);
         if (keybindings !== undefined && keybindings !== null) {
             let currCounter = this.internalCommandToCounter.get(commandId) ?? 0;
