@@ -2,7 +2,7 @@
   "name": "vscode-keypromoter",
   "displayName": "Key Promoter",
   "publisher": "donebd",
-  "description": "",
+  "description": "Learn shortcuts while you are working",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
