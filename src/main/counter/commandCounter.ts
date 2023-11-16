@@ -71,7 +71,7 @@ export class CommandCounter {
             }
             if (internalCounter > configuration.getLoyaltyLevel()) {
                 logger.info(`show info message for command ${commandId}`);
-                const ignoreBtn = "Add to ignore list";
+                const ignoreBtn = "Add to Ignore List";
                 vscode.window.showInformationMessage(
                     this.buildStyledMessage(keybindings, commandId),
                     ignoreBtn
@@ -135,7 +135,7 @@ export class CommandCounter {
             const goToSecondShortcut = this.keybindingStorage.getKeybindingsFor(goToSecondEditorCommand) ?? [""];
 
 
-            const checkAllShortcutsButton = "View all shortcuts";
+            const checkAllShortcutsButton = "View All Shortcuts";
             const publicCounter = this.publicCommandGroupToCounter.get(groupId)!;
             vscode.window.showInformationMessage(
                 `Tip: you can use '${goNextShortcut}'/'${goPreviousShortcut}' or '${goToFirstShortcut}', '${goToSecondShortcut}'... to navigate between editors. You missed ${publicCounter} times! You can also check keybindings for all commands.`,
