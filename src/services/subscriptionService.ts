@@ -20,11 +20,11 @@ export class SubscriptionService {
         "compositionEnd",
         "compositionStart",
         "compositionType",
-        "default:replacePreviousChar",
+        "replacePreviousChar",
         "cursorLeft",
         "cursorRight",
         "cursorUp",
-        "cursorDown"
+        "cursorDown",
     ];
 
     constructor(commandCounter: CommandCounter, fileHelper: FileHelper) {

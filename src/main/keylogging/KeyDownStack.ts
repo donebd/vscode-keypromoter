@@ -7,6 +7,9 @@ export class KeyDownStack {
     }
 
     public keyDown(key: string) {
+        if (this.stack.find(it => it === key)) {
+            return;
+        }
         this.stack.push(key);
     }
 
