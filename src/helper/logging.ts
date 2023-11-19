@@ -18,7 +18,7 @@ export const logger: winston.Logger = winston.createLogger({
     ],
 });
 
-export interface Channel {
+interface Channel {
     append(value: string): void;
 }
 

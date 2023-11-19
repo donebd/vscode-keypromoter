@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import * as transform from './transform';
+import * as transform from '../../../keylogger/transform';
 import * as iohook from 'uiohook-napi';
 
 describe("Key Transform Test", () => {

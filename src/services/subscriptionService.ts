@@ -1,16 +1,16 @@
 import path from 'path';
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
-import { CommandCounter } from '../main/counter/commandCounter';
-import { FileHelper } from '../main/helper/fileHelper';
-import { logger } from '../main/logging';
+import { CommandCounterService } from './commandCounterService';
+import { FileHelper } from '../helper/fileHelper';
+import { logger } from '../helper/logging';
 import { CommandGroup } from '../models/commandGroup';
 
 export class SubscriptionService {
 
     private readonly pipe = new Subject<[string, ...any]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
-    private readonly commandCounter: CommandCounter;
+    private readonly commandCounter: CommandCounterService;
     private readonly fileHelper: FileHelper;
     private readonly ignoreCommandToListenList = [
         "notification.expand",
@@ -27,7 +27,7 @@ export class SubscriptionService {
         "cursorDown",
     ];
 
-    constructor(commandCounter: CommandCounter, fileHelper: FileHelper) {
+    constructor(commandCounter: CommandCounterService, fileHelper: FileHelper) {
         this.commandCounter = commandCounter;
         this.fileHelper = fileHelper;
     }

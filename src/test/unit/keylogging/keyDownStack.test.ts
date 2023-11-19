@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { KeyDownStack } from "./KeyDownStack";
+import { KeyDownStack } from "../../../keylogger/keyDownStack";
 
 describe("Key Down Stack Test", () => {
 

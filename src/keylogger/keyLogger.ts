@@ -1,12 +1,26 @@
-import { KeyLogBuffer } from "../keylogging/KeyLogBuffer";
-import { KeyDownStack } from "../keylogging/KeyDownStack";
-import { keyFromKeycode } from "../keylogging/transform";
-import { logger } from "../logging";
+import { uIOhook } from 'uiohook-napi';
+import { logger } from "../helper/logging";
+import { KeyDownStack } from "./keyDownStack";
+import { KeyLogBuffer } from "./keyLogBuffer";
+import { keyFromKeycode } from "./transform";
 
 export class KeyLogger {
 
     private keyBuf = new KeyLogBuffer(5);
     private keyStack = new KeyDownStack();
+
+    public init() {
+        uIOhook.on('keydown', (e) => {
+            this.handleKeyDown(e.keycode);
+        });
+        uIOhook.on('keyup', (e) => {
+            this.handleKeyUp(e.keycode);
+        });
+        uIOhook.on('mousedown', (_) => {
+            this.handleMousePress();
+        });
+        uIOhook.start();
+    }
 
     public hasAnyKeybinding(keybindings: string[]): boolean {
         for (let keybinding of keybindings) {
@@ -47,6 +61,12 @@ export class KeyLogger {
         logger.debug(`pressed mouse`);
         this.keyBuf.reset();
         this.keyStack.reset();
+    }
+
+    public dispose() {
+        logger.info("deactivating extension...");
+        uIOhook.stop();
+        logger.info("extension deactivated!");
     }
 
 }

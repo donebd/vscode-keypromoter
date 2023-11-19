@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { logger } from '../main/logging';
+import { logger } from './helper/logging';
 
 const section = "keypromoter";
 

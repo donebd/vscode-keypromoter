@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
-import { Platform } from '../platform';
-import { logger } from '../logging';
+import { Platform } from '../helper/platform';
+import { logger } from '../helper/logging';
 
 class Keybinding {
     key!: string;
@@ -58,7 +58,7 @@ export class KeybindingStorage {
 
     private loadDefaultMap() {
         try {
-            let p = path.resolve(__dirname, `../../.././default-keybindings/${this.platform}.keybindings.json`);
+            let p = path.resolve(__dirname, `../.././default-keybindings/${this.platform}.keybindings.json`);
             let file = readFileSync(p);
             let document = json.parse<Keybinding[]>(file.toString());
             for (let i in document) {

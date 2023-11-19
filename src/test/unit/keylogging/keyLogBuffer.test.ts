@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { KeyLogBuffer } from "./KeyLogBuffer";
+import { KeyLogBuffer } from "../../../keylogger/keyLogBuffer";
 
 describe("Key Log Buffer Test", () => {
 

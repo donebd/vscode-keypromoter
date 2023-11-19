@@ -1,6 +1,6 @@
 import * as assert from 'assert';
-import { Platform } from '../platform';
-import { KeybindingStorage } from './keybindings';
+import { Platform } from '../../../helper/platform';
+import { KeybindingStorage } from '../../../services/keybindingStorage';
 
 describe("Default Keybindings Test", () => {
 

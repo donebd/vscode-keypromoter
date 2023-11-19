@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import path from 'path';
-import { logger } from '../logging';
+import { logger } from '../helper/logging';
 
-export class DescriptionHandler {
+export class DescriptionService {
   private jsonCommands: CommandInfo[];
   private pathToDescriptions = path.resolve(__dirname, `../../.././default-keybindings/descriptions/command_descriptions.json`);
 

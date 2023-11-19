@@ -58,7 +58,7 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "test-unit": "mocha --require ts-node/register src/main/**/*.test.ts"
+    "test-unit": "mocha --require ts-node/register src/test/unit/**/*.test.ts"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.3",

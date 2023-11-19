@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import { KeyLogger } from "./KeyLogger";
+import { KeyLogger } from "../../../keylogger/keyLogger";
 import { UiohookKey } from 'uiohook-napi';
 
 describe("Key Logger Test", () => {

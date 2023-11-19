@@ -1,44 +1,33 @@
-import { uIOhook } from 'uiohook-napi';
 import * as vscode from 'vscode';
-import { CommandCounter } from './main/counter/commandCounter';
-import { FileHelper } from './main/helper/fileHelper';
-import { KeybindingStorage } from './main/keybindings/keybindings';
-import { KeyLogger } from './main/keylogging/KeyLogger';
-import * as logging from './main/logging';
-import { logger } from './main/logging';
-import * as platform from './main/platform';
+import * as configuration from './configuration';
+import { FileHelper } from './helper/fileHelper';
+import * as platform from './helper/platform';
+import { KeyLogger } from './keylogger/keyLogger';
+import * as logging from './helper/logging';
+import { logger } from './helper/logging';
+import { PluginContext } from './pluginContext';
+import { CommandCounterService } from './services/commandCounterService';
+import { KeybindingStorage } from './services/keybindingStorage';
 import { SubscriptionService } from './services/subscriptionService';
-import * as configuration from './main/configuration';
 
 export function activate(context: vscode.ExtensionContext) {
 	initLogging(context);
-
 	logger.info("activating extension...");
 
-	let keyLogger = new KeyLogger();
-	uIOhook.on('keydown', (e) => {
-		keyLogger.handleKeyDown(e.keycode);
-	});
-	uIOhook.on('keyup', (e) => {
-		keyLogger.handleKeyUp(e.keycode);
-	});
-	uIOhook.on('mousedown', (_) => {
-		keyLogger.handleMousePress();
-	});
-	uIOhook.start();
-
+	const keyLogger = new KeyLogger();
+	keyLogger.init();
 	const keybindingStorage = new KeybindingStorage(platform.get());
-	const commandCounter = new CommandCounter(keybindingStorage, keyLogger);
+	const commandCounter = new CommandCounterService(keybindingStorage, keyLogger);
 	const fileHelper = new FileHelper();
 	const subscriptionService = new SubscriptionService(commandCounter, fileHelper);
 	subscriptionService.listenForPossibleShortcutActions();
+
+	PluginContext.init(keyLogger);
 	logger.info("extension activated!");
 }
 
 export function deactivate() {
-	logger.info("deactivating extension...");
-	uIOhook.stop();
-	logger.info("extension deactivated!");
+	PluginContext.dispose();
 }
 
 function initLogging(context: vscode.ExtensionContext) {
