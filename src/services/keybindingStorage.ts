@@ -1,3 +1,4 @@
+import * as fs from "fs";
 import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
@@ -79,12 +80,20 @@ export class KeybindingStorage {
         this.keybindings.clear();
         this.loadDefaultMap();
         try {
+            if (!fs.existsSync(this.userKeybindingsPath)) {
+                logger.warn("user keybindings not found");
+                return;
+            }
             const userKeybindingsJson = readFileSync(this.userKeybindingsPath).toString();
             this.patch(userKeybindingsJson);
         } catch (e) {
             if (e instanceof Error) {
                 logger.error(`error when loading user keybindings: ${e.message}`);
             }
+        }
+
+        if (this.platform === Platform.MACOS) {
+            this.fixMacOsKeybindings();
         }
     }
 
@@ -101,6 +110,15 @@ export class KeybindingStorage {
         } catch (e) {
             if (e instanceof Error) {
                 logger.error(`error when loading default keybindings: ${e.message}`);
+            }
+        }
+    }
+
+    private fixMacOsKeybindings() {
+        for (const [command, keybindings] of this.keybindings) {
+            if (keybindings.some(it => it.includes("cmd"))) {
+                const newKeybindings = keybindings.map(keybinding => keybinding.replaceAll("cmd", "meta"));
+                this.keybindings.set(command, newKeybindings);
             }
         }
     }
