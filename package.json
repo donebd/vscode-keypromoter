@@ -103,5 +103,5 @@
     "uiohook-napi": "^1.5.2",
     "winston": "^3.11.0"
   },
-  "icon": "img/icons/KP_logo_128.png"
+  "icon": "img/icons/KP_logo.png"
 }
