@@ -3,15 +3,32 @@
   "displayName": "Key Promoter",
   "publisher": "donebd",
   "description": "Learn shortcuts while you are working",
+  "author": {
+    "name": "Daniil Bakin"
+  },
+  "contributors": [
+    "Vyacheslav Kovalevsky (https://github.com/Slava0135)",
+    "Maxim Ilyin (https://github.com/Targaseer)",
+    "Alexandr Tveritin (https://github.com/ALTV2)"
+  ],
+  "keywords": [
+    "Shortcuts",
+    "Keybindings",
+    "Key Promoter",
+    "Keyboard",
+    "Keymaps"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/donebd/vscode-keypromoter"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
-    "vscode": "^1.84.0"
+    "vscode": "^1.67.0"
   },
   "categories": [
+    "Keymaps",
+    "Visualization",
     "Other"
   ],
   "activationEvents": [
@@ -22,29 +39,36 @@
     "configuration": {
       "title": "Key Promoter",
       "properties": {
-        "keypromoter.loyaltyLevel": {
+        "Key Promoter.loyaltyLevel": {
           "type": "number",
           "default": 5,
           "description": "Specifies number of command executions using mouse before notification."
         },
-        "keypromoter.ignoredCommands": {
+        "Key Promoter.ignoredCommands": {
           "type": "array",
-          "default": ["type"],
+          "default": [
+            "type"
+          ],
           "items": {
-            "type" : "string",
+            "type": "string",
             "title": "ignored commands"
           },
           "description": "Specifies commands that will not be processed by the extension."
         },
-        "keypromoter.suggestKeybindingCreation": {
+        "Key Promoter.suggestKeybindingCreation": {
           "type": "boolean",
           "default": true,
           "description": "Specifies whether to suggest creation of keybindings for commands without them."
         },
-        "keypromoter.logger.loggingLevel": {
+        "Key Promoter.logger.loggingLevel": {
           "type": "string",
           "default": "Info",
-          "enum": ["Error", "Warn", "Info", "Debug"],
+          "enum": [
+            "Error",
+            "Warn",
+            "Info",
+            "Debug"
+          ],
           "description": "Specifies logging level."
         }
       }
@@ -63,7 +87,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.3",
     "@types/node": "18.x",
-    "@types/vscode": "^1.84.0",
+    "@types/vscode": "1.67.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
     "@vscode/test-electron": "^2.3.6",

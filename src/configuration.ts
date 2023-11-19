@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { logger } from './helper/logging';
 
-const section = "keypromoter";
+const section = "Key Promoter";
 
 const logLevelScope = "logger.loggingLevel";
 const loyaltyLevelScope = "loyaltyLevel";

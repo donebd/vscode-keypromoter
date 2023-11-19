@@ -14,10 +14,10 @@ Extension that helps you to learn shortcuts while you are working.
 
 |Name|Description|Default|
 |-|-|-|
-|`keypromoter.loyaltyLevel`|Number of command executions using mouse before notification|`5`|
-|`keypromoter.ignoredCommands`|List of commands that will not be processed by the extension|`[]`|
-|`keypromoter.suggestKeybindingCreation`|Specifies whether to suggest creation of keybindings for commands without them|`true`|
-|`keypromoter.logger.loggingLevel`|Control logging level|`"Info"`|
+|`Key Promoter.loyaltyLevel`|Number of command executions using mouse before notification|`5`|
+|`Key Promoter.ignoredCommands`|List of commands that will not be processed by the extension|`[]`|
+|`Key Promoter.suggestKeybindingCreation`|Specifies whether to suggest creation of keybindings for commands without them|`true`|
+|`Key Promoter.logger.loggingLevel`|Control logging level|`"Info"`|
 
 ## Limitations
 
