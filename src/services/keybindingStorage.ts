@@ -1,8 +1,9 @@
 import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
-import { Platform } from '../helper/platform';
+import * as vscode from 'vscode';
 import { logger } from '../helper/logging';
+import { Platform } from '../helper/platform';
 
 class Keybinding {
     key!: string;
@@ -12,15 +13,21 @@ class Keybinding {
 export class KeybindingStorage {
 
     private readonly keybindings: Map<string, string[]>;
+    private readonly userKeybindingsPath: string;
 
     constructor(private readonly platform: Platform, defaultOnly: boolean = false) {
         this.keybindings = new Map<string, string[]>();
+
+        this.userKeybindingsPath = this.getUserKeybindingsPath();
+
         if (defaultOnly) {
             this.loadDefaultMap();
         } else {
             this.loadFullMap();
         }
-     }
+
+        this.listenUserKeybindings();
+    }
 
     public getKeybindingsFor(command: string): string[] {
         return this.keybindings.get(command) ?? [];
@@ -30,8 +37,25 @@ export class KeybindingStorage {
         return new Map(this.keybindings);
     }
 
-    private loadFullMap() {
-        this.loadDefaultMap();
+    public patch(JsonPatch: string) {
+        let patch = json.parse<Keybinding[]>(JsonPatch);
+        for (let i in patch) {
+            let key = patch[i].key;
+            let command = patch[i].command;
+            let keystrokes: Array<string>;
+            if (command.startsWith("-")) {
+                command = command.slice(1);
+                keystrokes = this.keybindings.get(command) ?? new Array<string>();
+                keystrokes = keystrokes.filter(other => other !== key);
+            } else {
+                keystrokes = this.keybindings.get(command) ?? new Array<string>();
+                keystrokes.push(key);
+            }
+            this.keybindings.set(command, keystrokes);
+        }
+    }
+
+    private getUserKeybindingsPath(): string {
         let pathToUser = "";
         switch (this.platform) {
             case Platform.LINUX:
@@ -44,11 +68,18 @@ export class KeybindingStorage {
                 pathToUser = process.env.HOME + "/Library/Application Support/Code";
                 break;
         }
+
+        pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
+            .replace(/\//g, this.platform === Platform.WINDOWS ? "\\" : "/");
+        return pathToUser;
+    }
+
+    private loadFullMap() {
+        this.keybindings.clear();
+        this.loadDefaultMap();
         try {
-            pathToUser = ((process.env.VSCODE_PORTABLE ? process.env.VSCODE_PORTABLE + "/user-data/User/" : pathToUser) + "/User/keybindings.json")
-                .replace(/\//g, this.platform === Platform.WINDOWS ? "\\" : "/");
-            let userJson = readFileSync(pathToUser).toString();
-            this.patch(userJson);
+            const userKeybindingsJson = readFileSync(this.userKeybindingsPath).toString();
+            this.patch(userKeybindingsJson);
         } catch (e) {
             if (e instanceof Error) {
                 logger.error(`error when loading user keybindings: ${e.message}`);
@@ -73,23 +104,13 @@ export class KeybindingStorage {
         }
     }
 
-    public patch(JsonPatch: string) {
-        let patch = json.parse<Keybinding[]>(JsonPatch);
-        for (let i in patch) {
-            let key = patch[i].key;
-            let command = patch[i].command;
-            let keystrokes: Array<string>;
-            if (command.startsWith("-")) {
-                command = command.slice(1);
-                keystrokes = this.keybindings.get(command) ?? new Array<string>();
-                keystrokes = keystrokes.filter(other => other !== key);
-            } else {
-                keystrokes = this.keybindings.get(command) ?? new Array<string>();
-                keystrokes.push(key);
+    private listenUserKeybindings() {
+        vscode.workspace.onDidSaveTextDocument((event) => {
+            if (event.fileName === this.userKeybindingsPath) {
+                logger.info("New user keybinding detected");
+                this.loadFullMap();
             }
-            this.keybindings.set(command, keystrokes);
-        }
+        });
     }
-
 }
 

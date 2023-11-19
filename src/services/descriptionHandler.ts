@@ -4,7 +4,7 @@ import { logger } from '../helper/logging';
 
 export class DescriptionService {
   private jsonCommands: CommandInfo[];
-  private pathToDescriptions = path.resolve(__dirname, `../../.././default-keybindings/descriptions/command_descriptions.json`);
+  private pathToDescriptions = path.resolve(__dirname, `../.././default-keybindings/descriptions/command_descriptions.json`);
 
   constructor() {
     this.jsonCommands = this.readJsonFile(this.pathToDescriptions);
