@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import * as json from 'json5';
 import * as path from 'path';
-import * as vscode from 'vscode';
 import { logger } from '../helper/logging';
 import { Platform } from '../helper/platform';
 
@@ -13,7 +12,7 @@ class Keybinding {
 export class KeybindingStorage {
 
     private readonly keybindings: Map<string, string[]>;
-    private readonly userKeybindingsPath: string;
+    public readonly userKeybindingsPath: string;
 
     constructor(private readonly platform: Platform, defaultOnly: boolean = false) {
         this.keybindings = new Map<string, string[]>();
@@ -25,8 +24,6 @@ export class KeybindingStorage {
         } else {
             this.loadFullMap();
         }
-
-        this.listenUserKeybindings();
     }
 
     public getKeybindingsFor(command: string): string[] {
@@ -53,6 +50,10 @@ export class KeybindingStorage {
             }
             this.keybindings.set(command, keystrokes);
         }
+    }
+
+    public updateKeybindings() {
+        this.loadFullMap();
     }
 
     private getUserKeybindingsPath(): string {
@@ -104,13 +105,5 @@ export class KeybindingStorage {
         }
     }
 
-    private listenUserKeybindings() {
-        vscode.workspace.onDidSaveTextDocument((event) => {
-            if (event.fileName === this.userKeybindingsPath) {
-                logger.info("New user keybinding detected");
-                this.loadFullMap();
-            }
-        });
-    }
 }
 

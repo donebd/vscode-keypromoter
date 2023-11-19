@@ -1,10 +1,10 @@
 import path from 'path';
 import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
-import { CommandCounterService } from './commandCounterService';
 import { FileHelper } from '../helper/fileHelper';
 import { logger } from '../helper/logging';
 import { CommandGroup } from '../models/commandGroup';
+import { CommandCounterService } from './commandCounterService';
 
 export class SubscriptionService {
 
@@ -32,11 +32,11 @@ export class SubscriptionService {
         this.fileHelper = fileHelper;
     }
 
-    public async listenForPossibleShortcutActions() {
+    public async listenForPossibleShortcutActions(): Promise<vscode.Disposable[]> {
         const commandIds = (await vscode.commands.getCommands(true))
             .filter(id => this.ignoreCommandToListenList.find(it => it === id) === undefined);
         this.listenVscodeCommands(commandIds);
-        this.listenPublicVscodeApi();
+        return this.listenPublicVscodeApi();
     }
 
     private listenVscodeCommands(commandIds: string[]) {
@@ -76,7 +76,7 @@ export class SubscriptionService {
         });
     }
 
-    private listenPublicVscodeApi() {
+    private listenPublicVscodeApi(): vscode.Disposable[] {
         let activeTextEditor: string | undefined;
         let previousStateTabs: string[] = [];
 
@@ -89,13 +89,13 @@ export class SubscriptionService {
         // Handled on text editor closed/opened
         // And not only text editor is text editor (LOL)
         // Output view defined as text editor too
-        vscode.window.onDidChangeActiveTextEditor((textEditor) => {
+        const onDidChangeEditorHandler = vscode.window.onDidChangeActiveTextEditor((textEditor) => {
             const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
             const actualStateTabs = openEditors.map(tab => tab.label);
             if (!textEditor) {
                 if (openEditors.length === 0) {
                     const times = previousStateTabs.length - actualStateTabs.length;
-                    this.commandCounter.handleCommand("workbench.action.closeActiveEditor", times);
+                    this.commandCounter.handleCommand("workbench.action.closeAllEditors", times);
                     previousStateTabs = actualStateTabs;
                 }
                 activeTextEditor = textEditor;
@@ -139,11 +139,13 @@ export class SubscriptionService {
         });
 
         // This handler explicity ignore, cause it doesn't suit our purposes
-        vscode.workspace.onDidCloseTextDocument(() => { });
+        const onDidCloseTextDocumentHandler = vscode.workspace.onDidCloseTextDocument(() => { });
 
-        vscode.window.onDidCloseTerminal(() => {
+        const onDidCloseTerminalHandler = vscode.window.onDidCloseTerminal(() => {
             this.commandCounter.handleCommand("workbench.action.terminal.kill");
         });
+
+        return [onDidChangeEditorHandler, onDidCloseTextDocumentHandler, onDidCloseTerminalHandler];
     }
 
 }
