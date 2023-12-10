@@ -8,7 +8,7 @@ import { CommandCounterService } from './commandCounterService';
 
 export class SubscriptionService {
 
-    private readonly pipe = new Subject<[string, ...any]>();
+    private readonly pipe = new Subject<[string, ...any[]]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
     private readonly commandCounter: CommandCounterService;
     private readonly fileHelper: FileHelper;
@@ -40,14 +40,14 @@ export class SubscriptionService {
     }
 
     private listenVscodeCommands(commandIds: string[]) {
-        const commandHandler = async (commandId: string, args: any) => {
+        const commandHandler = async (commandId: string, ...args: any[]) => {
             this.commandIdToOverloadHandlerMap.get(commandId)!.dispose();
-            this.pipe.next([commandId, args]);
+            this.pipe.next([commandId, ...args]);
         };
 
         commandIds.forEach(commandId => {
             try {
-                const overloadedHandler = vscode.commands.registerCommand(commandId, async (args) => commandHandler(commandId, args));
+                const overloadedHandler = vscode.commands.registerCommand(commandId, async (...args: any[]) => commandHandler(commandId, ...args));
                 this.commandIdToOverloadHandlerMap.set(
                     commandId,
                     overloadedHandler
@@ -59,10 +59,10 @@ export class SubscriptionService {
 
         this.pipe.subscribe(async (next) => {
             const commandId = next[0];
-            const pipeArgs = next[1];
+            const pipeArgs = next.slice(1, next.length);
             logger.debug(`command ${commandId} was executed!`);
             if (pipeArgs) {
-                await vscode.commands.executeCommand(commandId, pipeArgs);
+                await vscode.commands.executeCommand(commandId, ...pipeArgs);
             } else {
                 await vscode.commands.executeCommand(commandId);
             }

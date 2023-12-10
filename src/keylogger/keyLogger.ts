@@ -60,7 +60,6 @@ export class KeyLogger {
     public handleMousePress() {
         logger.debug(`pressed mouse`);
         this.keyBuf.reset();
-        this.keyStack.reset();
     }
 
     public dispose() {
