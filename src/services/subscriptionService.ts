@@ -61,7 +61,7 @@ export class SubscriptionService {
             const commandId = next[0];
             const pipeArgs = next.slice(1, next.length);
             logger.debug(`command ${commandId} was executed!`);
-            if (pipeArgs) {
+            if (pipeArgs && pipeArgs.length !== 0) {
                 await vscode.commands.executeCommand(commandId, ...pipeArgs);
             } else {
                 await vscode.commands.executeCommand(commandId);
@@ -71,7 +71,7 @@ export class SubscriptionService {
 
             this.commandIdToOverloadHandlerMap.set(
                 commandId,
-                vscode.commands.registerCommand(commandId, async (args) => commandHandler(commandId, args))
+                vscode.commands.registerCommand(commandId, async (...args: any[]) => commandHandler(commandId, ...args))
             );
         });
     }
