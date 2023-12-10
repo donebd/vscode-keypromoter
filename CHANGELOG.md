@@ -15,3 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Provide to user notification with suggestion to create shortcut
 - Properties which allow customize plugin behavior
 - Command ignore list
+
+## [1.0.1] - 2023.12.10
+
+- Fixed some technical issues
+- Solved problems with windows keyboard

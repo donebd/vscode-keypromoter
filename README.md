@@ -25,10 +25,6 @@ Extension that helps you to learn shortcuts while you are working.
 * Other extensions commands are not supported
 * MacOs 14.0^ temporary unsupported
 
-## Installation
-
-(**SOON**)
-
 ## Manual installation
 
 1. Clone repo:
