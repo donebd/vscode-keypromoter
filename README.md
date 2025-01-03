@@ -19,11 +19,18 @@ Extension that helps you to learn shortcuts while you are working.
 |`Key Promoter.suggestKeybindingCreation`|Specifies whether to suggest creation of keybindings for commands without them|`true`|
 |`Key Promoter.logger.loggingLevel`|Control logging level|`"Info"`|
 
+## Notes
+
+* For MacOS you may need to grant permission needed for library [node-global-key-listener](https://www.npmjs.com/package/node-global-key-listener) to listen keyboard shortcuts
+
+![MacOs permission](img/MacOs_permission.jpg)
+ 
 ## Limitations
 
 * Some of the default editor actions are not supported
 * Other extensions commands are not supported
-* MacOs 14.0^ temporary unsupported
+* Linux Wayland not supported
+* There may be incorrect behavior when working via wsl
 
 ## Manual installation
 

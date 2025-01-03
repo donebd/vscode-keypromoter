@@ -20,3 +20,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Fixed some technical issues
 - Solved problems with windows keyboard
+
+## [1.0.3] - 2025.01.03
+
+- Support MacOS 14^
+- Fix some issues
