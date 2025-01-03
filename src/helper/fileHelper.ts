@@ -1,5 +1,7 @@
+import { injectable } from "inversify";
 import * as vscode from "vscode";
 
+@injectable()
 export class FileHelper {
     
     public getCurrentWorkspacePath(): string {

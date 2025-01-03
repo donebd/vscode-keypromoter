@@ -1,11 +1,14 @@
+import { inject, injectable } from 'inversify';
 import * as vscode from 'vscode';
 import * as configuration from '../configuration';
+import { TYPES } from '../di/identifiers';
 import { logger } from '../helper/logging';
 import { KeyLogger } from '../keylogger/keyLogger';
 import { CommandGroup, CommandGroupModel } from '../models/commandGroup';
 import { DescriptionService } from "./descriptionHandler";
 import { KeybindingStorage } from "./keybindingStorage";
 
+@injectable()
 export class CommandCounterService {
     private internalCommandToCounter = new Map<string, number>();
     private internalCommandGroupToCounter = new Map<string, number>();
@@ -14,13 +17,10 @@ export class CommandCounterService {
 
     private descriptionHandler = new DescriptionService();
 
-    private readonly keybindingStorage: KeybindingStorage;
-    private readonly keyLogger: KeyLogger;
-
-    constructor(keybindingStorage: KeybindingStorage, keyLogger: KeyLogger) {
-        this.keybindingStorage = keybindingStorage;
-        this.keyLogger = keyLogger;
-    }
+    constructor(
+        @inject(TYPES.KeybindingStorage) private readonly keybindingStorage: KeybindingStorage,
+        @inject(TYPES.KeyLogger) private readonly keyLogger: KeyLogger
+    ) { }
 
     public handleCommand(commandId: string, times: number = 1) {
         if (configuration.getIgnoreCommands().includes(commandId)) {

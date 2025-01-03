@@ -1,26 +1,19 @@
-import { uIOhook } from 'uiohook-napi';
+import { injectable } from 'inversify';
 import { logger } from "../helper/logging";
 import { KeyDownStack } from "./keyDownStack";
 import { KeyLogBuffer } from "./keyLogBuffer";
-import { keyFromKeycode } from "./transform";
 
-export class KeyLogger {
+@injectable()
+export abstract class KeyLogger {
 
-    private keyBuf = new KeyLogBuffer(5);
-    private keyStack = new KeyDownStack();
+    protected keyBuf = new KeyLogBuffer(5);
+    protected keyStack = new KeyDownStack();
 
-    public init() {
-        uIOhook.on('keydown', (e) => {
-            this.handleKeyDown(e.keycode);
-        });
-        uIOhook.on('keyup', (e) => {
-            this.handleKeyUp(e.keycode);
-        });
-        uIOhook.on('mousedown', (_) => {
-            this.handleMousePress();
-        });
-        uIOhook.start();
-    }
+    public abstract init(): void;
+
+    public abstract dispose(): void;
+
+    public abstract keyFromKeycode(keycode: number | string): string;
 
     public hasAnyKeybinding(keybindings: string[]): boolean {
         for (let keybinding of keybindings) {
@@ -40,19 +33,15 @@ export class KeyLogger {
         return false;
     }
 
-    private splitKeys(keybinding: string) {
-        return keybinding.split(/\+/);
-    }
-
-    public handleKeyDown(keycode: number) {
-        let key = keyFromKeycode(keycode);
+    public handleKeyDown(keyId: number | string) {
+        let key = this.keyFromKeycode(keyId);
         logger.debug(`key down: ${key}`);
         this.keyBuf.keyPressed(key);
         this.keyStack.keyDown(key);
     }
 
-    public handleKeyUp(keycode: number) {
-        let key = keyFromKeycode(keycode);
+    public handleKeyUp(keyId: number | string) {
+        let key = this.keyFromKeycode(keyId);
         logger.debug(`key up: ${key}`);
         this.keyStack.keyUp(key);
     }
@@ -62,10 +51,7 @@ export class KeyLogger {
         this.keyBuf.reset();
     }
 
-    public dispose() {
-        logger.info("deactivating extension...");
-        uIOhook.stop();
-        logger.info("extension deactivated!");
+    private splitKeys(keybinding: string) {
+        return keybinding.split(/\+/);
     }
-
 }

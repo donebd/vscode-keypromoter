@@ -1,17 +1,16 @@
+import { inject, injectable } from 'inversify';
 import path from 'path';
-import { Subject } from 'rxjs';
 import * as vscode from 'vscode';
+import { TYPES } from '../di/identifiers';
 import { FileHelper } from '../helper/fileHelper';
 import { logger } from '../helper/logging';
 import { CommandGroup } from '../models/commandGroup';
 import { CommandCounterService } from './commandCounterService';
 
+@injectable()
 export class SubscriptionService {
 
-    private readonly pipe = new Subject<[string, ...any[]]>();
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
-    private readonly commandCounter: CommandCounterService;
-    private readonly fileHelper: FileHelper;
     private readonly ignoreCommandToListenList = [
         "notification.expand",
         "notification.clear",
@@ -25,29 +24,33 @@ export class SubscriptionService {
         "cursorRight",
         "cursorUp",
         "cursorDown",
+        "debug.editBreakpoint",
+        "workbench.debug.viewlet.action.removeBreakpoint",
+        "debug.removeWatchExpression",
+        "search.action",
     ];
 
-    constructor(commandCounter: CommandCounterService, fileHelper: FileHelper) {
-        this.commandCounter = commandCounter;
-        this.fileHelper = fileHelper;
-    }
+    constructor(
+        @inject(TYPES.CommandCounterService) private readonly commandCounter: CommandCounterService,
+        @inject(TYPES.FileHelper) private readonly fileHelper: FileHelper
+    ) { }
 
     public async listenForPossibleShortcutActions(): Promise<vscode.Disposable[]> {
-        const commandIds = (await vscode.commands.getCommands(true))
-            .filter(id => this.ignoreCommandToListenList.find(it => it === id) === undefined);
+        const commandIds = (await vscode.commands.getCommands(true)).filter(id => !this.ignoreCommandToListenList.find(it => id.startsWith(it)));
+        this.runtimeExecuteErrorsHandling(this.commandIdToOverloadHandlerMap);
         this.listenVscodeCommands(commandIds);
         return this.listenPublicVscodeApi();
     }
 
     private listenVscodeCommands(commandIds: string[]) {
-        const commandHandler = async (commandId: string, ...args: any[]) => {
+        const commandHandler = (commandId: string, ...args: any[]) => {
             this.commandIdToOverloadHandlerMap.get(commandId)!.dispose();
-            this.pipe.next([commandId, ...args]);
+            return this.proxyCallback(commandHandler, commandId, ...args);
         };
 
         commandIds.forEach(commandId => {
             try {
-                const overloadedHandler = vscode.commands.registerCommand(commandId, async (...args: any[]) => commandHandler(commandId, ...args));
+                const overloadedHandler = vscode.commands.registerCommand(commandId, (...args: any[]) => { return commandHandler(commandId, ...args); });
                 this.commandIdToOverloadHandlerMap.set(
                     commandId,
                     overloadedHandler
@@ -56,23 +59,55 @@ export class SubscriptionService {
                 logger.debug(`command ${commandId} can't be overloaded`);
             }
         });
+    }
 
-        this.pipe.subscribe(async (next) => {
-            const commandId = next[0];
-            const pipeArgs = next.slice(1, next.length);
-            logger.debug(`command ${commandId} was executed!`);
-            if (pipeArgs && pipeArgs.length !== 0) {
-                await vscode.commands.executeCommand(commandId, ...pipeArgs);
-            } else {
-                await vscode.commands.executeCommand(commandId);
+    private async proxyCallback(proxyCommandHandler: (commandId: string, ...args: any[]) => Promise<any>, commandId: string, ...any: any[]): Promise<any> {
+        const pipeArgs = any;
+        logger.debug(`command ${commandId} was executed!`);
+        let result = null;
+        this.commandCounter.handleCommand(commandId);
+        if (pipeArgs && pipeArgs.length !== 0) {
+            result = vscode.commands.executeCommand(commandId, ...pipeArgs);
+        } else {
+            result = vscode.commands.executeCommand(commandId);
+        }
+
+        this.commandIdToOverloadHandlerMap.set(
+            commandId,
+            vscode.commands.registerCommand(commandId, (...args: any[]) => { return proxyCommandHandler(commandId, ...args); })
+        );
+        return result;
+    }
+
+    private runtimeExecuteErrorsHandling(commandIdToOverloadHandlerMap: Map<string, vscode.Disposable>) {
+        const originalExecuteCommand = vscode.commands.executeCommand;
+        const errHandler = (errName: string, commandId: string) => {
+            if (errName === 'TypeError') {
+                logger.debug(`Command ${commandId} seems to depend on thisArg.`);
+                commandIdToOverloadHandlerMap.get(commandId)!.dispose();
             }
+        };
 
-            this.commandCounter.handleCommand(commandId);
+        vscode.commands.executeCommand = new Proxy(originalExecuteCommand, {
+            apply(target, thisArg, args) {
+                const [commandId] = args;
 
-            this.commandIdToOverloadHandlerMap.set(
-                commandId,
-                vscode.commands.registerCommand(commandId, async (...args: any[]) => commandHandler(commandId, ...args))
-            );
+                try {
+                    const result = Reflect.apply(target, thisArg, args);
+                    if (result instanceof Promise) {
+                        return result.catch(err => {
+                            errHandler(err.name, commandId);
+                            throw err;
+                        });
+                    }
+                    return result;
+                } catch (err) {
+                    if (err instanceof Error) {
+                        errHandler(err.name, commandId);
+                    }
+                    throw err;
+                }
+            }
         });
     }
 
@@ -93,7 +128,7 @@ export class SubscriptionService {
             const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
             const actualStateTabs = openEditors.map(tab => tab.label);
             if (!textEditor) {
-                if (openEditors.length === 0) {
+                if (openEditors.length === 0 && previousStateTabs.length !== 1) {
                     const times = previousStateTabs.length - actualStateTabs.length;
                     this.commandCounter.handleCommand("workbench.action.closeAllEditors", times);
                     previousStateTabs = actualStateTabs;
