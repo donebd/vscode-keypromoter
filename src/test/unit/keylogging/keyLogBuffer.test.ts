@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as assert from 'assert';
 import { KeyLogBuffer } from "../../../keylogger/keyLogBuffer";
 
@@ -38,7 +39,7 @@ describe("Key Log Buffer Test", () => {
         assert.equal(buf.hasKeystroke(["A", "C"]), false);
         assert.equal(buf.hasKeystroke(["A", "B"]), true);
         assert.equal(buf.hasKeystroke(["B", "C"]), true);
-        assert.equal(buf.hasKeystroke(["A", "B", "C"]), true);        
+        assert.equal(buf.hasKeystroke(["A", "B", "C"]), true);
     });
 
     it("looping keystrokes", () => {
@@ -52,7 +53,7 @@ describe("Key Log Buffer Test", () => {
         assert.equal(buf.hasKeystroke(["C", "D"]), true);
         assert.equal(buf.hasKeystroke(["D", "A"]), false);
         assert.equal(buf.hasKeystroke(["A", "B", "C"]), false);
-        assert.equal(buf.hasKeystroke(["B", "C", "D"]), true);        
+        assert.equal(buf.hasKeystroke(["B", "C", "D"]), true);
     });
 
 });

@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import { readFileSync } from 'fs';
+import { injectable } from "inversify";
 import * as json from 'json5';
 import * as path from 'path';
 import { logger } from '../helper/logging';
@@ -10,6 +11,7 @@ class Keybinding {
     command!: string;
 }
 
+@injectable()
 export class KeybindingStorage {
 
     private readonly keybindings: Map<string, string[]>;
@@ -99,7 +101,7 @@ export class KeybindingStorage {
 
     private loadDefaultMap() {
         try {
-            let p = path.resolve(__dirname, `../.././default-keybindings/${this.platform}.keybindings.json`);
+            let p = path.resolve(__dirname, '..', '..', 'default-keybindings', `${this.platform}.keybindings.json`);
             let file = readFileSync(p);
             let document = json.parse<Keybinding[]>(file.toString());
             for (let i in document) {

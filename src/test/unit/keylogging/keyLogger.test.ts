@@ -1,11 +1,12 @@
+import "reflect-metadata";
 import * as assert from 'assert';
-import { KeyLogger } from "../../../keylogger/keyLogger";
 import { UiohookKey } from 'uiohook-napi';
+import { UiHookKeyLogger } from '../../../keylogger/uiHookKeyLogger';
 
 describe("Key Logger Test", () => {
 
     it("single key", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), false);
         keyLogger.handleKeyDown(UiohookKey.W);
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), true);
@@ -14,7 +15,7 @@ describe("Key Logger Test", () => {
     });
 
     it("two keys", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["w+ctrl"]), false);
@@ -23,7 +24,7 @@ describe("Key Logger Test", () => {
         keyLogger.handleKeyDown(UiohookKey.W);
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), false);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w"]), true);
-        assert.equal(keyLogger.hasAnyKeybinding(["w+ctrl"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["w+ctrl"]), true);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl"]), false);
         keyLogger.handleKeyUp(UiohookKey.Ctrl);
         assert.equal(keyLogger.hasAnyKeybinding(["w"]), true);
@@ -33,17 +34,17 @@ describe("Key Logger Test", () => {
     });
 
     it("many keys", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+shift+w"]), false);
         keyLogger.handleKeyDown(UiohookKey.Ctrl);
         keyLogger.handleKeyDown(UiohookKey.Shift);
         keyLogger.handleKeyDown(UiohookKey.W);
         assert.equal(keyLogger.hasAnyKeybinding(["ctrl+shift+w"]), true);
-        assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w+shift", "w+shift+ctrl", "shift+w+ctrl"]), false);
+        assert.equal(keyLogger.hasAnyKeybinding(["ctrl+w+shift", "w+shift+ctrl", "shift+w+ctrl"]), true);
     });
 
     it("key reuse", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         keyLogger.handleKeyDown(UiohookKey.Alt);
         keyLogger.handleKeyDown(UiohookKey.ArrowDown);
         assert.equal(keyLogger.hasAnyKeybinding(["alt+down"]), true);
@@ -54,7 +55,7 @@ describe("Key Logger Test", () => {
     });
 
     it("chords", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         keyLogger.handleKeyDown(UiohookKey.A);
         keyLogger.handleKeyUp(UiohookKey.A);
         keyLogger.handleKeyDown(UiohookKey.B);
@@ -63,7 +64,7 @@ describe("Key Logger Test", () => {
     });
 
     it("repeated chords", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         keyLogger.handleKeyDown(UiohookKey.A);
         keyLogger.handleKeyUp(UiohookKey.A);
         keyLogger.handleKeyDown(UiohookKey.B);
@@ -74,14 +75,17 @@ describe("Key Logger Test", () => {
     });
 
     it("mouse press", () => {
-        let keyLogger = new KeyLogger();
+        let keyLogger = new UiHookKeyLogger();
         keyLogger.handleKeyDown(UiohookKey.A);
         keyLogger.handleKeyDown(UiohookKey.B);
         assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), true);
-        keyLogger.handleMousePress();
+        assert.equal(keyLogger.hasAnyKeybinding(["a b"]), true);
         assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), false);
-        assert.equal(keyLogger.hasAnyKeybinding(["a"]), false);
-        assert.equal(keyLogger.hasAnyKeybinding(["b"]), false);
+        keyLogger.handleKeyDown(UiohookKey.A);
+        keyLogger.handleKeyDown(UiohookKey.B);
+        keyLogger.handleMousePress();
+        assert.equal(keyLogger.hasAnyKeybinding(["a+b"]), true);
+        assert.equal(keyLogger.hasAnyKeybinding(["a b"]), false);
     });
 
 });

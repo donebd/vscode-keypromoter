@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as assert from 'assert';
 import { KeyDownStack } from "../../../keylogger/keyDownStack";
 
@@ -23,7 +24,7 @@ describe("Key Down Stack Test", () => {
         assert.equal(stack.hasKeystroke(["B", "C"]), false);
         assert.equal(stack.hasKeystroke(["A", "C"]), false);
         assert.equal(stack.hasKeystroke(["A", "B", "C"]), true);
-        assert.equal(stack.hasKeystroke(["B", "A", "C"]), false);
+        assert.equal(stack.hasKeystroke(["B", "A", "C"]), true);
     });
 
     it("single key up", () => {

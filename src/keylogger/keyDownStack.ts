@@ -18,7 +18,7 @@ export class KeyDownStack {
     }
 
     public hasKeystroke(keystroke: string[]) {
-        return this.stack.toString() === keystroke.toString();
+        return this.stack.sort().toString() === keystroke.sort().toString();
     }
 
     public reset() {

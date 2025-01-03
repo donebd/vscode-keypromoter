@@ -1,25 +1,25 @@
 import * as vscode from 'vscode';
 import * as configuration from './configuration';
-import { FileHelper } from './helper/fileHelper';
+import { TYPES } from './di/identifiers';
+import { diContainer, setupExtensionDependencies } from './di/inversify.config';
 import * as logging from './helper/logging';
 import { logger } from './helper/logging';
 import * as platform from './helper/platform';
 import { KeyLogger } from './keylogger/keyLogger';
 import { PluginContext } from './pluginContext';
-import { CommandCounterService } from './services/commandCounterService';
 import { KeybindingStorage } from './services/keybindingStorage';
 import { SubscriptionService } from './services/subscriptionService';
 
 export function activate(context: vscode.ExtensionContext) {
 	initLogging(context);
 	logger.info("activating extension...");
+	const _platform = platform.get();
+	setupExtensionDependencies(_platform);
 
-	const keyLogger = new KeyLogger();
+	const keyLogger = diContainer.get<KeyLogger>(TYPES.KeyLogger);
 	keyLogger.init();
-	const keybindingStorage = new KeybindingStorage(platform.get());
-	const commandCounter = new CommandCounterService(keybindingStorage, keyLogger);
-	const fileHelper = new FileHelper();
-	const subscriptionService = new SubscriptionService(commandCounter, fileHelper);
+	const keybindingStorage = diContainer.get<KeybindingStorage>(TYPES.KeybindingStorage);
+	const subscriptionService = diContainer.get<SubscriptionService>(TYPES.SubscriptionService);
 	const disposables = subscriptionService.listenForPossibleShortcutActions();
 
 	disposables.then((disposables) => {
