@@ -28,6 +28,9 @@ export class SubscriptionService {
         "workbench.debug.viewlet.action.removeBreakpoint",
         "debug.removeWatchExpression",
         "search.action",
+        "quickInput.next",
+        "quickInput.previous",
+        "workbench.action.output.toggleOutput"
     ];
 
     constructor(
@@ -137,6 +140,11 @@ export class SubscriptionService {
                 return;
             }
 
+            if (textEditor.document.uri.scheme === "output") {
+                this.commandCounter.handleCommand("workbench.action.output.toggleOutput");
+                return;
+            }
+
             if (!activeTextEditor) {
                 const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
                 const workspaceFolder = this.fileHelper.getCurrentWorkspacePath();
@@ -176,11 +184,15 @@ export class SubscriptionService {
         // This handler explicity ignore, cause it doesn't suit our purposes
         const onDidCloseTextDocumentHandler = vscode.workspace.onDidCloseTextDocument(() => { });
 
+        const onDidOpenTerminalHandler = vscode.window.onDidOpenTerminal(() => {
+            this.commandCounter.handleCommand("workbench.action.terminal.new");
+        });
+
         const onDidCloseTerminalHandler = vscode.window.onDidCloseTerminal(() => {
             this.commandCounter.handleCommand("workbench.action.terminal.kill");
         });
 
-        return [onDidChangeEditorHandler, onDidCloseTextDocumentHandler, onDidCloseTerminalHandler];
+        return [onDidChangeEditorHandler, onDidCloseTextDocumentHandler, onDidCloseTerminalHandler, onDidOpenTerminalHandler];
     }
 
 }

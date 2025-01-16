@@ -2,6 +2,10 @@
 
 Extension that helps you to learn shortcuts while you are working.
 
+Note: The current VScode API does not allow the plugin to be implemented in full. Therefore, the plugin was implemented in a workaround, and partially tracks user actions by indirect signs.
+
+If you have any problems or you want to participate in the development, welcome to the project repository on GitHub
+
 ## Features
 
 ![example](img/key_promoter.gif)
@@ -29,7 +33,7 @@ Extension that helps you to learn shortcuts while you are working.
 
 * Some of the default editor actions are not supported
 * Other extensions commands are not supported
-* Linux Wayland not supported
+* Can be problem on Linux Wayland
 * There may be incorrect behavior when working via wsl
 
 ## Manual installation
