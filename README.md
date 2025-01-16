@@ -33,7 +33,7 @@ If you have any problems or you want to participate in the development, welcome 
 
 * Some of the default editor actions are not supported
 * Other extensions commands are not supported
-* Linux Wayland not supported
+* Can be problem on Linux Wayland
 * There may be incorrect behavior when working via wsl
 
 ## Manual installation
