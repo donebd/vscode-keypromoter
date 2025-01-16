@@ -25,3 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Support MacOS 14^
 - Fix some issues
+
+## [1.0.4] - 2025.01.17
+
+- Minor improves
