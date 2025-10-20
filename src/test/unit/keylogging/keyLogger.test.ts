@@ -7,6 +7,7 @@ describe("Key Logger Test", () => {
 
     it("single key", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), false);
         keybindingTracker.handleKeyDown(UiohookKey.W);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), true);
@@ -16,6 +17,7 @@ describe("Key Logger Test", () => {
 
     it("two keys", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+w"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w+ctrl"]), false);
@@ -35,6 +37,7 @@ describe("Key Logger Test", () => {
 
     it("many keys", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+shift+w"]), false);
         keybindingTracker.handleKeyDown(UiohookKey.Ctrl);
         keybindingTracker.handleKeyDown(UiohookKey.Shift);
@@ -45,6 +48,7 @@ describe("Key Logger Test", () => {
 
     it("key reuse", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         keybindingTracker.handleKeyDown(UiohookKey.Alt);
         keybindingTracker.handleKeyDown(UiohookKey.ArrowDown);
         assert.equal(keybindingTracker.hasAnyKeybinding(["alt+down"]), true);
@@ -56,6 +60,7 @@ describe("Key Logger Test", () => {
 
     it("chords", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyUp(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
@@ -65,6 +70,7 @@ describe("Key Logger Test", () => {
 
     it("repeated chords", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyUp(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
@@ -76,6 +82,7 @@ describe("Key Logger Test", () => {
 
     it("mouse press", () => {
         let keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init()
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
         assert.equal(keybindingTracker.hasAnyKeybinding(["a+b"]), true);
