@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import * as assert from 'assert';
-import { KeyDownStack } from "../../../keylogger/keyDownStack";
+import { KeyDownStack } from "../../../keybindingTracker/keyDownStack";
 
 describe("Key Down Stack Test", () => {
 

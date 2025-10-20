@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
 import { GlobalKeyboardListener, IGlobalKeyEvent } from "node-global-key-listener";
 import { logger } from "../helper/logging";
-import { KeyLogger } from './keyLogger';
+import { KeybindingTracker } from './keybindingTracker';
 import { keyFromNodeKeyName } from "./transform";
 
 @injectable()
-export class NodeKeyLogger extends KeyLogger {
+export class NodeKeybindingTracker extends KeybindingTracker {
 
     private keyListener = new GlobalKeyboardListener();
 
@@ -25,6 +25,25 @@ export class NodeKeyLogger extends KeyLogger {
                 this.handleKeyUp(event.name);
             }
         });
+        
+        this.isListening = true;
+        logger.info("NodeKeybindingTracker initialized and listening");
+    }
+
+    public pause(): void {
+        if (!this.isListening) {
+            return;
+        }
+        this.isListening = false;
+        logger.info("NodeKeybindingTracker paused (VS Code lost focus)");
+    }
+
+    public resume(): void {
+        if (this.isListening) {
+            return;
+        }
+        this.isListening = true;
+        logger.info("NodeKeybindingTracker resumed (VS Code gained focus)");
     }
 
     public keyFromKeycode(keycode: string): string {
@@ -32,9 +51,10 @@ export class NodeKeyLogger extends KeyLogger {
     }
 
     public dispose() {
-        logger.info("deactivating extension...");
+        logger.info("disposing NodeKeybindingTracker...");
+        this.isListening = false;
         this.keyListener.kill();
-        logger.info("extension deactivated!");
+        logger.info("NodeKeybindingTracker disposed!");
     }
 
     private fixKeyEvent(event: IGlobalKeyEvent) {
@@ -42,5 +62,4 @@ export class NodeKeyLogger extends KeyLogger {
             (event as any).name = "FORWARD SLASH";
         }
     }
-
 }
