@@ -1,17 +1,36 @@
 import { injectable } from 'inversify';
 import { logger } from "../helper/logging";
 import { KeyDownStack } from "./keyDownStack";
-import { KeyLogBuffer } from "./keyLogBuffer";
+import { KeyStrokeBuffer } from "./keyStrokeBuffer";
 
+/**
+ * Detects keyboard shortcuts locally within VS Code.
+ * NO DATA IS STORED OR TRANSMITTED.
+ * All processing happens in-memory only.
+ * 
+ * Monitoring is automatically paused when VS Code loses focus for privacy.
+ */
 @injectable()
-export abstract class KeyLogger {
+export abstract class KeybindingTracker {
 
-    protected keyBuf = new KeyLogBuffer(5);
+    // Temporary in-memory buffer for last 5 keystrokes (for chord detection)
+    protected keyBuf = new KeyStrokeBuffer(5);
     protected keyStack = new KeyDownStack();
+    protected isListening: boolean = false;
 
     public abstract init(): void;
 
     public abstract dispose(): void;
+
+    /**
+     * Pause keyboard monitoring (called when VS Code loses focus)
+     */
+    public abstract pause(): void;
+
+    /**
+     * Resume keyboard monitoring (called when VS Code gains focus)
+     */
+    public abstract resume(): void;
 
     public abstract keyFromKeycode(keycode: number | string): string;
 
@@ -34,6 +53,9 @@ export abstract class KeyLogger {
     }
 
     public handleKeyDown(keyId: number | string) {
+        if (!this.isListening) {
+            return;
+        }
         let key = this.keyFromKeycode(keyId);
         logger.debug(`key down: ${key}`);
         this.keyBuf.keyPressed(key);
@@ -41,12 +63,18 @@ export abstract class KeyLogger {
     }
 
     public handleKeyUp(keyId: number | string) {
+        if (!this.isListening) {
+            return;
+        }
         let key = this.keyFromKeycode(keyId);
         logger.debug(`key up: ${key}`);
         this.keyStack.keyUp(key);
     }
 
     public handleMousePress() {
+        if (!this.isListening) {
+            return;
+        }
         logger.debug(`pressed mouse`);
         this.keyBuf.reset();
     }

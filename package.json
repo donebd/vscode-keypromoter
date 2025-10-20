@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/donebd/vscode-keypromoter"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -39,6 +39,11 @@
     "configuration": {
       "title": "Key Promoter",
       "properties": {
+        "Key Promoter.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "**Enable the extension's keyboard shortcut detection.**\n\n **Why this setting exists:**\nThe extension monitors keyboard events to detect when you use mouse instead of shortcuts. Some antivirus software may flag this behavior as suspicious, even though:\n-  All processing happens **locally** on your computer\n-  **No data is collected, stored, or transmitted**\n-  The extension is **fully open-source** and auditable\n\n **Privacy guarantee:** [Read our Privacy Policy](https://github.com/donebd/vscode-keypromoter/blob/master/PRIVACY.md)\n\n **If disabled:** The extension will not work - it cannot suggest shortcuts without monitoring your keyboard usage."
+        },
         "Key Promoter.loyaltyLevel": {
           "type": "number",
           "default": 5,

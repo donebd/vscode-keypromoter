@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import * as assert from 'assert';
-import { KeyLogBuffer } from "../../../keylogger/keyLogBuffer";
+import { KeyStrokeBuffer } from "../../../keybindingTracker/keyStrokeBuffer";
 
 describe("Key Log Buffer Test", () => {
 
     it("buffer size 1", () => {
-        var buf = new KeyLogBuffer(1);
+        var buf = new KeyStrokeBuffer(1);
         assert.equal(buf.hasKeystroke(["A"]), false);
         buf.keyPressed("A");
         assert.equal(buf.hasKeystroke(["A"]), true);
@@ -16,7 +16,7 @@ describe("Key Log Buffer Test", () => {
     });
 
     it("buffer size 2", () => {
-        var buf = new KeyLogBuffer(2);
+        var buf = new KeyStrokeBuffer(2);
         assert.equal(buf.hasKeystroke(["A"]), false);
         assert.equal(buf.hasKeystroke(["B"]), false);
         buf.keyPressed("A");
@@ -32,7 +32,7 @@ describe("Key Log Buffer Test", () => {
     });
 
     it("keystrokes", () => {
-        var buf = new KeyLogBuffer(3);
+        var buf = new KeyStrokeBuffer(3);
         buf.keyPressed("A");
         buf.keyPressed("B");
         buf.keyPressed("C");
@@ -43,7 +43,7 @@ describe("Key Log Buffer Test", () => {
     });
 
     it("looping keystrokes", () => {
-        var buf = new KeyLogBuffer(3);
+        var buf = new KeyStrokeBuffer(3);
         buf.keyPressed("A");
         buf.keyPressed("B");
         buf.keyPressed("C");

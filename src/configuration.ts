@@ -7,13 +7,18 @@ const logLevelScope = "logger.loggingLevel";
 const loyaltyLevelScope = "loyaltyLevel";
 const ignoredCommandsScope = "ignoredCommands";
 const suggestKeybindingCreationScope = "suggestKeybindingCreation";
+const pluginEnabledScope = "enabled";
 
 export function getLogLevel(): string {
     return vscode.workspace.getConfiguration(section).get(logLevelScope, 'Info');
 }
 
 export function didAffectLogLevel(e: vscode.ConfigurationChangeEvent): boolean {
-    return e.affectsConfiguration(section);
+    return e.affectsConfiguration(`${section}.${logLevelScope}`);
+}
+
+export function didAffectPluginEnabled(e: vscode.ConfigurationChangeEvent): boolean {
+    return e.affectsConfiguration(`${section}.${pluginEnabledScope}`);
 }
 
 export function getLoyaltyLevel(): number {
@@ -50,4 +55,13 @@ export function setSuggestKeybindingCreation(value: boolean) {
             logger.error(`error when updating 'suggest keybinding creation' setting: ${e.message}`);
         }
     }
+}
+
+export function getPluginEnabled(): boolean {
+    return vscode.workspace.getConfiguration(section).get(pluginEnabledScope, true);
+}
+
+export function setPluginEnabled(value: boolean): Thenable<void> {
+    logger.info(`updating 'plugin enabled' setting to '${value}'`);
+    return vscode.workspace.getConfiguration(section).update(pluginEnabledScope, value, vscode.ConfigurationTarget.Global);
 }

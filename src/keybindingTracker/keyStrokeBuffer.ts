@@ -1,4 +1,4 @@
-export class KeyLogBuffer {
+export class KeyStrokeBuffer {
 
     public readonly size: number;
 

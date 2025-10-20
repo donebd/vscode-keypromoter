@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import * as configuration from '../configuration';
 import { TYPES } from '../di/identifiers';
 import { logger } from '../helper/logging';
-import { KeyLogger } from '../keylogger/keyLogger';
+import { KeybindingTracker } from '../keybindingTracker/keybindingTracker';
 import { CommandGroup, CommandGroupModel } from '../models/commandGroup';
 import { DescriptionService } from "./descriptionHandler";
 import { KeybindingStorage } from "./keybindingStorage";
@@ -19,7 +19,7 @@ export class CommandCounterService {
 
     constructor(
         @inject(TYPES.KeybindingStorage) private readonly keybindingStorage: KeybindingStorage,
-        @inject(TYPES.KeyLogger) private readonly keyLogger: KeyLogger
+        @inject(TYPES.KeybindingTracker) private readonly keybindingTracker: KeybindingTracker
     ) { }
 
     public handleCommand(commandId: string, times: number = 1) {
@@ -57,7 +57,7 @@ export class CommandCounterService {
             let currCounter = this.internalCommandGroupToCounter.get(groupId) ?? 0;
             let publicCounter = this.publicCommandGroupToCounter.get(groupId) ?? 0;
 
-            if (!this.keyLogger.hasAnyKeybinding(groupKeybindings)) {
+            if (!this.keybindingTracker.hasAnyKeybinding(groupKeybindings)) {
                 currCounter++;
                 publicCounter++;
                 logger.debug(`user did not use keybindings for group ${groupId}, counter = ${currCounter}`);
@@ -82,7 +82,7 @@ export class CommandCounterService {
         let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
         let internalCounter = this.internalCommandToCounter.get(commandId) ?? 0;
 
-        if (!this.keyLogger.hasAnyKeybinding(keybindings)) {
+        if (!this.keybindingTracker.hasAnyKeybinding(keybindings)) {
             internalCounter += times;
             publicCounter += times;
             logger.debug(`user did not use keybinding for command ${commandId}, counter = ${internalCounter}`);
