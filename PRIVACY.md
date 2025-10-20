@@ -14,9 +14,8 @@ This extension **does NOT collect, store, or transmit any data**.
 
 **Privacy Enhancement:** Keyboard monitoring is **automatically paused** when VS Code loses focus.
 
-- ✅ **Only monitors when VS Code is active** - No keyboard events are processed when you're using other applications
-- ✅ **Automatic pause/resume** - Seamlessly stops when you switch apps, resumes when you return
-- ✅ **Buffer clearing** - All in-memory keystroke data is cleared when focus is lost
+- **Only monitors when VS Code is active** - No keyboard events are processed when you're using other applications
+- **Automatic pause/resume** - Seamlessly stops when you switch apps, resumes when you return
 
 This ensures the extension only monitors shortcuts within VS Code itself, never in your browser, terminal, or other applications.
 
