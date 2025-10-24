@@ -13,6 +13,10 @@ export function getLogLevel(): string {
     return vscode.workspace.getConfiguration(section).get(logLevelScope, 'Info');
 }
 
+export function didAffectIgnoredCommands(e: vscode.ConfigurationChangeEvent): boolean {
+    return e.affectsConfiguration(`${section}.${ignoredCommandsScope}`);
+}
+
 export function didAffectLogLevel(e: vscode.ConfigurationChangeEvent): boolean {
     return e.affectsConfiguration(`${section}.${logLevelScope}`);
 }

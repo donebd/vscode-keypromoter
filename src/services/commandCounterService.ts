@@ -1,8 +1,10 @@
 import { inject, injectable } from 'inversify';
 import * as vscode from 'vscode';
 import * as configuration from '../configuration';
+import { didAffectIgnoredCommands } from '../configuration';
 import { TYPES } from '../di/identifiers';
 import { logger } from '../helper/logging';
+import { WildcardMatcher } from '../helper/wildcardMatcher';
 import { KeybindingTracker } from '../keybindingTracker/keybindingTracker';
 import { CommandGroup, CommandGroupModel } from '../models/commandGroup';
 import { DescriptionService } from "./descriptionHandler";
@@ -16,15 +18,24 @@ export class CommandCounterService {
     private publicCommandGroupToCounter = new Map<string, number>();
 
     private descriptionHandler = new DescriptionService();
+    private ignoreMatcher: WildcardMatcher;
 
     constructor(
         @inject(TYPES.KeybindingStorage) private readonly keybindingStorage: KeybindingStorage,
         @inject(TYPES.KeybindingTracker) private readonly keybindingTracker: KeybindingTracker
-    ) { }
+    ) {
+        this.ignoreMatcher = new WildcardMatcher(configuration.getIgnoreCommands());
+        
+        vscode.workspace.onDidChangeConfiguration(e => {
+            if (didAffectIgnoredCommands(e)) {
+                this.ignoreMatcher.updatePatterns(configuration.getIgnoreCommands());
+            }
+        });
+    }
 
     public handleCommand(commandId: string, times: number = 1) {
-        if (configuration.getIgnoreCommands().includes(commandId)) {
-            logger.info(`ignoring command ${commandId} from ignore list`);
+        if (this.isCommandIgnored(commandId)) {
+            logger.info(`ignoring command ${commandId} (matched ignore pattern)`);
             return;
         }
 
@@ -38,8 +49,8 @@ export class CommandCounterService {
     }
 
     public handleCommandGroup(commandGroup: CommandGroupModel) {
-        if (configuration.getIgnoreCommands().includes(commandGroup.groupId)) {
-            logger.info(`ignoring command group ${commandGroup.groupId} from ignore list`);
+        if (this.isCommandIgnored(commandGroup.groupId)) {
+            logger.info(`ignoring command group ${commandGroup.groupId} (matched ignore pattern)`);
             return;
         }
 
@@ -77,6 +88,9 @@ export class CommandCounterService {
         }
     }
 
+    private isCommandIgnored(commandId: string): boolean {
+        return this.ignoreMatcher.matches(commandId);
+    }
 
     private handleCommandWithExistingShortcut(commandId: string, keybindings: string[], times: number) {
         let publicCounter = this.publicCommandToCounter.get(commandId) ?? 0;
@@ -148,7 +162,6 @@ export class CommandCounterService {
             }
         });
 
-
         this.internalCommandToCounter.set(commandId, 0);
         this.publicCommandToCounter.set(commandId, publicCounter);
     }
@@ -164,7 +177,6 @@ export class CommandCounterService {
             const goPreviousShortcut = this.keybindingStorage.getKeybindingsFor(goPreviousEditorCommand) ?? [""];
             const goToFirstShortcut = this.keybindingStorage.getKeybindingsFor(goToFirstEditorCommand) ?? [""];
             const goToSecondShortcut = this.keybindingStorage.getKeybindingsFor(goToSecondEditorCommand) ?? [""];
-
 
             const checkAllShortcutsButton = "View All Shortcuts";
             const ignoreBtn = "Add to Ignore List";

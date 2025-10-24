@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/donebd/vscode-keypromoter"
   },
-  "version": "1.0.5",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -58,7 +58,7 @@
             "type": "string",
             "title": "ignored commands"
           },
-          "description": "Specifies commands that will not be processed by the extension."
+          "markdownDescription": "Specifies commands that will not be processed by the extension. \n\n**Supports wildcards:** use `*` to match any characters (e.g., `\"git.*\"` ignores all Git commands, `\"inlineChat.*\"` ignores inline chat)."
         },
         "Key Promoter.suggestKeybindingCreation": {
           "type": "boolean",

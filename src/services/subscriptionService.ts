@@ -1,9 +1,12 @@
 import { inject, injectable } from 'inversify';
 import path from 'path';
 import * as vscode from 'vscode';
+import * as configuration from '../configuration';
+import { didAffectIgnoredCommands } from '../configuration';
 import { TYPES } from '../di/identifiers';
 import { FileHelper } from '../helper/fileHelper';
 import { logger } from '../helper/logging';
+import { WildcardMatcher } from '../helper/wildcardMatcher';
 import { CommandGroup } from '../models/commandGroup';
 import { CommandCounterService } from './commandCounterService';
 
@@ -11,7 +14,7 @@ import { CommandCounterService } from './commandCounterService';
 export class SubscriptionService {
 
     private readonly commandIdToOverloadHandlerMap: Map<string, vscode.Disposable> = new Map();
-    private readonly ignoreCommandToListenList = [
+    private readonly builtInIgnoreCommandsList = [
         "notification.expand",
         "notification.clear",
         "notification.collapse",
@@ -33,16 +36,77 @@ export class SubscriptionService {
         "workbench.action.output.toggleOutput"
     ];
 
+    private ignoreMatcher: WildcardMatcher;
+    private configurationWatcher?: vscode.Disposable;
+
     constructor(
         @inject(TYPES.CommandCounterService) private readonly commandCounter: CommandCounterService,
         @inject(TYPES.FileHelper) private readonly fileHelper: FileHelper
-    ) { }
+    ) {
+        this.ignoreMatcher = this.createIgnoreMatcher();
+    }
 
     public async listenForPossibleShortcutActions(): Promise<vscode.Disposable[]> {
-        const commandIds = (await vscode.commands.getCommands(true)).filter(id => !this.ignoreCommandToListenList.find(it => id.startsWith(it)));
+        const allCommandIds = await vscode.commands.getCommands(true);
+        const commandIds = this.filterIgnoredCommands(allCommandIds);
+
         this.runtimeExecuteErrorsHandling(this.commandIdToOverloadHandlerMap);
         this.listenVscodeCommands(commandIds);
-        return this.listenPublicVscodeApi();
+
+        this.configurationWatcher = vscode.workspace.onDidChangeConfiguration(e => {
+            if (didAffectIgnoredCommands(e)) {
+                logger.info('Ignored commands configuration changed, updating listeners');
+                this.updateIgnoredCommands();
+            }
+        });
+
+        const publicApiDisposables = this.listenPublicVscodeApi();
+        return [...publicApiDisposables, this.configurationWatcher];
+    }
+
+    private createIgnoreMatcher(): WildcardMatcher {
+        const userIgnoredCommands = configuration.getIgnoreCommands();
+        const allIgnoredPatterns = [...this.builtInIgnoreCommandsList, ...userIgnoredCommands];
+        logger.debug(`Creating ignore matcher with patterns: ${allIgnoredPatterns.join(', ')}`);
+        return new WildcardMatcher(allIgnoredPatterns);
+    }
+
+    private filterIgnoredCommands(commandIds: string[]): string[] {
+        return commandIds.filter(commandId => {
+            const shouldIgnore = this.ignoreMatcher.matches(commandId);
+            if (shouldIgnore) {
+                logger.debug(`Command ${commandId} is ignored by pattern`);
+            }
+            return !shouldIgnore;
+        });
+    }
+
+    private async updateIgnoredCommands(): Promise<void> {
+        this.ignoreMatcher = this.createIgnoreMatcher();
+
+        const commandsToDispose: string[] = [];
+        this.commandIdToOverloadHandlerMap.forEach((handler, commandId) => {
+            if (this.ignoreMatcher.matches(commandId)) {
+                logger.info(`Disposing handler for now-ignored command: ${commandId}`);
+                handler.dispose();
+                commandsToDispose.push(commandId);
+            }
+        });
+
+        commandsToDispose.forEach(commandId => {
+            this.commandIdToOverloadHandlerMap.delete(commandId);
+        });
+
+        const allCommandIds = await vscode.commands.getCommands(true);
+        const commandsToRegister = allCommandIds.filter(commandId =>
+            !this.ignoreMatcher.matches(commandId) &&
+            !this.commandIdToOverloadHandlerMap.has(commandId)
+        );
+
+        if (commandsToRegister.length > 0) {
+            logger.info(`Registering handlers for ${commandsToRegister.length} commands`);
+            this.listenVscodeCommands(commandsToRegister);
+        }
     }
 
     private listenVscodeCommands(commandIds: string[]) {
@@ -54,10 +118,7 @@ export class SubscriptionService {
         commandIds.forEach(commandId => {
             try {
                 const overloadedHandler = vscode.commands.registerCommand(commandId, (...args: any[]) => { return commandHandler(commandId, ...args); });
-                this.commandIdToOverloadHandlerMap.set(
-                    commandId,
-                    overloadedHandler
-                );
+                this.commandIdToOverloadHandlerMap.set(commandId, overloadedHandler);
             } catch (e) {
                 logger.debug(`command ${commandId} can't be overloaded`);
             }
@@ -87,7 +148,7 @@ export class SubscriptionService {
         const errHandler = (errName: string, commandId: string) => {
             if (errName === 'TypeError') {
                 logger.debug(`Command ${commandId} seems to depend on thisArg.`);
-                commandIdToOverloadHandlerMap.get(commandId)!.dispose();
+                commandIdToOverloadHandlerMap.get(commandId)?.dispose();
             }
         };
 
@@ -118,15 +179,10 @@ export class SubscriptionService {
         let activeTextEditor: string | undefined;
         let previousStateTabs: string[] = [];
 
-
         const equalsCheck = (a: string[], b: string[]) => {
             return JSON.stringify(a) === JSON.stringify(b);
         };
 
-        // Here complex logic cause vscode handle this in many ways
-        // Handled on text editor closed/opened
-        // And not only text editor is text editor (LOL)
-        // Output view defined as text editor too
         const onDidChangeEditorHandler = vscode.window.onDidChangeActiveTextEditor((textEditor) => {
             const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
             const actualStateTabs = openEditors.map(tab => tab.label);
@@ -195,4 +251,9 @@ export class SubscriptionService {
         return [onDidChangeEditorHandler, onDidCloseTextDocumentHandler, onDidCloseTerminalHandler, onDidOpenTerminalHandler];
     }
 
+    public dispose(): void {
+        this.commandIdToOverloadHandlerMap.forEach(handler => handler.dispose());
+        this.commandIdToOverloadHandlerMap.clear();
+        this.configurationWatcher?.dispose();
+    }
 }
