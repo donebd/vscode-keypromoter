@@ -35,6 +35,7 @@ export class NodeKeybindingTracker extends KeybindingTracker {
             return;
         }
         this.isListening = false;
+        this.clearBuffers();
         logger.info("NodeKeybindingTracker paused (VS Code lost focus)");
     }
 

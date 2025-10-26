@@ -79,6 +79,11 @@ export abstract class KeybindingTracker {
         this.keyBuf.reset();
     }
 
+    protected clearBuffers() {
+        this.keyBuf.reset();
+        this.keyStack.reset();
+    }
+
     private splitKeys(keybinding: string) {
         return keybinding.split(/\+/);
     }

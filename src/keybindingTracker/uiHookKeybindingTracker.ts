@@ -28,6 +28,7 @@ export class UiHookKeybindingTracker extends KeybindingTracker {
             return;
         }
         this.isListening = false;
+        this.clearBuffers();
         logger.info("UiHookKeybindingTracker paused (VS Code lost focus)");
     }
 
