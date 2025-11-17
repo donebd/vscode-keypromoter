@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
   - Use `*` to ignore entire command groups (e.g., `"git.*"` ignores all Git commands)
   - More flexible command filtering
 
+- Added `Key Promoter: Test Keyboard` command for debugging keyboard detection issues
+
 ## [1.0.5] - 2025.1.20
 
 ### Added

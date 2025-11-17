@@ -166,6 +166,17 @@ Use the **Key Promoter** output panel to see detailed logs:
 
 ![Troubleshooting](img/troubleshooting.png)
 
+
+### Testing Keyboard Detection
+
+If you're unsure whether Key Promoter can detect your keyboard:
+
+1. Open Command Palette (`F1`)
+2. Run: `Key Promoter: Test Keyboard`
+3. Press some keys to verify they are detected
+
+This is useful for debugging platform-specific issues (especially on Linux Wayland or macOS without permissions).
+
 ### Common Issues
 
 #### Extension not working

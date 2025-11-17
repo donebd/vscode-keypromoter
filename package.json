@@ -36,6 +36,13 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "keyPromoter.testKeyboard",
+        "title": "Test Keyboard",
+        "category": "Key Promoter"
+      }
+    ],
     "configuration": {
       "title": "Key Promoter",
       "properties": {

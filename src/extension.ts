@@ -16,6 +16,7 @@ import * as platform from './helper/platform';
 import { KeybindingTracker } from './keybindingTracker/keybindingTracker';
 import { PluginContext } from './pluginContext';
 import { KeybindingStorage } from './services/keybindingStorage';
+import { registerKeyboardTestPanel } from './services/keyboardTestPanel';
 import { SubscriptionService } from './services/subscriptionService';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -47,6 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
 	listenPluginEnabledChanges(context);
 	listenEditorActionsEnabledChanges(context);
 	listenWindowFocusChanges(context);
+	registerKeyboardTestPanel(context);
 
 	logger.info("extension activated!");
 }
