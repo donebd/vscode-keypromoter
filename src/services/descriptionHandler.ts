@@ -29,6 +29,6 @@ export class DescriptionService {
 }
 
 interface CommandInfo {
-    command: string;
-    description: string;
-  }
+  command: string;
+  description: string;
+}

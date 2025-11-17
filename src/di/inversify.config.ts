@@ -10,6 +10,9 @@ import { UiHookKeybindingTracker } from "../keybindingTracker/uiHookKeybindingTr
 import { CommandCounterService } from "../services/commandCounterService";
 import { KeybindingStorage } from "../services/keybindingStorage";
 import { SubscriptionService } from "../services/subscriptionService";
+import { EditorActionTracker } from "../editorActionTracker/editorActionTracker";
+import { EditorStateManager } from "../editorActionTracker/editorStateManager";
+import { EditorActionNotifier } from "../services/editorActionNotifier";
 import { TYPES } from "./identifiers";
 
 export const diContainer = new Container();
@@ -18,7 +21,6 @@ export function setupExtensionDependencies(platform: Platform) {
     if (platform === Platform.MACOS || platform === Platform.WINDOWS) {
         diContainer.bind<KeybindingTracker>(TYPES.KeybindingTracker).to(NodeKeybindingTracker).inSingletonScope();
     } else {
-        // linux only x11
         diContainer.bind<KeybindingTracker>(TYPES.KeybindingTracker).to(UiHookKeybindingTracker).inSingletonScope();
     }
 
@@ -26,4 +28,9 @@ export function setupExtensionDependencies(platform: Platform) {
     diContainer.bind<CommandCounterService>(TYPES.CommandCounterService).to(CommandCounterService).inSingletonScope();
     diContainer.bind<FileHelper>(TYPES.FileHelper).to(FileHelper).inSingletonScope();
     diContainer.bind<SubscriptionService>(TYPES.SubscriptionService).to(SubscriptionService).inSingletonScope();
+
+    // Editor action tracking
+    diContainer.bind<EditorStateManager>(TYPES.EditorStateManager).to(EditorStateManager).inSingletonScope();
+    diContainer.bind<EditorActionNotifier>(TYPES.EditorActionNotifier).to(EditorActionNotifier).inSingletonScope();
+    diContainer.bind<EditorActionTracker>(TYPES.EditorActionTracker).to(EditorActionTracker).inSingletonScope();
 }

@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import * as assert from 'assert';
-import * as iohook from 'uiohook-napi';
+import * as iohook from 'uiohook-napi-lite';
 import * as transform from '../../../keybindingTracker/transform';
 
 describe("Key Transform Test", () => {

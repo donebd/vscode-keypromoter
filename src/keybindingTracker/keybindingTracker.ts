@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { logger } from "../helper/logging";
+import { PluginContext } from '../pluginContext';
 import { KeyDownStack } from "./keyDownStack";
 import { KeyStrokeBuffer } from "./keyStrokeBuffer";
 
@@ -77,6 +78,28 @@ export abstract class KeybindingTracker {
         }
         logger.debug(`pressed mouse`);
         this.keyBuf.reset();
+
+        const editorTracker = PluginContext.getEditorActionTracker();
+        if (editorTracker) {
+            editorTracker.notifyMousePressed();
+        }
+    }
+
+    public handleMouseRelease() {
+        if (!this.isListening) {
+            return;
+        }
+        logger.debug(`released mouse`);
+
+        const editorTracker = PluginContext.getEditorActionTracker();
+        if (editorTracker) {
+            editorTracker.notifyMouseReleased();
+        }
+    }
+
+    protected clearBuffers() {
+        this.keyBuf.reset();
+        this.keyStack.reset();
     }
 
     private splitKeys(keybinding: string) {

@@ -4,7 +4,24 @@ All notable changes to the "vscode-keypromoter" extension will be documented in 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [1.0ю5] - 2025.10.20
+## [1.1.0] - 2025.01.25
+
+### Added
+
+- **Smart Editor Action Detection** - NEW feature that learns from your editing patterns
+  - Detects when you manually delete entire lines with Backspace and suggests shortcut
+  - Detects when you copy-paste to move lines and suggests shortcuts
+  - Detects when you copy-paste to duplicate lines and suggests shortcut
+  - Detects repeated word selections and suggests multi-cursor shortcuts
+  - Modular architecture allows easy addition of new patterns in future updates
+
+- **Wildcard Support for Ignored Commands**
+  - Use `*` to ignore entire command groups (e.g., `"git.*"` ignores all Git commands)
+  - More flexible command filtering
+
+- Added `Key Promoter: Test Keyboard` command for debugging keyboard detection issues
+
+## [1.0.5] - 2025.1.20
 
 ### Added
 
@@ -23,24 +40,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [1.0.4] - 2025.01.17
 
+### Changed
+
 - Minor improvements
 
 ## [1.0.3] - 2025.01.03
 
-- Support MacOS 14^
-- Fix some issues
+### Added
+
+- Support for MacOS 14+
+
+### Fixed
+
+- Various stability issues
 
 ## [1.0.1] - 2023.12.10
+
+### Fixed
 
 - Fixed some technical issues
 - Solved problems with Windows keyboard
 
 ## [1.0.0] - 2023.11.20
 
-- Initial release
-
 ### Added
 
+- Initial release
 - Provide to user shortcuts on manual actions
 - Provide to user group shortcuts on manual actions
 - Provide to user notification with suggestion to create shortcut

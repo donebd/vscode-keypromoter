@@ -5,16 +5,87 @@
 	"tasks": [
 		{
 			"type": "npm",
+			"script": "compile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$tsc",
+			"label": "npm: compile",
+			"detail": "tsc -p ./",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared",
+				"showReuseMessage": false
+			}
+		},
+		{
+			"type": "npm",
 			"script": "watch",
 			"problemMatcher": "$tsc-watch",
 			"isBackground": true,
 			"presentation": {
 				"reveal": "never"
 			},
+			"group": "build",
+			"label": "npm: watch",
+			"detail": "tsc -watch -p ./"
+		},
+		{
+			"type": "npm",
+			"script": "test-unit",
 			"group": {
-				"kind": "build",
+				"kind": "test",
 				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: test-unit",
+			"detail": "Run unit tests",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": true
 			}
+		},
+		{
+			"type": "npm",
+			"script": "test-integration",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test-integration",
+			"detail": "Run integration tests",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test",
+			"detail": "Run all tests",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"clear": true
+			}
+		},
+		{
+			"label": "Terminate All Tasks",
+			"command": "echo ${input:terminate}",
+			"type": "shell",
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "terminate",
+			"type": "command",
+			"command": "workbench.action.tasks.terminate",
+			"args": "terminateAll"
 		}
 	]
 }

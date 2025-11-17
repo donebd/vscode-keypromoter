@@ -1,13 +1,22 @@
-import "reflect-metadata";
 import * as assert from 'assert';
-import { UiohookKey } from 'uiohook-napi';
+import "reflect-metadata";
+import { UiohookKey } from 'uiohook-napi-lite';
 import { UiHookKeybindingTracker } from '../../../keybindingTracker/uiHookKeybindingTracker';
 
 describe("Key Logger Test", () => {
 
+    let keybindingTracker: UiHookKeybindingTracker | null = null;
+
+    afterEach(() => {
+        if (keybindingTracker) {
+            keybindingTracker.dispose();
+            keybindingTracker = null;
+        }
+    });
+
     it("single key", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), false);
         keybindingTracker.handleKeyDown(UiohookKey.W);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), true);
@@ -16,8 +25,8 @@ describe("Key Logger Test", () => {
     });
 
     it("two keys", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+w"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w+ctrl"]), false);
@@ -36,8 +45,8 @@ describe("Key Logger Test", () => {
     });
 
     it("many keys", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+shift+w"]), false);
         keybindingTracker.handleKeyDown(UiohookKey.Ctrl);
         keybindingTracker.handleKeyDown(UiohookKey.Shift);
@@ -47,8 +56,8 @@ describe("Key Logger Test", () => {
     });
 
     it("key reuse", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         keybindingTracker.handleKeyDown(UiohookKey.Alt);
         keybindingTracker.handleKeyDown(UiohookKey.ArrowDown);
         assert.equal(keybindingTracker.hasAnyKeybinding(["alt+down"]), true);
@@ -59,8 +68,8 @@ describe("Key Logger Test", () => {
     });
 
     it("chords", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyUp(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
@@ -69,8 +78,8 @@ describe("Key Logger Test", () => {
     });
 
     it("repeated chords", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyUp(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
@@ -81,8 +90,8 @@ describe("Key Logger Test", () => {
     });
 
     it("mouse press", () => {
-        let keybindingTracker = new UiHookKeybindingTracker();
-        keybindingTracker.init()
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
         keybindingTracker.handleKeyDown(UiohookKey.A);
         keybindingTracker.handleKeyDown(UiohookKey.B);
         assert.equal(keybindingTracker.hasAnyKeybinding(["a+b"]), true);
@@ -93,6 +102,26 @@ describe("Key Logger Test", () => {
         keybindingTracker.handleMousePress();
         assert.equal(keybindingTracker.hasAnyKeybinding(["a+b"]), true);
         assert.equal(keybindingTracker.hasAnyKeybinding(["a b"]), false);
+    });
+
+    it("mouse press and release", () => {
+        keybindingTracker = new UiHookKeybindingTracker();
+        keybindingTracker.init();
+
+        keybindingTracker.handleKeyDown(UiohookKey.A);
+        keybindingTracker.handleKeyDown(UiohookKey.B);
+        assert.equal(keybindingTracker.hasAnyKeybinding(["a+b"]), true);
+
+        // Mouse press clears buffer
+        keybindingTracker.handleMousePress();
+        assert.equal(keybindingTracker.hasAnyKeybinding(["a b"]), false);
+
+        // Mouse release doesn't affect keybinding detection
+        keybindingTracker.handleMouseRelease();
+        assert.equal(keybindingTracker.hasAnyKeybinding(["a+b"]), true);
+
+        keybindingTracker.handleKeyUp(UiohookKey.A);
+        keybindingTracker.handleKeyUp(UiohookKey.B);
     });
 
 });
