@@ -16,7 +16,11 @@ export class NodeKeybindingTracker extends KeybindingTracker {
                 return;
             }
             if (event.name === "MOUSE LEFT" || event.name === "MOUSE RIGHT") {
-                this.handleMousePress();
+                if (event.state === "DOWN") {
+                    this.handleMousePress();
+                } else if (event.state === "UP") {
+                    this.handleMouseRelease();
+                }
                 return;
             }
             if (event.state === "DOWN") {
@@ -25,7 +29,7 @@ export class NodeKeybindingTracker extends KeybindingTracker {
                 this.handleKeyUp(event.name);
             }
         });
-        
+
         this.isListening = true;
         logger.info("NodeKeybindingTracker initialized and listening");
     }

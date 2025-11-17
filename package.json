@@ -47,7 +47,8 @@
         "Key Promoter.loyaltyLevel": {
           "type": "number",
           "default": 5,
-          "description": "Specifies number of command executions using mouse before notification."
+          "minimum": 1,
+          "description": "Number of command executions using mouse before notification."
         },
         "Key Promoter.ignoredCommands": {
           "type": "array",
@@ -58,12 +59,23 @@
             "type": "string",
             "title": "ignored commands"
           },
-          "markdownDescription": "Specifies commands that will not be processed by the extension. \n\n**Supports wildcards:** use `*` to match any characters (e.g., `\"git.*\"` ignores all Git commands, `\"inlineChat.*\"` ignores inline chat)."
+          "markdownDescription": "Specifies commands and editor patterns that will not be processed by the extension. \n\n**Supports wildcards:** use `*` to match any characters.\n\n**Examples:**\n- `\"git.*\"` - ignores all Git commands\n- `\"inlineChat.*\"` - ignores inline chat commands\n- `\"editorPattern.line-delete-backspace\"` - ignores specific editor tip\n- `\"editorPattern.*\"` - ignores all editor tips"
         },
         "Key Promoter.suggestKeybindingCreation": {
           "type": "boolean",
           "default": true,
-          "description": "Specifies whether to suggest creation of keybindings for commands without them."
+          "description": "Suggest creation of keybindings for commands without them."
+        },
+        "Key Promoter.editorActions.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "**Enable smart editor action detection.**\n\nDetects inefficient editing patterns (like deleting lines with Backspace, manual line movement, etc.) and suggests better shortcuts."
+        },
+        "Key Promoter.editorActions.loyaltyLevel": {
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "description": "Number of inefficient editor action repetitions before showing notification."
         },
         "Key Promoter.logger.loggingLevel": {
           "type": "string",
@@ -86,11 +98,14 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "test-unit": "mocha --require ts-node/register src/test/unit/**/*.test.ts"
+    "test-integration": "node ./out/test/runTest.js",
+    "test-unit": "mocha --require ./out/test/unit/preload-mock-vscode.js --require ts-node/register 'src/test/unit/**/*.test.ts'",
+    "test:keybindings": "mocha --require ts-node/register --colors src/test/unit/editorActions/patternKeybindings.test.ts",
+    "check:keybindings": "ts-node scripts/check-keybinding-coverage.ts"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.3",
+    "@types/mock-require": "^3.0.0",
     "@types/node": "18.x",
     "@types/vscode": "1.67.0",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
@@ -99,16 +114,17 @@
     "eslint": "^8.52.0",
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
+    "mock-require": "^3.0.3",
     "ts-node": "^10.9.1",
     "typescript": "4.9.5"
   },
   "dependencies": {
-    "json5": "^2.2.3",
-    "rxjs": "^7.8.1",
-    "uiohook-napi": "^1.5.4",
-    "reflect-metadata": "^0.1.13",
-    "node-global-key-listener": "^0.3.0",
     "inversify": "5.0.1",
+    "json5": "^2.2.3",
+    "node-global-key-listener": "^0.3.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
+    "uiohook-napi-lite": "^1.5.8",
     "winston": "^3.11.0"
   },
   "icon": "img/icons/KP_logo.png"

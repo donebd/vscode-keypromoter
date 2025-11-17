@@ -9,6 +9,10 @@ const ignoredCommandsScope = "ignoredCommands";
 const suggestKeybindingCreationScope = "suggestKeybindingCreation";
 const pluginEnabledScope = "enabled";
 
+// New settings for editor actions
+const editorActionsEnabledScope = "editorActions.enabled";
+const editorActionsLoyaltyLevelScope = "editorActions.loyaltyLevel";
+
 export function getLogLevel(): string {
     return vscode.workspace.getConfiguration(section).get(logLevelScope, 'Info');
 }
@@ -25,8 +29,20 @@ export function didAffectPluginEnabled(e: vscode.ConfigurationChangeEvent): bool
     return e.affectsConfiguration(`${section}.${pluginEnabledScope}`);
 }
 
+export function didAffectEditorActionsEnabled(e: vscode.ConfigurationChangeEvent): boolean {
+    return e.affectsConfiguration(`${section}.${editorActionsEnabledScope}`);
+}
+
+export function didAffectEditorActionsLoyaltyLevel(e: vscode.ConfigurationChangeEvent): boolean {
+    return e.affectsConfiguration(`${section}.${editorActionsLoyaltyLevelScope}`);
+}
+
 export function getLoyaltyLevel(): number {
     return vscode.workspace.getConfiguration(section).get(loyaltyLevelScope, 5);
+}
+
+export function getEditorActionsLoyaltyLevel(): number {
+    return vscode.workspace.getConfiguration(section).get(editorActionsLoyaltyLevelScope, 1);
 }
 
 export function getIgnoreCommands(): string[] {
@@ -68,4 +84,13 @@ export function getPluginEnabled(): boolean {
 export function setPluginEnabled(value: boolean): Thenable<void> {
     logger.info(`updating 'plugin enabled' setting to '${value}'`);
     return vscode.workspace.getConfiguration(section).update(pluginEnabledScope, value, vscode.ConfigurationTarget.Global);
+}
+
+export function getEditorActionsEnabled(): boolean {
+    return vscode.workspace.getConfiguration(section).get(editorActionsEnabledScope, true);
+}
+
+export function setEditorActionsEnabled(value: boolean): Thenable<void> {
+    logger.info(`updating 'editor actions enabled' setting to '${value}'`);
+    return vscode.workspace.getConfiguration(section).update(editorActionsEnabledScope, value, vscode.ConfigurationTarget.Global);
 }

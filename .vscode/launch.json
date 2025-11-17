@@ -1,7 +1,3 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
-// Use IntelliSense to learn about possible attributes.
-// Hover to view descriptions of existing attributes.
-// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
 	"version": "0.2.0",
 	"configurations": [
@@ -18,7 +14,7 @@
 			"preLaunchTask": "${defaultBuildTask}"
 		},
 		{
-			"name": "Extension Tests",
+			"name": "Extension Integration Tests",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
@@ -28,7 +24,85 @@
 			"outFiles": [
 				"${workspaceFolder}/out/test/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "npm: compile"
+		},
+		{
+			"name": "Unit Tests",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--require",
+				"${workspaceFolder}/out/test/unit/preload-mock-vscode.js",
+				"--require",
+				"ts-node/register",
+				"--colors",
+				"--timeout",
+				"5000",
+				"${workspaceFolder}/src/test/unit/**/*.test.ts"
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js"
+			],
+			"preLaunchTask": "npm: compile",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"console": "integratedTerminal",
+			"outputCapture": "std"
+		},
+		{
+			"name": "Current Unit Test File",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--require",
+				"${workspaceFolder}/out/test/unit/preload-mock-vscode.js",
+				"--require",
+				"ts-node/register",
+				"--colors",
+				"--timeout",
+				"5000",
+				"${file}"
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js"
+			],
+			"preLaunchTask": "npm: compile",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"console": "integratedTerminal"
+		},
+		{
+			"name": "Unit Tests (Debug)",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--require",
+				"${workspaceFolder}/out/test/unit/preload-mock-vscode.js",
+				"--require",
+				"ts-node/register",
+				"--colors",
+				"--timeout",
+				"10000",
+				"--inspect-brk",
+				"${workspaceFolder}/src/test/unit/**/*.test.ts"
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js"
+			],
+			"preLaunchTask": "npm: compile",
+			"internalConsoleOptions": "openOnSessionStart",
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"console": "integratedTerminal",
+			"stopOnEntry": false
 		}
 	]
 }

@@ -8,19 +8,19 @@ describe("Default Keybindings Test", () => {
     it("get linux default keybindings", () => {
         const linuxStorage = new KeybindingStorage(Platform.LINUX, true);
         assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
-        assert.equal(countBindings(linuxStorage.allKeybindings()), 991);
+        assert.equal(countBindings(linuxStorage.allKeybindings()), 1048);
     });
 
     it("get macos default keybindings", () => {
         const macStorage = new KeybindingStorage(Platform.MACOS, true);
         assert.deepEqual(macStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
-        assert.equal(countBindings(macStorage.allKeybindings()), 1085);
+        assert.equal(countBindings(macStorage.allKeybindings()), 1150);
     });
 
     it("get windows default keybindings", () => {
         const windowsStorage = new KeybindingStorage(Platform.WINDOWS, true);
         assert.deepEqual(windowsStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
-        assert.equal(countBindings(windowsStorage.allKeybindings()), 1000);
+        assert.equal(countBindings(windowsStorage.allKeybindings()), 1056);
     });
 
     it("get unsupported OS default keybindings", () => {

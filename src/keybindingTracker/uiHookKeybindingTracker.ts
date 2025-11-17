@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { uIOhook, UiohookKey } from 'uiohook-napi';
+import { uIOhook } from 'uiohook-napi-lite';
 import { logger } from "../helper/logging";
 import { KeybindingTracker } from './keybindingTracker';
 import { keyFromUioHookKeycode } from "./transform";
@@ -17,8 +17,11 @@ export class UiHookKeybindingTracker extends KeybindingTracker {
         uIOhook.on('mousedown', (_) => {
             this.handleMousePress();
         });
+        uIOhook.on('mouseup', (_) => {
+            this.handleMouseRelease();
+        });
         uIOhook.start();
-        
+
         this.isListening = true;
         logger.info("UiHookKeybindingTracker initialized and listening");
     }
