@@ -281,14 +281,26 @@ export class SubscriptionService {
             return JSON.stringify(a) === JSON.stringify(b);
         };
 
+        const wasRecentCommand = (commandId: string): boolean => {
+            const now = Date.now();
+            return this.recentCommands.some(
+                cmd => cmd.command === commandId &&
+                    now - cmd.timestamp < this.RECENT_COMMAND_WINDOW_MS
+            );
+        };
+
         const onDidChangeEditorHandler = vscode.window.onDidChangeActiveTextEditor((textEditor) => {
             const openEditors = vscode.window.tabGroups.activeTabGroup.tabs;
             const actualStateTabs = openEditors.map(tab => tab.label);
 
             if (!textEditor) {
                 if (openEditors.length === 0 && previousStateTabs.length !== 1) {
-                    const times = previousStateTabs.length - actualStateTabs.length;
-                    this.commandCounter.handleCommand("workbench.action.closeAllEditors", times);
+                    if (!wasRecentCommand("workbench.action.closeAllEditors")) {
+                        const times = previousStateTabs.length - actualStateTabs.length;
+                        this.commandCounter.handleCommand("workbench.action.closeAllEditors", times);
+                    } else {
+                        logger.debug('closeAllEditors was already tracked via command execution');
+                    }
                     previousStateTabs = actualStateTabs;
                 }
                 activeTextEditor = textEditor;
@@ -315,8 +327,12 @@ export class SubscriptionService {
                 }
 
                 if (previousStateTabs.length > actualStateTabs.length) {
-                    const times = previousStateTabs.length - actualStateTabs.length;
-                    this.commandCounter.handleCommand("workbench.action.closeActiveEditor", times);
+                    if (!wasRecentCommand("workbench.action.closeActiveEditor")) {
+                        const times = previousStateTabs.length - actualStateTabs.length;
+                        this.commandCounter.handleCommand("workbench.action.closeActiveEditor", times);
+                    } else {
+                        logger.debug('closeActiveEditor was already tracked via command execution');
+                    }
                     activeTextEditor = textEditor.document.fileName;
                     previousStateTabs = actualStateTabs;
                     return;

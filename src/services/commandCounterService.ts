@@ -25,7 +25,7 @@ export class CommandCounterService {
         @inject(TYPES.KeybindingTracker) private readonly keybindingTracker: KeybindingTracker
     ) {
         this.ignoreMatcher = new WildcardMatcher(configuration.getIgnoreCommands());
-        
+
         vscode.workspace.onDidChangeConfiguration(e => {
             if (didAffectIgnoredCommands(e)) {
                 this.ignoreMatcher.updatePatterns(configuration.getIgnoreCommands());

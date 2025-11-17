@@ -56,7 +56,7 @@ export function addIgnoreCommand(command: string) {
         vscode.workspace.getConfiguration(section).update(ignoredCommandsScope, ignored, vscode.ConfigurationTarget.Global);
         logger.info(`added command ${command} to ignore list (with total length of ${ignored.length})`);
     } catch (e) {
-        if (e instanceof Error) {   
+        if (e instanceof Error) {
             logger.error(`error when adding command ${command} to ignore list: ${e.message}`);
         }
     }
@@ -71,7 +71,7 @@ export function setSuggestKeybindingCreation(value: boolean) {
         vscode.workspace.getConfiguration(section).update(suggestKeybindingCreationScope, value, vscode.ConfigurationTarget.Global);
         logger.info(`updated 'suggest keybinding creation' setting to '${value}'`);
     } catch (e) {
-        if (e instanceof Error) {   
+        if (e instanceof Error) {
             logger.error(`error when updating 'suggest keybinding creation' setting: ${e.message}`);
         }
     }
