@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/donebd/vscode-keypromoter"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -101,13 +101,14 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "build": "npm install && vsce package",
+    "install:mac-deps": "node scripts/install-mac-deps.js",
+    "build": "npm install && npm run install:mac-deps && vsce package",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test-integration": "node ./out/test/runTest.js",
     "test-unit": "mocha --require ./out/test/unit/preload-mock-vscode.js --require ts-node/register 'src/test/unit/**/*.test.ts'",
-    "test:keybindings": "mocha --require ts-node/register --colors src/test/unit/editorActions/patternKeybindings.test.ts",
+    "test:keybindings": "mocha --require ts-node/register --require src/test/unit/preload-mock-vscode.ts --colors src/test/unit/editorActions/patternKeybindings.test.ts",
     "check:keybindings": "ts-node scripts/check-keybinding-coverage.ts"
   },
   "devDependencies": {
@@ -128,11 +129,15 @@
   "dependencies": {
     "inversify": "5.0.1",
     "json5": "^2.2.3",
-    "node-global-key-listener": "^0.3.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
+    "simen-keyboard-listener": "^1.1.16",
     "uiohook-napi-lite": "^1.5.8",
     "winston": "^3.11.0"
   },
-  "icon": "img/icons/KP_logo.png"
+  "icon": "img/icons/KP_logo.png",
+  "optionalDependencies": {
+    "@simen-keyboard-listener/darwin-arm64": "^1.1.16",
+    "@simen-keyboard-listener/win32-x64": "^1.1.16"
+  }
 }

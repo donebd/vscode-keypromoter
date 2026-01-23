@@ -16,8 +16,6 @@ If you have any problems or want to participate in the development, welcome to t
 
 **[Read our Privacy Policy](PRIVACY.md)** | **No data collection** | **Local processing only**
 
-> **For antivirus users:** This extension monitors keyboard events to suggest shortcuts. Some antivirus software may flag this as "keylogger-like" behavior, but the extension is completely safe and transparent. You can review the source code at any time.
-
 ## Features
 
 ### Command Shortcut Learning
@@ -191,9 +189,8 @@ This is useful for debugging platform-specific issues (especially on Linux Wayla
 - Disable editor actions with `Key Promoter.editorActions.enabled: false`
 
 #### Antivirus warnings
-- The extension monitors keyboard events locally - this is safe and necessary
-- Add VS Code to your antivirus whitelist if needed
-- Review the open-source code for transparency
+- **Update to version 1.2.0+** - This version fixes false positive virus detections by using a new native library.
+- The extension monitors keyboard events locally - this is safe and necessary for functionality.
 
 ## Installation
 

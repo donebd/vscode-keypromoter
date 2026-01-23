@@ -31,6 +31,7 @@ describe("Key Logger Test", () => {
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+w"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w+ctrl"]), false);
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl"]), false);
+
         keybindingTracker.handleKeyDown(UiohookKey.Ctrl);
         keybindingTracker.handleKeyDown(UiohookKey.W);
         assert.equal(keybindingTracker.hasAnyKeybinding(["w"]), false);
@@ -48,6 +49,7 @@ describe("Key Logger Test", () => {
         keybindingTracker = new UiHookKeybindingTracker();
         keybindingTracker.init();
         assert.equal(keybindingTracker.hasAnyKeybinding(["ctrl+shift+w"]), false);
+
         keybindingTracker.handleKeyDown(UiohookKey.Ctrl);
         keybindingTracker.handleKeyDown(UiohookKey.Shift);
         keybindingTracker.handleKeyDown(UiohookKey.W);

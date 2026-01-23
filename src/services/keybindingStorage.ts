@@ -1,10 +1,12 @@
 import * as fs from "fs";
 import { readFileSync } from 'fs';
-import { injectable } from "inversify";
+import { injectable, inject } from "inversify";
 import * as json from 'json5';
 import * as path from 'path';
+import * as vscode from 'vscode';
 import { logger } from '../helper/logging';
 import { Platform } from '../helper/platform';
+import { TYPES } from "../di/identifiers";
 
 class Keybinding {
     key!: string;
@@ -15,18 +17,38 @@ class Keybinding {
 export class KeybindingStorage {
 
     private readonly keybindings: Map<string, string[]>;
-    public readonly userKeybindingsPath: string;
+    public userKeybindingsPath: string;
 
-    constructor(private readonly platform: Platform, defaultOnly: boolean = false) {
+    constructor(
+        @inject(TYPES.ExtensionContext) private readonly context: vscode.ExtensionContext,
+        @inject(TYPES.Platform) private readonly platform: Platform
+    ) {
         this.keybindings = new Map<string, string[]>();
 
-        this.userKeybindingsPath = this.getUserKeybindingsPath();
-
-        if (defaultOnly) {
-            this.loadDefaultMap();
+        const contextKeybindingsPath = this.resolveKeybindingsPathFromContext();
+        if (contextKeybindingsPath && fs.existsSync(contextKeybindingsPath)) {
+            this.userKeybindingsPath = contextKeybindingsPath;
         } else {
-            this.loadFullMap();
+            this.userKeybindingsPath = this.getUserKeybindingsPathLegacy();
         }
+
+        if (!fs.existsSync(this.userKeybindingsPath)) {
+            vscode.window.showWarningMessage("Key Promoter: User keybindings file not found or not exist. Using default keybindings.");
+        }
+
+        this.loadFullMap();
+    }
+
+    private resolveKeybindingsPathFromContext(): string | undefined {
+        if (this.context.globalStorageUri) {
+            try {
+                const userDir = path.dirname(path.dirname(this.context.globalStorageUri.fsPath));
+                return path.join(userDir, 'keybindings.json');
+            } catch (e) {
+                logger.warn(`Failed to resolve keybindings path via context: ${e}`);
+            }
+        }
+        return undefined;
     }
 
     public getKeybindingsFor(command: string): string[] {
@@ -59,7 +81,13 @@ export class KeybindingStorage {
         this.loadFullMap();
     }
 
-    private getUserKeybindingsPath(): string {
+    public setUserKeybindingsPath(path: string) {
+        this.userKeybindingsPath = path;
+        logger.info(`KeybindingStorage: switching to provided user keybindings path: ${path}`);
+        this.loadFullMap();
+    }
+
+    private getUserKeybindingsPathLegacy(): string {
         let pathToUser = "";
         switch (this.platform) {
             case Platform.LINUX:

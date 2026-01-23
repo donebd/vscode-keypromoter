@@ -9,4 +9,6 @@ export const TYPES = {
     EditorActionTracker: Symbol.for("EditorActionTracker"),
     EditorStateManager: Symbol.for("EditorStateManager"),
     EditorActionNotifier: Symbol.for("EditorActionNotifier"),
+    ExtensionContext: Symbol.for("ExtensionContext"),
+    Platform: Symbol.for("Platform"),
 };
