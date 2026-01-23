@@ -15,6 +15,7 @@ describe('Pattern Keybindings Test', () => {
     describe('Default keybindings coverage', () => {
 
         const platforms = [Platform.LINUX, Platform.WINDOWS, Platform.MACOS];
+        const stubContext = { globalStorageUri: undefined } as any;
 
         platforms.forEach(platform => {
             describe(`${platform} platform`, () => {
@@ -24,7 +25,7 @@ describe('Pattern Keybindings Test', () => {
                 let missingCommands: string[];
 
                 before(() => {
-                    storage = new KeybindingStorage(platform, true); // defaultOnly = true
+                    storage = new KeybindingStorage(stubContext, platform);
                     allCommands = getAllUsedCommands();
                     missingCommands = allCommands.filter(cmd => {
                         const bindings = storage.getKeybindingsFor(cmd);
@@ -101,10 +102,16 @@ describe('Pattern Keybindings Test', () => {
     describe('Keybinding format validation', () => {
 
         const platforms = [Platform.LINUX, Platform.WINDOWS, Platform.MACOS];
+        const stubContext = { globalStorageUri: undefined } as any;
 
         platforms.forEach(platform => {
             it(`should have non-empty keybindings for ${platform}`, () => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
+                // Manually load defaults since constructor signature changed and defaultOnly logic was removed in verified step 841? 
+                // Wait, step 841 removed defaultOnly parameter. So we need to ensure we are testing defaults.
+                // The KeybindingStorage now always loads full map, which includes defaults.
+                // But in tests we don't have user keybindings file, so it effectively loads defaults.
+
                 const allCommands = getAllUsedCommands();
 
                 allCommands.forEach(cmd => {
@@ -119,7 +126,7 @@ describe('Pattern Keybindings Test', () => {
             });
 
             it(`should have valid keybinding format for ${platform}`, () => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
                 const allCommands = getAllUsedCommands();
 
                 // Simple validation: keybindings should contain at least one character
@@ -144,12 +151,13 @@ describe('Pattern Keybindings Test', () => {
         it('should report coverage for all platforms', () => {
             const platforms = [Platform.LINUX, Platform.WINDOWS, Platform.MACOS];
             const allCommands = getAllUsedCommands();
+            const stubContext = { globalStorageUri: undefined } as any;
 
             console.log('\n=== Keybinding Coverage Report ===\n');
             console.log(`Total commands used: ${allCommands.length}\n`);
 
             platforms.forEach(platform => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
                 const covered = allCommands.filter(cmd =>
                     storage.getKeybindingsFor(cmd).length > 0
                 );
@@ -190,7 +198,8 @@ describe('Pattern Keybindings Test', () => {
 
         it('should have same commands across all platforms', () => {
             const platforms = [Platform.LINUX, Platform.WINDOWS, Platform.MACOS];
-            const storages = platforms.map(p => new KeybindingStorage(p, true));
+            const stubContext = { globalStorageUri: undefined } as any;
+            const storages = platforms.map(p => new KeybindingStorage(stubContext, p));
             const allCommands = getAllUsedCommands();
 
             const inconsistencies: string[] = [];
@@ -228,9 +237,10 @@ describe('Pattern Keybindings Test', () => {
 
         it('should have deleteLine on all platforms', () => {
             const platforms = [Platform.LINUX, Platform.WINDOWS, Platform.MACOS];
+            const stubContext = { globalStorageUri: undefined } as any;
 
             platforms.forEach(platform => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
                 const bindings = storage.getKeybindingsFor('editor.action.deleteLines');
 
                 assert.ok(
@@ -248,9 +258,10 @@ describe('Pattern Keybindings Test', () => {
                 'deleteWordLeft',
                 'deleteWordRight'
             ];
+            const stubContext = { globalStorageUri: undefined } as any;
 
             platforms.forEach(platform => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
 
                 wordCommands.forEach(cmd => {
                     const bindings = storage.getKeybindingsFor(cmd);
@@ -270,9 +281,10 @@ describe('Pattern Keybindings Test', () => {
                 'editor.action.copyLinesUpAction',
                 'editor.action.copyLinesDownAction'
             ];
+            const stubContext = { globalStorageUri: undefined } as any;
 
             platforms.forEach(platform => {
-                const storage = new KeybindingStorage(platform, true);
+                const storage = new KeybindingStorage(stubContext, platform);
 
                 lineCommands.forEach(cmd => {
                     const bindings = storage.getKeybindingsFor(cmd);

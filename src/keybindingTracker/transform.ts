@@ -200,18 +200,21 @@ export function keyFromUioHookKeycode(keycode: number): string {
     return key;
 }
 
-const nodeNameKeyMap = new Map<string, string>([
+const simenKeyMap = new Map<string, string>([
     // Основные клавиши
     ["BACKSPACE", "backspace"],
     ["TAB", "tab"],
     ["RETURN", "enter"],
-    ["NUMPAD RETURN", "enter"],
     ["ESCAPE", "escape"],
     ["SPACE", "space"],
-    ["PAGE UP", "pageup"],
-    ["PAGE DOWN", "pagedown"],
+    ["PAGEUP", "pageup"],
+    ["PAGEDOWN", "pagedown"],
     ["END", "end"],
     ["HOME", "home"],
+    ["LEFT", "left"],
+    ["UP", "up"],
+    ["RIGHT", "right"],
+    ["DOWN", "down"],
     ["LEFT ARROW", "left"],
     ["UP ARROW", "up"],
     ["RIGHT ARROW", "right"],
@@ -231,20 +234,17 @@ const nodeNameKeyMap = new Map<string, string>([
     ["F9", "f9"], ["F10", "f10"], ["F11", "f11"], ["F12", "f12"],
     ["F13", "f13"], ["F14", "f14"], ["F15", "f15"], ["F16", "f16"],
     ["F17", "f17"], ["F18", "f18"], ["F19", "f19"], ["F20", "f20"],
-    ["F21", "f21"], ["F22", "f22"], ["F23", "f23"], ["F24", "f24"],
 
     // Символы
     ["SEMICOLON", ";"],
     ["COMMA", ","],
     ["MINUS", "-"],
     ["DOT", "."],
-    ["NUMPAD DOT", "."],
-    ["FORWARD SLASH", "/"],
+    ["SLASH", "/"],
     ["EQUALS", "="],
-    ["SQUARE BRACKET OPEN", "["],
+    ["LEFTBRACKET", "["],
     ["BACKSLASH", "\\"],
-    ["SQUARE BRACKET CLOSE", "]"],
-    ["BACKTICK", "`"],
+    ["RIGHTBRACKET", "]"],
     ["QUOTE", "'"],
 
     // Модификаторы
@@ -256,95 +256,23 @@ const nodeNameKeyMap = new Map<string, string>([
     ["RIGHT SHIFT", "shift"],
     ["LEFT META", "meta"],
     ["RIGHT META", "meta"],
-    ["LEFT SUPER", "meta"],  // Linux
-    ["RIGHT SUPER", "meta"], // Linux
-    ["LEFT CMD", "meta"],    // macOS alternative
-    ["RIGHT CMD", "meta"],   // macOS alternative
+    ["LEFT CMD", "meta"],
+    ["RIGHT CMD", "meta"],
+    ["COMMAND", "meta"],
+    ["L COMMAND", "meta"],
+    ["R COMMAND", "meta"],
+    ["FN", "fn"], // Simen supports FN
 
     // Цифры
     ["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"],
     ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"],
-
-    // Специальные клавиши
-    ["DELETE", "delete"],
-    ["CAPS LOCK", "capslock"],
-    ["SCROLL LOCK", "scrolllock"],
-    ["NUM LOCK", "numlock"],
-    ["PRINT SCREEN", "printscreen"],
-    ["INS", "insert"],
-    ["INSERT", "insert"],
-    ["PAUSE", "pause"],
-    ["PAUSE BREAK", "pause"],
-
-    // Numpad
-    ["NUMPAD 0", "numpad0"],
-    ["NUMPAD 1", "numpad1"],
-    ["NUMPAD 2", "numpad2"],
-    ["NUMPAD 3", "numpad3"],
-    ["NUMPAD 4", "numpad4"],
-    ["NUMPAD 5", "numpad5"],
-    ["NUMPAD 6", "numpad6"],
-    ["NUMPAD 7", "numpad7"],
-    ["NUMPAD 8", "numpad8"],
-    ["NUMPAD 9", "numpad9"],
-    ["NUMPAD PLUS", "numpad_add"],
-    ["NUMPAD MULTIPLY", "numpad_multiply"],
-    ["NUMPAD MINUS", "numpad_subtract"],
-    ["NUMPAD DIVIDE", "numpad_divide"],
-
-    // Мультимедийные клавиши
-    ["VOLUME UP", "volumeup"],
-    ["VOLUME DOWN", "volumedown"],
-    ["AUDIO MUTE", "audiomute"],
-    ["MUTE", "audiomute"],
-    ["PLAY PAUSE", "audioplay"],
-    ["PLAY/PAUSE", "audioplay"],
-    ["MEDIA PLAY PAUSE", "audioplay"],
-    ["MEDIA STOP", "audiostop"],
-    ["MEDIA NEXT TRACK", "audionext"],
-    ["MEDIA PREVIOUS TRACK", "audioprev"],
-    ["NEXT TRACK", "audionext"],
-    ["PREVIOUS TRACK", "audioprev"],
-    ["EJECT", "eject"],
-
-    // Браузерные клавиши
-    ["BROWSER SEARCH", "browsersearch"],
-    ["BROWSER HOME", "browserhome"],
-    ["BROWSER BACK", "browserback"],
-    ["BROWSER FORWARD", "browserforward"],
-    ["BROWSER STOP", "browserstop"],
-    ["BROWSER REFRESH", "browserrefresh"],
-    ["BROWSER FAVORITES", "browserfavorites"],
-
-    // Системные клавиши
-    ["POWER", "power"],
-    ["SLEEP", "sleep"],
-    ["WAKE UP", "wakeup"],
-    ["WAKE", "wakeup"],
-    ["MEDIA SELECT", "mediaselect"],
-    ["LAUNCH APP 1", "launchapp1"],
-    ["LAUNCH APP 2", "launchapp2"],
-    ["LAUNCH MAIL", "launchmail"],
-    ["CONTEXT MENU", "contextmenu"],
-    ["MENU", "contextmenu"],
-    ["APPLICATION", "contextmenu"],
-
-    // Дополнительные клавиши
-    ["UNDO", "undo"],
-    ["REDO", "redo"],
-    ["CUT", "cut"],
-    ["COPY", "copy"],
-    ["PASTE", "paste"],
-    ["FIND", "find"],
-    ["HELP", "help"],
 ]);
 
-export function keyFromNodeKeyName(keyName: string): string {
+export function keyFromSimenKeyName(keyName: string): string {
     const normalizedKey = keyName.toUpperCase();
-    const key = nodeNameKeyMap.get(normalizedKey);
+    const key = simenKeyMap.get(normalizedKey);
     if (!key) {
-        // Log неизвестное имя клавиши для отладки
-        console.debug(`Unknown key name: "${keyName}"`);
+        console.debug(`Unknown Simen key name: "${keyName}"`);
         return UNSUPPORTED_KEY;
     }
     return key;

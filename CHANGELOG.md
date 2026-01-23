@@ -4,6 +4,17 @@ All notable changes to the "vscode-keypromoter" extension will be documented in 
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [1.2.0] - 2026.01.23
+
+### Added
+- **Dynamic Path Resolution for Keybindings**
+    - Keybindings path is now dynamically resolved using VS Code API for better reliability across platforms (macOS/Linux/Windows) and portable installations.
+- **Security & Stability**
+    - Replaced underlying native library to resolve false positive virus detections (incorrectly flagged as Trojan/Keylogger by some vendors).
+
+### Fixed
+- Handling of missing user keybindings file is now more graceful with user notification.
+
 ## [1.1.0] - 2025.01.25
 
 ### Added

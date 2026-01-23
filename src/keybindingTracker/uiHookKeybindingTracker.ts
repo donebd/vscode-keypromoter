@@ -20,10 +20,14 @@ export class UiHookKeybindingTracker extends KeybindingTracker {
         uIOhook.on('mouseup', (_) => {
             this.handleMouseRelease();
         });
-        uIOhook.start();
 
-        this.isListening = true;
-        logger.info("UiHookKeybindingTracker initialized and listening");
+        try {
+            uIOhook.start();
+            this.isListening = true;
+            logger.info("UiHookKeybindingTracker initialized and listening");
+        } catch (e) {
+            logger.error(`UiHookKeybindingTracker failed to start: ${e}`);
+        }
     }
 
     public pause(): void {

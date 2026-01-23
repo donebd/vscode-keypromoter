@@ -1,8 +1,9 @@
 import { uIOhook } from 'uiohook-napi-lite';
 import * as vscode from 'vscode';
 import { logger } from '../helper/logging';
-import { NodeKeybindingTracker } from '../keybindingTracker/nodeKeybindingTracker';
 import { UiHookKeybindingTracker } from '../keybindingTracker/uiHookKeybindingTracker';
+import { SimenKeybindingTracker } from '../keybindingTracker/simenKeybindingTracker';
+import { keyFromSimenKeyName, keyFromUioHookKeycode } from '../keybindingTracker/transform';
 import { PluginContext } from '../pluginContext';
 
 export class KeyboardTestPanel {
@@ -53,8 +54,8 @@ export class KeyboardTestPanel {
 
         if (tracker instanceof UiHookKeybindingTracker) {
             this.setupUiohookListeners(uIOhook);
-        } else if (tracker instanceof NodeKeybindingTracker) {
-            this.setupGlobalKeyListeners((tracker as any).keyListener);
+        } else if (tracker instanceof SimenKeybindingTracker) {
+            this.setupSimenListeners((tracker as any).listener);
         } else {
             logger.error("Unknown tracker type");
             return;
@@ -100,30 +101,44 @@ export class KeyboardTestPanel {
         logger.info('KeyboardTestPanel: UiHook listeners attached successfully');
     }
 
-    private setupGlobalKeyListeners(globalKeyListener: any) {
-        logger.info('KeyboardTestPanel: setting up GlobalKeyListener');
+    private setupSimenListeners(listener: any) {
+        logger.info('KeyboardTestPanel: setting up Simen listeners');
 
-        const listener = (event: any, down: any) => {
-            const keyName = this.getKeyNameFromNodeEvent(down);
+        const callback = (event: any, down: any) => {
+            const keyName = this.getKeyNameFromSimenEvent(event);
             if (keyName && keyName !== 'UNSUPPORTED_KEY') {
-                if (down.state === 'DOWN') {
+                if (event.state === 'DOWN') {
                     this.handleKeyEvent('down', keyName);
-                } else if (down.state === 'UP') {
+                } else if (event.state === 'UP') {
                     this.handleKeyEvent('up', keyName);
                 }
             }
         };
 
-        globalKeyListener.addListener(listener);
+        listener.addListener(callback);
 
         this.disposables.push({
             dispose: () => {
-                globalKeyListener.removeListener(listener);
-                logger.info('KeyboardTestPanel: GlobalKeyListener removed');
+                try {
+                    listener.removeListener(callback);
+                } catch (e) { }
+                logger.info('KeyboardTestPanel: Simen listeners removed');
             }
         });
 
-        logger.info('KeyboardTestPanel: GlobalKeyListener attached successfully');
+        logger.info('KeyboardTestPanel: Simen listeners attached successfully');
+    }
+
+    private getKeyNameFromSimenEvent(event: any): string | null {
+        if (event.name) {
+            try {
+                return keyFromSimenKeyName(event.name);
+            } catch (error) {
+                logger.error('Failed to transform key name:', error);
+                return event.name;
+            }
+        }
+        return null;
     }
 
     private handleKeyEvent(type: 'down' | 'up' | 'mouse', keyName: string) {
@@ -186,7 +201,6 @@ export class KeyboardTestPanel {
     private getKeyNameFromUiohookEvent(event: any): string | null {
         if (event.keycode !== undefined) {
             try {
-                const { keyFromUioHookKeycode } = require('../keybindingTracker/transform');
                 return keyFromUioHookKeycode(event.keycode);
             } catch (error) {
                 logger.error('Failed to transform keycode:', error);
@@ -196,18 +210,7 @@ export class KeyboardTestPanel {
         return null;
     }
 
-    private getKeyNameFromNodeEvent(down: any): string | null {
-        if (down.name) {
-            try {
-                const { keyFromNodeKeyName } = require('../keybindingTracker/transform');
-                return keyFromNodeKeyName(down.name);
-            } catch (error) {
-                logger.error('Failed to transform key name:', error);
-                return down.name;
-            }
-        }
-        return null;
-    }
+
 
     private getHtmlContent(): string {
         return `<!DOCTYPE html>

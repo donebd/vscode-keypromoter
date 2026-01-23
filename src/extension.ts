@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 import * as configuration from './configuration';
 import { TYPES } from './di/identifiers';
 import { diContainer, setupExtensionDependencies } from './di/inversify.config';
@@ -24,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 	logger.info("activating extension...");
 
 	const osPlatform = platform.get();
-	setupExtensionDependencies(osPlatform);
+	setupExtensionDependencies(osPlatform, context);
 
 	if (configuration.getPluginEnabled()) {
 		initializeKeybindingTracker();
@@ -37,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 	const keybindingStorage = diContainer.get<KeybindingStorage>(TYPES.KeybindingStorage);
+
 	const subscriptionService = diContainer.get<SubscriptionService>(TYPES.SubscriptionService);
 	const disposables = subscriptionService.listenForPossibleShortcutActions();
 

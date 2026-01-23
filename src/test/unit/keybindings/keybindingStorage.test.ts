@@ -5,26 +5,28 @@ import { KeybindingStorage } from '../../../services/keybindingStorage';
 
 describe("Default Keybindings Test", () => {
 
+    const stubContext = { globalStorageUri: undefined } as any;
+
     it("get linux default keybindings", () => {
-        const linuxStorage = new KeybindingStorage(Platform.LINUX, true);
+        const linuxStorage = new KeybindingStorage(stubContext, Platform.LINUX);
         assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
         assert.equal(countBindings(linuxStorage.allKeybindings()), 1048);
     });
 
     it("get macos default keybindings", () => {
-        const macStorage = new KeybindingStorage(Platform.MACOS, true);
+        const macStorage = new KeybindingStorage(stubContext, Platform.MACOS);
         assert.deepEqual(macStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["alt+cmd+up"]);
         assert.equal(countBindings(macStorage.allKeybindings()), 1150);
     });
 
     it("get windows default keybindings", () => {
-        const windowsStorage = new KeybindingStorage(Platform.WINDOWS, true);
+        const windowsStorage = new KeybindingStorage(stubContext, Platform.WINDOWS);
         assert.deepEqual(windowsStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+alt+up"]);
         assert.equal(countBindings(windowsStorage.allKeybindings()), 1056);
     });
 
     it("get unsupported OS default keybindings", () => {
-        const unsupportedStorage = new KeybindingStorage(Platform.UNSUPPORTED, true);
+        const unsupportedStorage = new KeybindingStorage(stubContext, Platform.UNSUPPORTED);
         assert.equal(unsupportedStorage.allKeybindings().size, 0);
     });
 
@@ -39,6 +41,8 @@ function countBindings(bindings: Map<string, string[]>) {
 }
 
 describe("Patched Keybindings Test", () => {
+
+    const stubContext = { globalStorageUri: undefined } as any;
 
     it("patch default keybindings", () => {
         const JsonPatch =
@@ -56,7 +60,7 @@ describe("Patched Keybindings Test", () => {
             }
         ]
         `;
-        const linuxStorage = new KeybindingStorage(Platform.LINUX, true);
+        const linuxStorage = new KeybindingStorage(stubContext, Platform.LINUX);
         assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "shift+alt+up"]);
         linuxStorage.patch(JsonPatch);
         assert.deepEqual(linuxStorage.getKeybindingsFor("editor.action.insertCursorAbove"), ["ctrl+shift+up", "numpad_add"]);
